@@ -136,7 +136,7 @@ const ChapterSection: FC<ChapterSectionProps> = ({
             </Shadow>
           )}
         </Box>}
-        <Box flexGrow={1} display={"grid"}>
+        <Box display={"grid"}>
           <AnimatePresence initial={false}>
             {amountSections - sectionNumber > 0 &&
               Array(amountSections - sectionNumber)
