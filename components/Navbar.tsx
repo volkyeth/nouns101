@@ -58,7 +58,9 @@ export const Navbar: FC<NavbarProps> = ({ extraContent, ...props }) => {
         <VStack>
           <>
             <HStack w={"full"} justifyContent={"space-between"}>
-              <Image src={logo} layout={"fixed"} height={24} />
+              <Link href={"/"}>
+                <Image src={logo} layout={"fixed"} height={24} />
+              </Link>
               {!isMobile ? (
                 <>
                   <HStack spacing={4}>
