@@ -1,0 +1,194 @@
+import { FC, PropsWithChildren } from "react";
+import { useRouter } from "next/router";
+import {
+  ShadowedPixelBox,
+  ShadowedPixelBoxProps,
+} from "../../../components/ShadowedPixelBox";
+import { Main } from "../../../layouts/Main";
+import {
+  Box,
+  forwardRef,
+  HStack,
+  SimpleGrid,
+  Spacer,
+  VStack,
+} from "@chakra-ui/react";
+import { Shadow } from "../../../components/Shadow";
+import { ArrowUp } from "../../../components/Icons";
+import Link from "next/link";
+import dynamic from "next/dynamic";
+import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
+import { readdirSync, existsSync } from "fs";
+import { NutshellDefinitions } from "../../../components/Nouns101MdxProvider";
+import {
+  AnimatePresence,
+  domAnimation,
+  LazyMotion,
+  motion,
+  MotionProps,
+} from "framer-motion";
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const {
+    // @ts-ignore
+    params: { chapterNumber, section },
+  } = context;
+
+  const amountSections = readdirSync(
+    `content/chapters/${chapterNumber}/sections`
+  ).length;
+
+  const sectionNumber = parseInt(section);
+  const previousSection =
+    sectionNumber > 1
+      ? `/chapters/${chapterNumber}/${sectionNumber - 1}`
+      : null;
+  const nextSection =
+    sectionNumber + 1 <= amountSections
+      ? `/chapters/${chapterNumber}/${sectionNumber + 1}`
+      : null;
+
+  return {
+    props: {
+      chapterNumber,
+      sectionNumber,
+      previousSection,
+      nextSection,
+      amountSections,
+    },
+  };
+};
+
+export const getStaticPaths: GetStaticPaths = async (context) => {
+  const paths = readdirSync("content/chapters").flatMap((chapterNumber) =>
+    readdirSync(`content/chapters/${chapterNumber}/sections`).map(
+      (sectionFile) => {
+        const section = sectionFile.split(".")[0];
+        return {
+          params: {
+            chapterNumber,
+            section,
+          },
+        };
+      }
+    )
+  );
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+type ChapterSectionProps = {
+  chapterNumber: number;
+  sectionNumber: number;
+  previousSection: string;
+  nextSection: string | null;
+  amountSections: number;
+};
+
+const ChapterSection: FC<ChapterSectionProps> = ({
+  chapterNumber,
+  sectionNumber,
+  previousSection,
+  nextSection,
+  amountSections,
+}) => {
+  const SectionContent = dynamic(
+    () =>
+      import(
+        `../../../content/chapters/${chapterNumber}/sections/${sectionNumber}.mdx`
+      ),
+    {
+      ssr: true,
+    }
+  );
+
+  const pixelBoxProps: Partial<ShadowedPixelBoxProps & MotionProps> = {
+    as: motion.div,
+    // position: "absolute",
+    h: "60vh",
+    w: "xl",
+    initial: { x: "-50vw" },
+    animate: { x: 0 },
+    exit: { x: "-90vw" },
+    transition: {
+      duration: 3,
+      ease: "easeInOut",
+    },
+  };
+
+  // @ts-ignore
+  return (
+    <Main>
+      <HStack h={"full"} alignItems={"center"} justifyContent={"space-evenly"}>
+        <Box w={"80px"}>
+          {previousSection && (
+            <Shadow>
+              <Link href={previousSection}>
+                <ArrowUp
+                  cursor={"pointer"}
+                  _hover={{ color: "nouns101.lightBlue" }}
+                  boxSize={20}
+                  color={"nouns101.blue"}
+                  transform={"rotate(-90deg)"}
+                />
+              </Link>
+            </Shadow>
+          )}
+        </Box>
+        <Box display={"grid"}>
+          <AnimatePresence initial={false}>
+            {amountSections - sectionNumber > 0 &&
+              Array(amountSections - sectionNumber)
+                .fill(null)
+                .map((_, idx) => (
+                  <ShadowedPixelBox
+                    gridArea={"1/1/1/1"}
+                    // @ts-ignore
+                    // layoutId={`section-${sectionNumber + idx + 1}`}
+                    transform={`translateX(${8 * (idx + 1)}px) translateY(${
+                      8 * (idx + 1)
+                    }px)`}
+                    key={`section-${sectionNumber + idx + 1}`}
+                    {...pixelBoxProps}
+                  />
+                ))
+                .reverse()}
+            <ShadowedPixelBox
+              // @ts-ignore
+              // layoutId={`section-${sectionNumber}`}
+              gridArea={"1/1/1/1"}
+              key={`section-${sectionNumber}`}
+              {...pixelBoxProps}
+              // position={"relative"}
+              p={8}
+              overflowY={"scroll"}
+            >
+              <VStack alignItems={"start"}>
+                <SectionContent />
+              </VStack>
+            </ShadowedPixelBox>
+          </AnimatePresence>
+        </Box>
+        <Box w={"80px"}>
+          {nextSection && (
+            <Shadow>
+              <Link href={nextSection}>
+                <ArrowUp
+                  cursor={"pointer"}
+                  _hover={{ color: "nouns101.lightBlue" }}
+                  boxSize={20}
+                  color={"nouns101.blue"}
+                  transform={"rotate(90deg)"}
+                />
+              </Link>
+            </Shadow>
+          )}
+        </Box>
+      </HStack>
+    </Main>
+  );
+};
+
+export default ChapterSection;

@@ -1,0 +1,13 @@
+import Image from "next/image";
+import logo from "../assets/101-logo.svg";
+import { Center, CenterProps } from "@chakra-ui/react";
+import { FC } from "react";
+import { MainContainer } from "../layouts/Main";
+
+export const Footer: FC<CenterProps> = (props) => (
+  <Center bgColor={"#FFE7BF"} w={"full"} {...props}>
+    <MainContainer>
+      <Image src={logo} layout={"fixed"} />
+    </MainContainer>
+  </Center>
+);
