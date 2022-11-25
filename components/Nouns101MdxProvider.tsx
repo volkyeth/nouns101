@@ -70,8 +70,6 @@ const CustomLink: FC<CustomLinkProps> = ({ href, children, className }) => {
   const nutshellDefinitions =
     useContext<NutshellDefinitions>(NutshellDefinitions);
 
-  console.log({ href, children, className });
-
   if (className === "wikilink inexistent") {
     if (nutshellDefinitions && nutshellDefinitions[href!]) {
       return (

@@ -158,12 +158,13 @@ const ChapterSection: FC<ChapterSectionProps> = ({
               {...pixelBoxProps}
               // @ts-ignore
               onPanEnd={(event, info) => {
-                console.log(info)
-                if (info.velocity.x < 0 && nextSection) {
+                // const {delta, offset} = info
+                // console.log({delta: delta.x, offset: offset.x})
+                if (info.offset.x < -30 && nextSection) {
                   push(nextSection)
                 }
 
-                if (info.velocity.x > 0 && previousSection) {
+                if (info.offset.x > 30 && previousSection) {
                   push(previousSection)
                 }
               }}
