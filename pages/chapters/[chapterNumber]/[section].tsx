@@ -114,7 +114,7 @@ const ChapterSection: FC<ChapterSectionProps> = ({
     w: {base: "full", md: "xl"},
     initial: { x: "-50vw" },
     animate: { x: 0 },
-    exit: { x: "-90vw" },
+    exit: { x: "-100vw" },
   };
 
   // @ts-ignore
