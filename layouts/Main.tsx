@@ -12,10 +12,10 @@ export const Main: FC<PropsWithChildren<MainLayoutProps>> = ({
   navbarExtraContent,
   ...containerProps
 }) => (
-  <VStack spacing={0} w={"full"} h={"100vh"} justifyItems={"stretch"}>
+  <VStack spacing={0} w={"full"} h={"100vh"} justifyItems={"stretch"} overflow={"clip"}>
     <Navbar py={2} extraContent={navbarExtraContent} />
     <Box bgColor="#FBF0DF" w={"full"} flexGrow={1}>
-      <MainContainer py={10} h={"full"} {...containerProps}>
+      <MainContainer py={10} px={6} h={"full"} {...containerProps}>
         {children}
       </MainContainer>
     </Box>

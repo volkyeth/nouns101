@@ -27,6 +27,7 @@ import {
   motion,
   MotionProps,
 } from "framer-motion";
+import { useIsMobile } from "../../../hooks/mobile";
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const {
@@ -94,6 +95,8 @@ const ChapterSection: FC<ChapterSectionProps> = ({
   nextSection,
   amountSections,
 }) => {
+  const isMobile = useIsMobile();
+  const {push} = useRouter()
   const SectionContent = dynamic(
     () =>
       import(
@@ -107,8 +110,8 @@ const ChapterSection: FC<ChapterSectionProps> = ({
   const pixelBoxProps: Partial<ShadowedPixelBoxProps & MotionProps> = {
     as: motion.div,
     // position: "absolute",
-    h: "60vh",
-    w: "xl",
+    h: "65vh",
+    w: {base: "full", md: "xl"},
     initial: { x: "-50vw" },
     animate: { x: 0 },
     exit: { x: "-90vw" },
@@ -117,8 +120,8 @@ const ChapterSection: FC<ChapterSectionProps> = ({
   // @ts-ignore
   return (
     <Main>
-      <HStack h={"full"} alignItems={"center"} justifyContent={"space-evenly"}>
-        <Box w={"80px"}>
+      <HStack h={"full"} w={"full"} alignItems={"center"} justifyContent={"space-evenly"} >
+        {!isMobile && <Box w={"80px"}>
           {previousSection && (
             <Shadow>
               <Link href={previousSection}>
@@ -132,8 +135,8 @@ const ChapterSection: FC<ChapterSectionProps> = ({
               </Link>
             </Shadow>
           )}
-        </Box>
-        <Box display={"grid"}>
+        </Box>}
+        <Box flexGrow={1} display={"grid"}>
           <AnimatePresence initial={false}>
             {amountSections - sectionNumber > 0 &&
               Array(amountSections - sectionNumber)
@@ -141,8 +144,6 @@ const ChapterSection: FC<ChapterSectionProps> = ({
                 .map((_, idx) => (
                   <ShadowedPixelBox
                     gridArea={"1/1/1/1"}
-                    // @ts-ignore
-                    // layoutId={`section-${sectionNumber + idx + 1}`}
                     transform={`translateX(${8 * (idx + 1)}px) translateY(${
                       8 * (idx + 1)
                     }px)`}
@@ -152,22 +153,30 @@ const ChapterSection: FC<ChapterSectionProps> = ({
                 ))
                 .reverse()}
             <ShadowedPixelBox
-              // @ts-ignore
-              // layoutId={`section-${sectionNumber}`}
               gridArea={"1/1/1/1"}
               key={`section-${sectionNumber}`}
               {...pixelBoxProps}
-              // position={"relative"}
-              p={8}
-              overflowY={"scroll"}
+              // @ts-ignore
+              onPanEnd={(event, info) => {
+                console.log(info)
+                if (info.velocity.x < 0 && nextSection) {
+                  push(nextSection)
+                }
+
+                if (info.velocity.x > 0 && previousSection) {
+                  push(previousSection)
+                }
+              }}
+              py={8}
+              px={[2,8]}
             >
-              <VStack alignItems={"start"}>
+              <VStack h="full" px={[6,0]} alignItems={"start"} overflowY={"scroll"} style={{touchAction: "pan-y"}}>
                 <SectionContent />
               </VStack>
             </ShadowedPixelBox>
           </AnimatePresence>
         </Box>
-        <Box w={"80px"}>
+        {!isMobile && <Box w={"80px"}>
           {nextSection && (
             <Shadow>
               <Link href={nextSection}>
@@ -181,7 +190,7 @@ const ChapterSection: FC<ChapterSectionProps> = ({
               </Link>
             </Shadow>
           )}
-        </Box>
+        </Box>}
       </HStack>
     </Main>
   );
