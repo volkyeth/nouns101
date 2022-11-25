@@ -112,10 +112,6 @@ const ChapterSection: FC<ChapterSectionProps> = ({
     initial: { x: "-50vw" },
     animate: { x: 0 },
     exit: { x: "-90vw" },
-    transition: {
-      duration: 3,
-      ease: "easeInOut",
-    },
   };
 
   // @ts-ignore
