@@ -1,5 +1,5 @@
 import { ChapterMetadata } from "../../../utils/metadata";
-import noggles from "../../../assets/noggles.svg";
+import noggles from "./noggles.svg";
 
 export default {
   id: "3",

@@ -1,5 +1,5 @@
 import { ChapterMetadata } from "../../../utils/metadata";
-import bitNoggles from "../../../assets/bitNoggles.svg";
+import bitNoggles from "./bitNoggles.svg";
 
 export default {
   id: "1",

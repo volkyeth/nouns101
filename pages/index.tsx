@@ -13,10 +13,10 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import bitNoggles from "../assets/bitNoggles.svg";
-import lilNoggles from "../assets/lilNoggles.svg";
-import noggles from "../assets/noggles.svg";
-import monoggle from "../assets/monoggle.svg";
+import bitNoggles from "../content/chapters/1/bitNoggles.svg";
+import lilNoggles from "../content/chapters/2/lilNoggles.svg";
+import noggles from "../content/chapters/3/noggles.svg";
+import monoggle from "../content/chapters/4/monoggle.svg";
 
 import chapter1 from "../content/chapters/1/summary.mdx";
 import chapter1Meta from "../content/chapters/1/metadata";

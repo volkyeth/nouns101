@@ -1,5 +1,5 @@
 import { ChapterMetadata } from "../../../utils/metadata";
-import lilNoggles from "../../../assets/lilNoggles.svg";
+import lilNoggles from "./lilNoggles.svg";
 
 export default {
   id: "2",

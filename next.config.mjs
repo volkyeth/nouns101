@@ -1,7 +1,5 @@
-import mdx from "@next/mdx";
-
 /**
- * @type {import('next').NextConfig}
+ * @type {import("next").NextConfig}
  **/
 export default {
   reactStrictMode: true,
@@ -13,12 +11,12 @@ export default {
       use: [
         options.defaultLoaders.babel,
         {
-          loader: '@mdx-js/loader',
-          /** @type {import('@mdx-js/loader').Options} */
-          options: {},
-        },
+          loader: "@mdx-js/loader",
+          /** @type {import("@mdx-js/loader").Options} */
+          options: {}
+        }
       ]
-    })
+    });
 
     return config;
   }

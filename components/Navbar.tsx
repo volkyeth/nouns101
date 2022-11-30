@@ -49,17 +49,16 @@ export const Navbar: FC<NavbarProps> = ({ extraContent, ...props }) => {
     <Center
       bgColor={"#FFE7BF"}
       w={"full"}
-      h={"80px"}
       borderBottomWidth={3}
       borderColor={"black"}
       {...props}
     >
       <MainContainer>
-        <VStack>
+        <VStack spacing={[2, 8]}>
           <>
             <HStack w={"full"} justifyContent={"space-between"}>
               <Link href={"/"}>
-                <Image src={logo} layout={"fixed"} height={24} />
+                <Image alt={"Nouns101 logo"} src={logo} height={24} />
               </Link>
               {!isMobile ? (
                 <>
@@ -72,13 +71,13 @@ export const Navbar: FC<NavbarProps> = ({ extraContent, ...props }) => {
 
                   <HStack spacing={2}>
                     <PixelButton bgColor={"#1D9BF0"} {...socialsButtonProps}>
-                      <Image src={twitter} />
+                      <Image alt={"twitter"} src={twitter} />
                     </PixelButton>
                     <PixelButton bgColor={"black"} {...socialsButtonProps}>
-                      <Image src={figma} />
+                      <Image alt={"figma"} src={figma} />
                     </PixelButton>
                     <PixelButton bgColor={"#5865F2"} {...socialsButtonProps}>
-                      <Image src={discord} />
+                      <Image alt={"discord"} src={discord} />
                     </PixelButton>
                   </HStack>
                 </>

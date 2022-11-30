@@ -8,10 +8,14 @@ import { Main } from "../../../layouts/Main";
 import {
   Box,
   forwardRef,
+  Heading,
   HStack,
   SimpleGrid,
   Spacer,
+  chakra,
+  Text,
   VStack,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import { Shadow } from "../../../components/Shadow";
 import { ArrowUp } from "../../../components/Icons";
@@ -37,6 +41,9 @@ import * as fs from "fs";
 import { basename } from "path";
 import { serializeMdx, serializeNutshells } from "../../../utils/mdx";
 import { ChapterMetadata } from "../../../utils/metadata";
+import Image from "next/image";
+import { ProgressBar } from "../../../components/ProgressBar";
+import poap from "../../../assets/poap.svg";
 
 export const getStaticProps: GetStaticProps<ChapterSectionProps> = async (
   context
@@ -74,12 +81,8 @@ export const getStaticProps: GetStaticProps<ChapterSectionProps> = async (
     `content/chapters/${chapterId}/sections`
   ).length;
 
-  console.log(`content/chapters/${chapterId}/metadata`);
-
   const chapterMeta = (await import(`content/chapters/${chapterId}/metadata`))
     .default as ChapterMetadata;
-
-  console.log(chapterMeta);
 
   const sectionNumber = parseInt(section);
   const previousSection =
@@ -142,7 +145,7 @@ const ChapterSection: FC<ChapterSectionProps> = ({
   serializedNutshells,
   chapterMeta,
 }) => {
-  const isMobile = useIsMobile();
+  const showArrows = useBreakpointValue({ base: false, lg: true });
   const { push } = useRouter();
 
   const pixelBoxProps: Partial<ShadowedPixelBoxProps & MotionProps> = {
@@ -150,21 +153,77 @@ const ChapterSection: FC<ChapterSectionProps> = ({
     // position: "absolute",
     h: "65vh",
     w: { base: "full", md: "xl" },
-    initial: { x: "-50vw" },
+    initial: { x: "-100vw" },
     animate: { x: 0 },
     exit: { x: "-100vw" },
   };
 
+  const poapWidth = useBreakpointValue([32, 54]);
+  const poapStyle = useBreakpointValue([
+    {
+      marginLeft: "-14px",
+      marginBottom: "-6px",
+    },
+    {
+      marginTop: "-16px",
+      marginLeft: "-30px",
+      marginBottom: "-30px",
+    },
+  ]);
+
   // @ts-ignore
   return (
-    <Main bgColor={chapterMeta.color}>
+    <Main
+      bgColor={chapterMeta.color}
+      overflow={"clip"}
+      navbarExtraContent={
+        <VStack
+          w={"full"}
+          fontWeight={"bold"}
+          fontFamily={`"LoRes 12 OT",sans-serif`}
+          spacing={[0, 2]}
+        >
+          <HStack
+            w={"full"}
+            justifyContent={"space-between"}
+            alignItems={"center"}
+          >
+            <VStack spacing={0} alignItems={"start"} p={0}>
+              <Text fontSize={["xl", "2xl"]} color={"#2245C5"}>
+                Chapter {chapterMeta.id}
+              </Text>
+              <Heading fontSize={["lg", "2xl"]} as={"h2"}>
+                {chapterMeta.title}
+              </Heading>
+            </VStack>
+            <Image alt={"noggles"} src={chapterMeta.image} width={60} />
+          </HStack>
+          <HStack w={"full"} pb={[1, 6]}>
+            <Text>
+              {sectionNumber}/{amountSections}
+            </Text>
+            <ProgressBar
+              flexGrow={1}
+              amountSegments={amountSections}
+              currentSegment={sectionNumber}
+            />
+            <Image
+              alt={"poap"}
+              src={poap}
+              width={poapWidth}
+              style={poapStyle}
+            />
+          </HStack>
+        </VStack>
+      }
+    >
       <HStack
         h={"full"}
         w={"full"}
         alignItems={"center"}
         justifyContent={"space-evenly"}
       >
-        {!isMobile && (
+        {showArrows && (
           <Box w={"80px"}>
             {previousSection && (
               <Shadow>
@@ -235,7 +294,7 @@ const ChapterSection: FC<ChapterSectionProps> = ({
             </ShadowedPixelBox>
           </AnimatePresence>
         </Box>
-        {!isMobile && (
+        {showArrows && (
           <Box w={"80px"}>
             {nextSection && (
               <Shadow>

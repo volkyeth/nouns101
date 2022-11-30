@@ -5,16 +5,24 @@ import { Box, Container, ContainerProps, VStack } from "@chakra-ui/react";
 
 export type MainLayoutProps = {
   navbarExtraContent?: ReactNode;
+  bgColor?: string;
 } & ContainerProps;
 
 export const Main: FC<PropsWithChildren<MainLayoutProps>> = ({
   children,
   navbarExtraContent,
+  bgColor = "#FBF0DF",
   ...containerProps
 }) => (
-  <VStack spacing={0} w={"full"} h={["full","100vh"]} justifyItems={"stretch"} overflowX={"clip"}>
+  <VStack
+    spacing={0}
+    w={"full"}
+    h={["full", "100vh"]}
+    justifyItems={"stretch"}
+    overflowX={"clip"}
+  >
     <Navbar py={2} extraContent={navbarExtraContent} />
-    <Box bgColor="#FBF0DF" w={"full"} flexGrow={1}>
+    <Box bgColor={bgColor} w={"full"} flexGrow={1}>
       <MainContainer py={10} px={6} h={"full"} {...containerProps}>
         {children}
       </MainContainer>
