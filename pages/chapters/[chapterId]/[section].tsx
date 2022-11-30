@@ -287,6 +287,23 @@ const ChapterSection: FC<ChapterSectionProps> = ({
                 overflowY={"scroll"}
                 style={{ touchAction: "pan-y" }}
               >
+                <VStack
+                  spacing={0}
+                  alignItems={"start"}
+                  p={0}
+                  pb={[4, 8]}
+                  fontWeight={"bold"}
+                  fontFamily={`"LoRes 12 OT",sans-serif`}
+                >
+                  <Text fontSize={["xl", "2xl"]} color={"#2245C5"}>
+                    Section {sectionNumber}
+                  </Text>
+                  {serializedSection?.frontmatter?.title && (
+                    <Heading fontSize={["lg", "2xl"]} as={"h2"}>
+                      {serializedSection.frontmatter.title}
+                    </Heading>
+                  )}
+                </VStack>
                 <NutshellDefinitions.Provider value={serializedNutshells}>
                   <MDXRemote {...serializedSection} />
                 </NutshellDefinitions.Provider>

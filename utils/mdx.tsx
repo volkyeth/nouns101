@@ -28,6 +28,7 @@ export const serializeMdx = async (
       ],
       rehypePlugins: [],
     },
+    parseFrontmatter: true,
   });
 
 const pageResolver = (name: string) => {
