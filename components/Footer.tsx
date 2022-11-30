@@ -1,5 +1,5 @@
 import Image from "next/image";
-import logo from "../assets/101-logo.svg";
+import logo from "../assets/noggle101.svg";
 import { Center, CenterProps } from "@chakra-ui/react";
 import { FC } from "react";
 import { MainContainer } from "../layouts/Main";

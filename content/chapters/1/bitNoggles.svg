@@ -1,24 +1,10 @@
 <svg width="60" height="20" viewBox="0 0 60 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect y="13.3334" width="6.66664" height="6.66664" fill="#FF638D"/>
-<rect y="6.66675" width="6.66664" height="6.66664" fill="#FF638D"/>
-<rect x="6.66699" y="6.66675" width="6.66664" height="6.66664" fill="#FF638D"/>
-<rect x="33.3329" y="6.66675" width="6.66664" height="6.66664" fill="#FF638D"/>
-<rect x="13.3335" width="6.66664" height="6.66664" fill="#FF638D"/>
-<rect x="40" width="6.66664" height="6.66664" fill="#FF638D"/>
-<rect x="19.9998" width="6.66664" height="6.66664" fill="#FF638D"/>
-<rect x="46.6661" width="6.66664" height="6.66664" fill="#FF638D"/>
-<rect x="26.6667" width="6.66664" height="6.66664" fill="#FF638D"/>
-<rect x="53.3329" width="6.66664" height="6.66664" fill="#FF638D"/>
-<rect x="26.6667" y="6.66675" width="6.66664" height="6.66664" fill="#FF638D"/>
-<rect x="53.3329" y="6.66675" width="6.66664" height="6.66664" fill="#FF638D"/>
-<rect x="19.9998" y="6.66675" width="6.66664" height="6.66664" fill="black"/>
-<rect x="46.6661" y="6.66675" width="6.66664" height="6.66664" fill="black"/>
-<rect x="13.3335" y="6.66675" width="6.66664" height="6.66664" fill="white"/>
-<rect x="40" y="6.66675" width="6.66664" height="6.66664" fill="white"/>
-<rect x="26.6667" y="13.3334" width="6.66664" height="6.66664" fill="#FF638D"/>
-<rect x="53.3329" y="13.3334" width="6.66664" height="6.66664" fill="#FF638D"/>
-<rect x="19.9998" y="13.3334" width="6.66664" height="6.66664" fill="black"/>
-<rect x="46.6661" y="13.3334" width="6.66664" height="6.66664" fill="black"/>
-<rect x="13.3335" y="13.3334" width="6.66664" height="6.66664" fill="white"/>
-<rect x="40" y="13.3333" width="6.66664" height="6.66664" fill="white"/>
+    <path d="M13.3335 0V6.66664H26.6665L26.6666 19.9999H33.3333V13.3334H39.9995V6.66675H33.3333V0H26.6665H13.3335Z"
+          fill="#FF638D"/>
+    <path d="M6.66664 6.66675H0V19.9999H6.66664V13.3334H13.3336L13.3335 6.66664L6.66664 6.66675Z" fill="#FF638D"/>
+    <path d="M40 0L39.9995 6.66675L53.3327 6.66664L53.3328 19.9999H59.9995V6.66664V0H53.3327H40Z" fill="#FF638D"/>
+    <path d="M26.6666 6.66699H20V20.0001H26.6666V6.66699Z" fill="black"/>
+    <path d="M53.3328 6.66699H46.6662V20.0001H53.3328V6.66699Z" fill="black"/>
+    <path d="M20.0006 6.66699H13.334V20.0001H20.0006V6.66699Z" fill="white"/>
+    <path d="M46.6671 6.66699H40.0005V20.0001H46.6671V6.66699Z" fill="white"/>
 </svg>

@@ -19,7 +19,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import Image from "next/image";
-import logo from "../assets/101-logo.svg";
+import logo from "../assets/noggle101.svg";
 import { PixelButton, PixelButtonProps } from "./PixelButton";
 import twitter from "../assets/twitter.svg";
 import figma from "../assets/figma.svg";
