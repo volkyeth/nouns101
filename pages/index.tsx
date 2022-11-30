@@ -19,9 +19,13 @@ import noggles from "../assets/noggles.svg";
 import monoggle from "../assets/monoggle.svg";
 
 import chapter1 from "../content/chapters/1/summary.mdx";
+import chapter1Meta from "../content/chapters/1/metadata";
 import chapter2 from "../content/chapters/2/summary.mdx";
+import chapter2Meta from "../content/chapters/2/metadata";
 import chapter3 from "../content/chapters/3/summary.mdx";
+import chapter3Meta from "../content/chapters/3/metadata";
 import chapter4 from "../content/chapters/4/summary.mdx";
+import chapter4Meta from "../content/chapters/4/metadata";
 import { FC } from "react";
 import { ShadowedPixelBox } from "../components/ShadowedPixelBox";
 import { ChapterCard } from "../components/ChapterCard";
@@ -66,31 +70,19 @@ const Home: NextPage = () => {
 
         <SimpleGrid w={"full"} columns={[1, 2]} gridGap={4}>
           <ChapterCard
-            chapterNumber={1}
-            chapterTitle={"New to Web3"}
-            chapterColor={"#FEE3F3"}
-            chapterImage={bitNoggles}
+            chapterMetadata={chapter1Meta}
             chapterSummary={chapter1({})}
           />
           <ChapterCard
-            chapterNumber={2}
-            chapterTitle={"Understanding NFTs"}
-            chapterColor={"#FFC8B2"}
-            chapterImage={lilNoggles}
+            chapterMetadata={chapter2Meta}
             chapterSummary={chapter2({})}
           />
           <ChapterCard
-            chapterNumber={3}
-            chapterTitle={"NFTs and DAOs"}
-            chapterColor={"#DAE6FF"}
-            chapterImage={noggles}
+            chapterMetadata={chapter3Meta}
             chapterSummary={chapter3({})}
           />
           <ChapterCard
-            chapterNumber={4}
-            chapterTitle={"Joining a DAO!"}
-            chapterColor={"#C8B6FF"}
-            chapterImage={monoggle}
+            chapterMetadata={chapter4Meta}
             chapterSummary={chapter4({})}
           />
         </SimpleGrid>

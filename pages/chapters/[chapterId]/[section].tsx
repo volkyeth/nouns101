@@ -33,26 +33,24 @@ import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import remarkGfm from "remark-gfm";
 // @ts-ignore
 import wikiLinkPlugin from "remark-wiki-link";
-import imageSize from "rehype-img-size";
 import * as fs from "fs";
 import { basename } from "path";
 import { serializeMdx, serializeNutshells } from "../../../utils/mdx";
+import { ChapterMetadata } from "../../../utils/metadata";
 
 export const getStaticProps: GetStaticProps<ChapterSectionProps> = async (
   context
 ) => {
-  const { chapterNumber, section } = context.params as {
-    chapterNumber: string;
+  const { chapterId, section } = context.params as {
+    chapterId: string;
     section: string;
   };
   const glossaryNutshellFiles = readdirSync("content/glossary").map(
     (filename) => `content/glossary/${filename}`
   );
   const chapterNutshellFiles = readdirSync(
-    `content/chapters/${chapterNumber}/nutshells`
-  ).map(
-    (filename) => `content/chapters/${chapterNumber}/nutshells/${filename}`
-  );
+    `content/chapters/${chapterId}/nutshells`
+  ).map((filename) => `content/chapters/${chapterId}/nutshells/${filename}`);
   const nutshellFiles = [
     ...glossaryNutshellFiles,
     ...chapterNutshellFiles,
@@ -66,52 +64,56 @@ export const getStaticProps: GetStaticProps<ChapterSectionProps> = async (
     permalinks
   );
 
-  const sectionFile = `content/chapters/${chapterNumber}/sections/${section}.mdx`;
+  const sectionFile = `content/chapters/${chapterId}/sections/${section}.mdx`;
   const serializedSection = await serializeMdx(
     readFileSync(sectionFile).toString(),
     permalinks
   );
 
   const amountSections = readdirSync(
-    `content/chapters/${chapterNumber}/sections`
+    `content/chapters/${chapterId}/sections`
   ).length;
+
+  console.log(`content/chapters/${chapterId}/metadata`);
+
+  const chapterMeta = (await import(`content/chapters/${chapterId}/metadata`))
+    .default as ChapterMetadata;
+
+  console.log(chapterMeta);
 
   const sectionNumber = parseInt(section);
   const previousSection =
-    sectionNumber > 1
-      ? `/chapters/${chapterNumber}/${sectionNumber - 1}`
-      : null;
+    sectionNumber > 1 ? `/chapters/${chapterId}/${sectionNumber - 1}` : null;
   const nextSection =
     sectionNumber + 1 <= amountSections
-      ? `/chapters/${chapterNumber}/${sectionNumber + 1}`
+      ? `/chapters/${chapterId}/${sectionNumber + 1}`
       : null;
 
   return {
     props: {
-      chapterNumber: parseInt(chapterNumber),
+      chapterId,
       sectionNumber,
       previousSection,
       nextSection,
       amountSections,
       serializedSection,
       serializedNutshells: nutshellDefinitions,
+      chapterMeta,
     },
   };
 };
 
 export const getStaticPaths: GetStaticPaths = async (context) => {
-  const paths = readdirSync("content/chapters").flatMap((chapterNumber) =>
-    readdirSync(`content/chapters/${chapterNumber}/sections`).map(
-      (sectionFile) => {
-        const section = sectionFile.split(".")[0];
-        return {
-          params: {
-            chapterNumber,
-            section,
-          },
-        };
-      }
-    )
+  const paths = readdirSync("content/chapters").flatMap((chapterId) =>
+    readdirSync(`content/chapters/${chapterId}/sections`).map((sectionFile) => {
+      const section = sectionFile.split(".")[0];
+      return {
+        params: {
+          chapterId,
+          section,
+        },
+      };
+    })
   );
   return {
     paths,
@@ -122,21 +124,23 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
 type ChapterSectionProps = {
   serializedSection: MDXRemoteSerializeResult;
   serializedNutshells: NutshellDefinitions;
-  chapterNumber: number;
+  chapterId: string;
   sectionNumber: number;
   previousSection: string | null;
   nextSection: string | null;
   amountSections: number;
+  chapterMeta: ChapterMetadata;
 };
 
 const ChapterSection: FC<ChapterSectionProps> = ({
-  chapterNumber,
+  chapterId,
   sectionNumber,
   previousSection,
   nextSection,
   amountSections,
   serializedSection,
   serializedNutshells,
+  chapterMeta,
 }) => {
   const isMobile = useIsMobile();
   const { push } = useRouter();
@@ -153,7 +157,7 @@ const ChapterSection: FC<ChapterSectionProps> = ({
 
   // @ts-ignore
   return (
-    <Main>
+    <Main bgColor={chapterMeta.color}>
       <HStack
         h={"full"}
         w={"full"}

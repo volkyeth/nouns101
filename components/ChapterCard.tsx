@@ -22,20 +22,15 @@ import { SmallArrowUp } from "./Icons";
 import { Shadow } from "./Shadow";
 import { PixelButton } from "./PixelButton";
 import Link from "next/link";
+import { ChapterMetadata } from "../utils/metadata";
 
 export type ChapterCardProps = {
-  chapterTitle: string;
+  chapterMetadata: ChapterMetadata;
   chapterSummary: ReactNode;
-  chapterColor: string;
-  chapterImage: string;
-  chapterNumber: number;
 } & AccordionProps;
 
 export const ChapterCard: FC<ChapterCardProps> = ({
-  chapterNumber,
-  chapterTitle,
-  chapterColor,
-  chapterImage,
+  chapterMetadata,
   chapterSummary,
   ...props
 }) => {
@@ -54,19 +49,19 @@ export const ChapterCard: FC<ChapterCardProps> = ({
           <>
             <AutoExpander expand={!isMobile} />
             <AccordionButton
-              bg={chapterColor}
+              bg={chapterMetadata.color}
               py={4}
               px={[2, 8]}
               borderBottomWidth={2}
               borderColor={"black"}
               disabled={!isMobile}
               _disabled={{ opacity: "inherit", cursor: "initial" }}
-              _hover={{ bgColor: chapterColor }}
+              _hover={{ bgColor: chapterMetadata.color }}
             >
               <HStack w={"full"} p={0} spacing={[4, 2]}>
                 {isMobile && (
                   <chakra.span transform={"rotate(-90deg)"}>
-                    <Image src={chapterImage} width={"50px"} />
+                    <Image src={chapterMetadata.image} width={"50px"} />
                   </chakra.span>
                 )}
                 <VStack
@@ -78,10 +73,10 @@ export const ChapterCard: FC<ChapterCardProps> = ({
                   p={0}
                 >
                   <Text fontSize={["xl", "2xl"]} color={"#2245C5"}>
-                    Chapter {chapterNumber}
+                    Chapter {chapterMetadata.id}
                   </Text>
                   <Heading fontSize={["lg", "2xl"]} as={"h2"}>
-                    {chapterTitle}
+                    {chapterMetadata.title}
                   </Heading>
                 </VStack>
                 {isMobile ? (
@@ -93,7 +88,7 @@ export const ChapterCard: FC<ChapterCardProps> = ({
                   </Shadow>
                 ) : (
                   <chakra.span alignSelf={"end"}>
-                    <Image src={chapterImage} />
+                    <Image src={chapterMetadata.image} />
                   </chakra.span>
                 )}
               </HStack>
@@ -101,7 +96,7 @@ export const ChapterCard: FC<ChapterCardProps> = ({
             <AccordionPanel fontSize={"sm"} py={4} px={8}>
               <VStack h={"full"} w={"full"} alignItems={"start"}>
                 {chapterSummary}
-                <Link href={`/chapters/${chapterNumber}/1`}>
+                <Link href={`/chapters/${chapterMetadata.id}/1`}>
                   <PixelButton shadowColor={"nouns101.blue"} alignSelf={"end"}>
                     Read
                   </PixelButton>
