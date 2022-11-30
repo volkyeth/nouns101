@@ -18,7 +18,7 @@ import { ArrowUp } from "../../../components/Icons";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
-import { readdirSync, existsSync } from "fs";
+import { readdirSync, existsSync, readFileSync } from "fs";
 import { NutshellDefinitions } from "../../../components/Nouns101MdxProvider";
 import {
   AnimatePresence,
@@ -28,12 +28,49 @@ import {
   MotionProps,
 } from "framer-motion";
 import { useIsMobile } from "../../../hooks/mobile";
+import { serialize } from "next-mdx-remote/serialize";
+import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
+import remarkGfm from "remark-gfm";
+// @ts-ignore
+import wikiLinkPlugin from "remark-wiki-link";
+import imageSize from "rehype-img-size";
+import * as fs from "fs";
+import { basename } from "path";
+import { serializeMdx, serializeNutshells } from "../../../utils/mdx";
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  const {
-    // @ts-ignore
-    params: { chapterNumber, section },
-  } = context;
+export const getStaticProps: GetStaticProps<ChapterSectionProps> = async (
+  context
+) => {
+  const { chapterNumber, section } = context.params as {
+    chapterNumber: string;
+    section: string;
+  };
+  const glossaryNutshellFiles = readdirSync("content/glossary").map(
+    (filename) => `content/glossary/${filename}`
+  );
+  const chapterNutshellFiles = readdirSync(
+    `content/chapters/${chapterNumber}/nutshells`
+  ).map(
+    (filename) => `content/chapters/${chapterNumber}/nutshells/${filename}`
+  );
+  const nutshellFiles = [
+    ...glossaryNutshellFiles,
+    ...chapterNutshellFiles,
+  ].filter((filename) => filename.split(".")[1] === "mdx");
+  const permalinks = nutshellFiles.map((filename) =>
+    basename(filename, ".mdx")
+  );
+
+  const nutshellDefinitions = await serializeNutshells(
+    nutshellFiles,
+    permalinks
+  );
+
+  const sectionFile = `content/chapters/${chapterNumber}/sections/${section}.mdx`;
+  const serializedSection = await serializeMdx(
+    readFileSync(sectionFile).toString(),
+    permalinks
+  );
 
   const amountSections = readdirSync(
     `content/chapters/${chapterNumber}/sections`
@@ -51,11 +88,13 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   return {
     props: {
-      chapterNumber,
+      chapterNumber: parseInt(chapterNumber),
       sectionNumber,
       previousSection,
       nextSection,
       amountSections,
+      serializedSection,
+      serializedNutshells: nutshellDefinitions,
     },
   };
 };
@@ -81,9 +120,11 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
 };
 
 type ChapterSectionProps = {
+  serializedSection: MDXRemoteSerializeResult;
+  serializedNutshells: NutshellDefinitions;
   chapterNumber: number;
   sectionNumber: number;
-  previousSection: string;
+  previousSection: string | null;
   nextSection: string | null;
   amountSections: number;
 };
@@ -94,24 +135,17 @@ const ChapterSection: FC<ChapterSectionProps> = ({
   previousSection,
   nextSection,
   amountSections,
+  serializedSection,
+  serializedNutshells,
 }) => {
   const isMobile = useIsMobile();
-  const {push} = useRouter()
-  const SectionContent = dynamic(
-    () =>
-      import(
-        `../../../content/chapters/${chapterNumber}/sections/${sectionNumber}.mdx`
-      ),
-    {
-      ssr: true,
-    }
-  );
+  const { push } = useRouter();
 
   const pixelBoxProps: Partial<ShadowedPixelBoxProps & MotionProps> = {
     as: motion.div,
     // position: "absolute",
     h: "65vh",
-    w: {base: "full", md: "xl"},
+    w: { base: "full", md: "xl" },
     initial: { x: "-50vw" },
     animate: { x: 0 },
     exit: { x: "-100vw" },
@@ -120,22 +154,29 @@ const ChapterSection: FC<ChapterSectionProps> = ({
   // @ts-ignore
   return (
     <Main>
-      <HStack h={"full"} w={"full"} alignItems={"center"} justifyContent={"space-evenly"} >
-        {!isMobile && <Box w={"80px"}>
-          {previousSection && (
-            <Shadow>
-              <Link href={previousSection}>
-                <ArrowUp
-                  cursor={"pointer"}
-                  _hover={{ color: "nouns101.lightBlue" }}
-                  boxSize={20}
-                  color={"nouns101.blue"}
-                  transform={"rotate(-90deg)"}
-                />
-              </Link>
-            </Shadow>
-          )}
-        </Box>}
+      <HStack
+        h={"full"}
+        w={"full"}
+        alignItems={"center"}
+        justifyContent={"space-evenly"}
+      >
+        {!isMobile && (
+          <Box w={"80px"}>
+            {previousSection && (
+              <Shadow>
+                <Link href={previousSection}>
+                  <ArrowUp
+                    cursor={"pointer"}
+                    _hover={{ color: "nouns101.lightBlue" }}
+                    boxSize={20}
+                    color={"nouns101.blue"}
+                    transform={"rotate(-90deg)"}
+                  />
+                </Link>
+              </Shadow>
+            )}
+          </Box>
+        )}
         <Box display={"grid"}>
           <AnimatePresence initial={false}>
             {amountSections - sectionNumber > 0 &&
@@ -158,42 +199,55 @@ const ChapterSection: FC<ChapterSectionProps> = ({
               {...pixelBoxProps}
               // @ts-ignore
               onPanEnd={(event, info) => {
-                if (event.pointerType !== "touch" || event.type === "pointercancel") {
-                  return
+                if (
+                  event.pointerType !== "touch" ||
+                  event.type === "pointercancel"
+                ) {
+                  return;
                 }
-                const {offset } = info
+                const { offset } = info;
                 if (offset.x < -40 && nextSection) {
-                  push(nextSection)
+                  push(nextSection);
                 }
 
                 if (offset.x > 40 && previousSection) {
-                  push(previousSection)
+                  push(previousSection);
                 }
               }}
               py={8}
-              px={[2,8]}
+              px={[2, 8]}
             >
-              <VStack h="full" px={[6,0]} alignItems={"start"} overflowY={"scroll"} style={{touchAction: "pan-y"}}>
-                <SectionContent />
+              <VStack
+                h="full"
+                px={[6, 0]}
+                alignItems={"start"}
+                overflowY={"scroll"}
+                style={{ touchAction: "pan-y" }}
+              >
+                <NutshellDefinitions.Provider value={serializedNutshells}>
+                  <MDXRemote {...serializedSection} />
+                </NutshellDefinitions.Provider>
               </VStack>
             </ShadowedPixelBox>
           </AnimatePresence>
         </Box>
-        {!isMobile && <Box w={"80px"}>
-          {nextSection && (
-            <Shadow>
-              <Link href={nextSection}>
-                <ArrowUp
-                  cursor={"pointer"}
-                  _hover={{ color: "nouns101.lightBlue" }}
-                  boxSize={20}
-                  color={"nouns101.blue"}
-                  transform={"rotate(90deg)"}
-                />
-              </Link>
-            </Shadow>
-          )}
-        </Box>}
+        {!isMobile && (
+          <Box w={"80px"}>
+            {nextSection && (
+              <Shadow>
+                <Link href={nextSection}>
+                  <ArrowUp
+                    cursor={"pointer"}
+                    _hover={{ color: "nouns101.lightBlue" }}
+                    boxSize={20}
+                    color={"nouns101.blue"}
+                    transform={"rotate(90deg)"}
+                  />
+                </Link>
+              </Shadow>
+            )}
+          </Box>
+        )}
       </HStack>
     </Main>
   );

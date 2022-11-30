@@ -8,22 +8,22 @@ import {
 } from "react";
 import {
   chakra,
-  forwardRef,
+  forwardRef, Image,
   Text,
   Tooltip,
-  TooltipProps,
+  TooltipProps
 } from "@chakra-ui/react";
 import { Nutshell } from "./Nutshell";
 import { MDXProvider } from "@mdx-js/react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import Image, { ImageProps } from "next/image";
+import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 
 export const Nouns101MdxProvider: FC<PropsWithChildren<{}>> = ({
   children,
 }) => {
   const components = {
-    img: ResponsiveImage,
+    img: Image,
     h1: chakra.h1,
     h2: chakra.h2,
     p: chakra.div,
@@ -40,7 +40,7 @@ export const Nouns101MdxProvider: FC<PropsWithChildren<{}>> = ({
 
 export const NutshellDefinitions = createContext({});
 
-type NutshellDefinitions = { [permalink: string]: string };
+export type NutshellDefinitions = { [permalink: string]: MDXRemoteSerializeResult };
 
 type CustomLinkProps = {
   href?: string;
@@ -71,11 +71,6 @@ const CustomLink: FC<CustomLinkProps> = ({ href, children, className }) => {
     useContext<NutshellDefinitions>(NutshellDefinitions);
 
   if (className === "wikilink inexistent") {
-    if (nutshellDefinitions && nutshellDefinitions[href!]) {
-      return (
-        <Nutshell term={children as string}>{/*<Definition />*/}</Nutshell>
-      );
-    }
     return (
       <Text color={"red"} fontWeight={"extrabold"} display={"inline"}>
         :{children}:
@@ -83,19 +78,10 @@ const CustomLink: FC<CustomLinkProps> = ({ href, children, className }) => {
     );
   }
 
-  if (className === "wikilink") {
-    const Definition = dynamic(
-      () => import(`../content/glossary/${href}.mdx`),
-      {
-        ssr: false,
-      }
-    );
-
-    return (
-      <Nutshell term={children as string}>
-        <Definition />
-      </Nutshell>
-    );
+  if (className === "wikilink" && nutshellDefinitions && nutshellDefinitions[href!]) {
+      return (
+        <Nutshell term={children as string}><MDXRemote {...nutshellDefinitions[href!]}/></Nutshell>
+      );
   }
 
   return (

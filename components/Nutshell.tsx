@@ -54,12 +54,12 @@ export const Nutshell: FC<NutshellProps> = ({ children, term }) => {
         {isOpen && <SmallArrowUp viewBox={"0 0 27 15"} color={"#E9F0FF"} />}
       </VStack>
       {isOpen && (
-        <>
+        <Box px={2}>
           <ShadowedPixelBox bgColor={"#E9F0FF"} shadowColor={nouns101Blue}>
             <VStack alignItems={"start"}>{children}</VStack>
           </ShadowedPixelBox>
           <Spacer h={2} />
-        </>
+        </Box>
       )}
     </>
   );
