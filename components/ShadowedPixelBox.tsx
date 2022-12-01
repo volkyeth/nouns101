@@ -4,10 +4,8 @@ import { pixelatedClipPath } from "../utils/clipPaths";
 import { Shadow } from "./Shadow";
 
 export type ShadowedPixelBoxProps = {
-  pixelSize?: number;
   shadowColor?: string;
-} & BoxProps;
-
+} & PixelBoxProps;
 export const ShadowedPixelBox: FC<ShadowedPixelBoxProps> = forwardRef(
   (
     { pixelSize = 4, shadowColor = "black", gridArea, transform, ...props },
@@ -19,21 +17,14 @@ export const ShadowedPixelBox: FC<ShadowedPixelBoxProps> = forwardRef(
       gridArea={gridArea}
       transform={transform}
     >
-      <Box
-        ref={ref}
-        p={4}
-        clipPath={pixelatedClipPath(pixelSize)}
-        bgColor={"white"}
-        {...props}
-      />
+      <PixelBox {...props} />
     </Shadow>
   )
 );
 
 export type OutlinedPixelBoxProps = {
-  pixelSize?: number;
   outlineColor?: string;
-} & BoxProps;
+} & PixelBoxProps;
 
 export const OutlinedPixelBox: FC<OutlinedPixelBoxProps> = forwardRef(
   ({ pixelSize = 4, outlineColor = "black", ...props }, ref) => (
@@ -42,13 +33,20 @@ export const OutlinedPixelBox: FC<OutlinedPixelBoxProps> = forwardRef(
       clipPath={pixelatedClipPath(pixelSize)}
       bgColor={outlineColor}
     >
-      <Box
-        ref={ref}
-        p={4}
-        clipPath={pixelatedClipPath(pixelSize)}
-        bgColor={"white"}
-        {...props}
-      />
+      <PixelBox {...props} />
     </Box>
   )
+);
+
+export type PixelBoxProps = {
+  pixelSize?: number;
+} & BoxProps;
+
+export const PixelBox: FC<PixelBoxProps> = ({ pixelSize = 4, ...props }) => (
+  <Box
+    p={4}
+    clipPath={pixelatedClipPath(pixelSize)}
+    bgColor={"white"}
+    {...props}
+  />
 );

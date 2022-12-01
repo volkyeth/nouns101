@@ -20,7 +20,7 @@ import { AutoExpander } from "./AutoExpander";
 import { useIsMobile } from "../hooks/mobile";
 import { SmallArrowUp } from "./Icons";
 import { Shadow } from "./Shadow";
-import { PixelButton } from "./PixelButton";
+import { CtaButton, PixelButton } from "./PixelButton";
 import Link from "next/link";
 import { ChapterMetadata } from "../utils/metadata";
 
@@ -61,7 +61,11 @@ export const ChapterCard: FC<ChapterCardProps> = ({
               <HStack w={"full"} p={0} spacing={[4, 2]}>
                 {isMobile && (
                   <chakra.span transform={"rotate(-90deg)"}>
-                    <Image src={chapterMetadata.image} width={"50px"} />
+                    <Image
+                      src={chapterMetadata.image}
+                      alt={"Noggles"}
+                      width={50}
+                    />
                   </chakra.span>
                 )}
                 <VStack
@@ -75,7 +79,11 @@ export const ChapterCard: FC<ChapterCardProps> = ({
                   <Text fontSize={["xl", "2xl"]} color={"#2245C5"}>
                     Chapter {chapterMetadata.id}
                   </Text>
-                  <Heading fontSize={["lg", "2xl"]} as={"h2"}>
+                  <Heading
+                    fontSize={["lg", "2xl"]}
+                    as={"h2"}
+                    textAlign={"start"}
+                  >
                     {chapterMetadata.title}
                   </Heading>
                 </VStack>
@@ -88,7 +96,7 @@ export const ChapterCard: FC<ChapterCardProps> = ({
                   </Shadow>
                 ) : (
                   <chakra.span alignSelf={"end"}>
-                    <Image src={chapterMetadata.image} />
+                    <Image src={chapterMetadata.image} alt={"Noggles"} />
                   </chakra.span>
                 )}
               </HStack>
@@ -97,9 +105,13 @@ export const ChapterCard: FC<ChapterCardProps> = ({
               <VStack h={"full"} w={"full"} alignItems={"start"}>
                 {chapterSummary}
                 <Link href={`/chapters/${chapterMetadata.id}/1`}>
-                  <PixelButton shadowColor={"nouns101.blue"} alignSelf={"end"}>
+                  <CtaButton
+                    shadowColor={"nouns101.blue"}
+                    alignSelf={"end"}
+                    colorScheme={"blue"}
+                  >
                     Read
-                  </PixelButton>
+                  </CtaButton>
                 </Link>
               </VStack>
             </AccordionPanel>
