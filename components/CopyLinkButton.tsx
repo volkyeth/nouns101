@@ -1,5 +1,5 @@
 import { FC, useEffect } from "react";
-import { IconButton, useBoolean, useClipboard } from "@chakra-ui/react";
+import { IconButton, Link, useBoolean, useClipboard } from "@chakra-ui/react";
 import { PixelTooltip } from "./PixelTooltip";
 import Image from "next/image";
 import linkImg from "../assets/link.svg";
@@ -20,8 +20,7 @@ export const CopyLinkButton: FC<CopyLinkButtonProps> = ({ link }) => {
       label={copied ? "Copied to clipboard!" : "Copy definition url"}
       closeOnClick={false}
     >
-      <IconButton
-        variant={"unstyled"}
+      <Link
         aria-label={"copy definition"}
         onClick={() => {
           onCopy();
@@ -30,7 +29,7 @@ export const CopyLinkButton: FC<CopyLinkButtonProps> = ({ link }) => {
         }}
       >
         <Image src={linkImg} alt={"copy definition"} />
-      </IconButton>
+      </Link>
     </PixelTooltip>
   );
 };
