@@ -52,20 +52,19 @@ const Glossary: FC<SerializeNutshellsResult> = ({ terms, definitions }) => {
   return (
     <NutshellDefinitions.Provider value={definitions}>
       <MainLayout centerContent>
-        <VStack spacing={10}>
+        <VStack spacing={10} w={"full"}>
           <Heading
             fontFamily={`"LoRes 12 OT",sans-serif`}
             color={"nouns101.blue"}
           >
             Glossary
           </Heading>
-          <ShadowedPixelBox w={"2xl"}>
+          <ShadowedPixelBox w={["full", "2xl"]}>
             <VStack
-              p={10}
+              p={[4, 10]}
               fontFamily={`"LoRes 12 OT",sans-serif`}
-              fontSize={"lg"}
+              fontSize={["md", "lg"]}
               spacing={2}
-              // w={"full"}
             >
               {Object.entries(terms).map(([permalink, title]) => (
                 <VStack

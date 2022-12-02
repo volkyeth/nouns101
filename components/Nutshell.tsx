@@ -12,6 +12,7 @@ import {
   chakra,
   Link,
   Spacer,
+  StackProps,
   Text,
   useDisclosure,
   useTheme,
@@ -29,9 +30,9 @@ import { SmallArrowUp } from "./Icons";
 export type NutshellProps = {
   children: ReactNode;
   term: string;
-};
+} & StackProps;
 
-export const Nutshell: FC<NutshellProps> = ({ children, term }) => {
+export const Nutshell: FC<NutshellProps> = ({ children, term, ...props }) => {
   const { isOpen, onToggle } = useDisclosure();
   const nouns101Blue = useToken("colors", "nouns101.blue");
 
@@ -42,6 +43,7 @@ export const Nutshell: FC<NutshellProps> = ({ children, term }) => {
         spacing={0}
         verticalAlign={"top"}
         textAlign={"center"}
+        {...props}
       >
         <Link
           variant={"unstyled"}

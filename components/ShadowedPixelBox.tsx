@@ -8,10 +8,11 @@ export type ShadowedPixelBoxProps = {
 } & PixelBoxProps;
 export const ShadowedPixelBox: FC<ShadowedPixelBoxProps> = forwardRef(
   (
-    { pixelSize = 4, shadowColor = "black", gridArea, transform, ...props },
+    { pixelSize = 4, shadowColor = "black", w, gridArea, transform, ...props },
     ref
   ) => (
     <Shadow
+      w={w}
       size={pixelSize}
       color={shadowColor}
       gridArea={gridArea}
