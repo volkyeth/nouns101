@@ -1,44 +1,26 @@
-import { FC, PropsWithChildren } from "react";
+import { FC } from "react";
 import { useRouter } from "next/router";
 import {
   ShadowedPixelBox,
   ShadowedPixelBoxProps,
 } from "../../../components/ShadowedPixelBox";
-import { Main } from "../../../layouts/Main";
+import { MainLayout } from "../../../components/MainLayout";
 import {
   Box,
-  forwardRef,
   Heading,
   HStack,
-  SimpleGrid,
-  Spacer,
-  chakra,
   Text,
-  VStack,
   useBreakpointValue,
+  VStack,
 } from "@chakra-ui/react";
 import { Shadow } from "../../../components/Shadow";
 import { ArrowUp } from "../../../components/Icons";
 import Link from "next/link";
-import dynamic from "next/dynamic";
-import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
-import { readdirSync, existsSync, readFileSync } from "fs";
+import { GetStaticPaths, GetStaticProps } from "next";
+import { readdirSync, readFileSync } from "fs";
 import { NutshellDefinitions } from "../../../components/Nouns101MdxProvider";
-import {
-  AnimatePresence,
-  domAnimation,
-  LazyMotion,
-  motion,
-  MotionProps,
-} from "framer-motion";
-import { useIsMobile } from "../../../hooks/mobile";
-import { serialize } from "next-mdx-remote/serialize";
+import { AnimatePresence, motion, MotionProps } from "framer-motion";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
-import remarkGfm from "remark-gfm";
-// @ts-ignore
-import wikiLinkPlugin from "remark-wiki-link";
-import * as fs from "fs";
-import { basename } from "path";
 import { serializeMdx, serializeNutshells } from "../../../utils/mdx";
 import { ChapterMetadata } from "../../../utils/metadata";
 import Image from "next/image";
@@ -62,19 +44,14 @@ export const getStaticProps: GetStaticProps<ChapterSectionProps> = async (
     ...glossaryNutshellFiles,
     ...chapterNutshellFiles,
   ].filter((filename) => filename.split(".")[1] === "mdx");
-  const permalinks = nutshellFiles.map((filename) =>
-    basename(filename, ".mdx")
-  );
 
-  const nutshellDefinitions = await serializeNutshells(
-    nutshellFiles,
-    permalinks
+  const { definitions: nutshellDefinitions } = await serializeNutshells(
+    nutshellFiles
   );
 
   const sectionFile = `content/chapters/${chapterId}/sections/${section}.mdx`;
   const serializedSection = await serializeMdx(
-    readFileSync(sectionFile).toString(),
-    permalinks
+    readFileSync(sectionFile).toString()
   );
 
   const amountSections = readdirSync(
@@ -173,7 +150,7 @@ const ChapterSection: FC<ChapterSectionProps> = ({
 
   // @ts-ignore
   return (
-    <Main
+    <MainLayout
       bgColor={chapterMeta.color}
       overflow={"clip"}
       navbarExtraContent={
@@ -329,7 +306,7 @@ const ChapterSection: FC<ChapterSectionProps> = ({
           </Box>
         )}
       </HStack>
-    </Main>
+    </MainLayout>
   );
 };
 

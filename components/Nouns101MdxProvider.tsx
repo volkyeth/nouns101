@@ -8,16 +8,18 @@ import {
 } from "react";
 import {
   chakra,
-  forwardRef, Image,
+  forwardRef,
+  Image,
   Text,
   Tooltip,
-  TooltipProps
+  TooltipProps,
 } from "@chakra-ui/react";
 import { Nutshell } from "./Nutshell";
 import { MDXProvider } from "@mdx-js/react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
+import { PixelTooltip } from "./PixelTooltip";
 
 export const Nouns101MdxProvider: FC<PropsWithChildren<{}>> = ({
   children,
@@ -40,27 +42,15 @@ export const Nouns101MdxProvider: FC<PropsWithChildren<{}>> = ({
 
 export const NutshellDefinitions = createContext({});
 
-export type NutshellDefinitions = { [permalink: string]: MDXRemoteSerializeResult };
+export type NutshellDefinitions = {
+  [permalink: string]: MDXRemoteSerializeResult;
+};
 
 type CustomLinkProps = {
   href?: string;
   children?: ReactNode;
   className?: string;
 };
-
-const PixelTooltip = forwardRef<TooltipProps, "div">(
-  ({ children, ...props }, ref) => (
-    <Tooltip
-      hasArrow
-      color={"white"}
-      bgColor={"nouns101.blue"}
-      ref={ref}
-      {...props}
-    >
-      <chakra.u>{children}</chakra.u>
-    </Tooltip>
-  )
-);
 
 const ResponsiveImage = (props: any) => (
   <Image layout="responsive" loading="lazy" {...props} />
@@ -70,18 +60,20 @@ const CustomLink: FC<CustomLinkProps> = ({ href, children, className }) => {
   const nutshellDefinitions =
     useContext<NutshellDefinitions>(NutshellDefinitions);
 
-  if (className === "wikilink inexistent") {
+  if (className && className.includes("wikilink")) {
+    if (nutshellDefinitions && nutshellDefinitions[href!]) {
+      return (
+        <Nutshell term={children as string}>
+          <MDXRemote {...nutshellDefinitions[href!]} />
+        </Nutshell>
+      );
+    }
+
     return (
       <Text color={"red"} fontWeight={"extrabold"} display={"inline"}>
         :{children}:
       </Text>
     );
-  }
-
-  if (className === "wikilink" && nutshellDefinitions && nutshellDefinitions[href!]) {
-      return (
-        <Nutshell term={children as string}><MDXRemote {...nutshellDefinitions[href!]}/></Nutshell>
-      );
   }
 
   return (

@@ -8,8 +8,7 @@ import { basename } from "path";
 import { readFileSync } from "fs";
 
 export const serializeMdx = async (
-  content: string,
-  permalinks: string[]
+  content: string
 ): Promise<MDXRemoteSerializeResult> =>
   await serialize(content, {
     mdxOptions: {
@@ -19,10 +18,7 @@ export const serializeMdx = async (
           wikiLinkPlugin,
           {
             wikiLinkClassName: "wikilink",
-            newClassName: "inexistent",
-            hrefTemplate: (permalink: string) => permalink,
-            pageResolver,
-            permalinks,
+            hrefTemplate: (permalink: string) => normalizeName(permalink),
           },
         ],
       ],
@@ -31,26 +27,38 @@ export const serializeMdx = async (
     parseFrontmatter: true,
   });
 
-const pageResolver = (name: string) => {
-  const normalizedName = name.replace(/[ -]/g, "_").toLowerCase();
-  const depluralizedName = normalizedName.replace(/[sS]$/g, "");
-
-  return [normalizedName, depluralizedName];
+export type SerializeNutshellsResult = {
+  definitions: NutshellDefinitions;
+  terms: { [permalink: string]: string };
 };
 
 export const serializeNutshells = async (
-  nutshellFiles: string[],
-  permalinks: string[]
-): Promise<NutshellDefinitions> => {
-  const nutshellDefinitions = {} as NutshellDefinitions;
+  nutshellFiles: string[]
+): Promise<SerializeNutshellsResult> => {
+  const definitions = {} as NutshellDefinitions;
+  const terms = {} as { [permalink: string]: string };
 
   for (const nutshellFile of nutshellFiles) {
     const nutshellContent = readFileSync(nutshellFile).toString();
+    const serializedNutshell = await serializeMdx(nutshellContent);
+    const permalink = normalizeName(basename(nutshellFile, ".mdx"));
 
-    nutshellDefinitions[basename(nutshellFile, ".mdx")] = await serializeMdx(
-      nutshellContent,
-      permalinks
-    );
+    definitions[permalink] = serializedNutshell;
+    terms[permalink] = serializedNutshell?.frontmatter?.title ?? permalink;
+    if (serializedNutshell?.frontmatter?.aliases) {
+      for (const alias of serializedNutshell.frontmatter.aliases) {
+        const normalizedName = normalizeName(alias);
+        const depluralizedName = depluralizeName(normalizedName);
+        definitions[normalizedName] = serializedNutshell;
+        definitions[depluralizedName] = serializedNutshell;
+      }
+    }
   }
-  return nutshellDefinitions;
+
+  return { definitions, terms };
 };
+
+export const normalizeName = (name: string) =>
+  name.replace(/[ -]/g, "_").toLowerCase();
+
+export const depluralizeName = (name: string) => name.replace(/[sS]$/g, "");

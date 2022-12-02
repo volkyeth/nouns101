@@ -39,7 +39,7 @@ export const Nutshell: FC<NutshellProps> = ({ children, term }) => {
     <>
       <VStack
         display={"inline-flex"}
-        spacing={-2}
+        spacing={0}
         verticalAlign={"top"}
         textAlign={"center"}
       >
@@ -54,12 +54,14 @@ export const Nutshell: FC<NutshellProps> = ({ children, term }) => {
         {isOpen && <SmallArrowUp viewBox={"0 0 27 15"} color={"#E9F0FF"} />}
       </VStack>
       {isOpen && (
-        <Box px={2}>
-          <ShadowedPixelBox bgColor={"#E9F0FF"} shadowColor={nouns101Blue}>
-            <VStack alignItems={"start"}>{children}</VStack>
-          </ShadowedPixelBox>
-          <Spacer h={2} />
-        </Box>
+        <>
+          <Box>
+            <ShadowedPixelBox bgColor={"#E9F0FF"} shadowColor={nouns101Blue}>
+              <VStack alignItems={"start"}>{children}</VStack>
+            </ShadowedPixelBox>
+            <Spacer h={2} />
+          </Box>
+        </>
       )}
     </>
   );

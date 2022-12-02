@@ -32,12 +32,12 @@ import { ChapterCard } from "../components/ChapterCard";
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 import { useIsMobile } from "../hooks/mobile";
-import { Main } from "../layouts/Main";
+import { MainLayout } from "../components/MainLayout";
 
 const Home: NextPage = () => {
   const isMobile = useIsMobile();
   return (
-    <Main>
+    <MainLayout>
       <VStack w={"full"} spacing={20}>
         <Center>
           <VStack w={"full"}>
@@ -87,7 +87,7 @@ const Home: NextPage = () => {
           />
         </SimpleGrid>
       </VStack>
-    </Main>
+    </MainLayout>
   );
 };
 

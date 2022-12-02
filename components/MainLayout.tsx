@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren, ReactNode } from "react";
-import { Navbar } from "../components/Navbar";
-import { Footer } from "../components/Footer";
+import { Navbar } from "./Navbar";
+import { Footer } from "./Footer";
 import { Box, Container, ContainerProps, VStack } from "@chakra-ui/react";
 
 export type MainLayoutProps = {
@@ -8,19 +8,13 @@ export type MainLayoutProps = {
   bgColor?: string;
 } & ContainerProps;
 
-export const Main: FC<PropsWithChildren<MainLayoutProps>> = ({
+export const MainLayout: FC<PropsWithChildren<MainLayoutProps>> = ({
   children,
   navbarExtraContent,
   bgColor = "#FBF0DF",
   ...containerProps
 }) => (
-  <VStack
-    spacing={0}
-    w={"full"}
-    h={["full", "100vh"]}
-    justifyItems={"stretch"}
-    overflowX={"clip"}
-  >
+  <VStack spacing={0} w={"full"} h={["full", "100vh"]} overflowX={"clip"}>
     <Navbar py={2} extraContent={navbarExtraContent} />
     <Box bgColor={bgColor} w={"full"} flexGrow={1}>
       <MainContainer py={10} px={6} h={"full"} {...containerProps}>

@@ -31,7 +31,7 @@ import { useIsMobile } from "../hooks/mobile";
 import { FC, ReactNode, useRef } from "react";
 import close from "../assets/close.svg";
 import Link from "next/link";
-import { MainContainer } from "../layouts/Main";
+import { MainContainer } from "./MainLayout";
 import { useRouter } from "next/router";
 
 const socialsButtonProps: Partial<PixelButtonProps> = {
