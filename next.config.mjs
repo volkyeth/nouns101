@@ -19,6 +19,5 @@ export default {
     });
 
     return config;
-  },
-  experimental: { nftTracing: true }
+  }
 };
