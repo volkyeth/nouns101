@@ -120,7 +120,6 @@ export const Navbar: FC<NavbarProps> = ({ extraContent, ...props }) => {
                         >
                           <VStack spacing={4}>
                             {nav.map(({ href, label }) => {
-                              console.log({ pathname, href });
                               const isCurrent = href === pathname;
                               return (
                                 <Link key={label} href={href}>

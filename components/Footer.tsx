@@ -7,7 +7,7 @@ import { MainContainer } from "./MainLayout";
 export const Footer: FC<CenterProps> = (props) => (
   <Center bgColor={"#FFE7BF"} w={"full"} {...props}>
     <MainContainer>
-      <Image src={logo} layout={"fixed"} />
+      <Image src={logo} alt={"logo"} />
     </MainContainer>
   </Center>
 );
