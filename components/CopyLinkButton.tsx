@@ -21,6 +21,7 @@ export const CopyLinkButton: FC<CopyLinkButtonProps> = ({ link }) => {
       closeOnClick={false}
     >
       <IconButton
+        variant={"unstyled"}
         aria-label={"copy definition"}
         onClick={() => {
           onCopy();
