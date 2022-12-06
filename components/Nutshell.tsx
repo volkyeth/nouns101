@@ -5,6 +5,7 @@ import {
   ReactElement,
   ReactNode,
   useContext,
+  useEffect,
 } from "react";
 import { useRouter } from "next/router";
 import {
@@ -32,9 +33,17 @@ export type NutshellProps = {
   term: string;
 } & StackProps;
 
+declare var twttr: { widgets: { load: () => void } };
+
 export const Nutshell: FC<NutshellProps> = ({ children, term, ...props }) => {
   const { isOpen, onToggle } = useDisclosure();
   const nouns101Blue = useToken("colors", "nouns101.blue");
+
+  useEffect(() => {
+    if (!isOpen) return;
+    // @TODO remove when static tweet embedding is implemented (#28)
+    twttr.widgets.load();
+  }, [isOpen]);
 
   return (
     <>

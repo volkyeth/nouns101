@@ -78,7 +78,8 @@ const GlossaryEntry: FC<GlossaryEntryProps> = ({
               </HStack>
               <VStack w={"full"} spacing={0} alignItems={"start"}>
                 <Divider borderWidth={1} opacity={1} borderColor={"gray.700"} />
-                {definitions[permalink]?.frontmatter?.aliases && (
+                {(definitions[permalink]?.frontmatter?.aliases?.length ?? 0) >
+                  0 && (
                   <Text
                     fontWeight={"semibold"}
                     color={"gray.700"}

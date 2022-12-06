@@ -32,11 +32,13 @@ import { Fonts } from "../components/Fonts";
 import "@fontsource/nunito";
 import { Nutshell } from "../components/Nutshell";
 import { Nouns101MdxProvider } from "../components/Nouns101MdxProvider";
+import "../styles/global.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Nouns101MdxProvider>
       <ChakraProvider theme={theme}>
+        <Script src={"https://platform.twitter.com/widgets.js"} />
         <Fonts />
         <Component {...pageProps} />
       </ChakraProvider>
