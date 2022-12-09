@@ -101,7 +101,9 @@ externalReferences:
   "NounsDAO": "https://nouns.wtf"
 ---
 
-## Here's a heading
+# Here's a heading
+
+## Here's a subheading
 
 content goes here
 `;
