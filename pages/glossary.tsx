@@ -1,37 +1,17 @@
-import { FC, useEffect, useState } from "react";
-import {
-  Box,
-  chakra,
-  Heading,
-  HStack,
-  IconButton,
-  SimpleGrid,
-  Spacer,
-  Tooltip,
-  useBoolean,
-  useClipboard,
-  VStack,
-} from "@chakra-ui/react";
-import { GetServerSideProps, GetStaticProps } from "next";
-import { readdirSync, readFileSync } from "fs";
-import {
-  serializeMdx,
-  serializeNutshells,
-  SerializeNutshellsResult,
-} from "../utils/mdx";
+import { FC } from "react";
+import { chakra, Heading, HStack, VStack } from "@chakra-ui/react";
+import { GetStaticProps } from "next";
+import { readdirSync } from "fs";
+import { serializeNutshells, SerializeNutshellsResult } from "../utils/mdx";
 import { NutshellDefinitions } from "../components/Nouns101MdxProvider";
 import { MainLayout } from "../components/MainLayout";
 import Link from "next/link";
-import { PixelBox, ShadowedPixelBox } from "../components/ShadowedPixelBox";
-import { groupBy } from "lodash";
+import { ShadowedPixelBox } from "../components/ShadowedPixelBox";
 import { Nutshell } from "../components/Nutshell";
 import { MDXRemote } from "next-mdx-remote";
-import thinArrowImg from "../assets/thinArrowRight.svg";
 import openImg from "../assets/open.svg";
-import linkImg from "../assets/link.svg";
 import Image from "next/image";
 import { PixelTooltip } from "../components/PixelTooltip";
-import { useRouter } from "next/router";
 import { CopyLinkButton } from "../components/CopyLinkButton";
 
 export const getStaticProps: GetStaticProps<

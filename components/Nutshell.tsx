@@ -1,49 +1,31 @@
-import {
-  ComponentType,
-  createContext,
-  FC,
-  ReactElement,
-  ReactNode,
-  useContext,
-  useEffect,
-} from "react";
-import { useRouter } from "next/router";
+import { FC, ReactNode } from "react";
 import {
   Box,
-  chakra,
   Link,
   Spacer,
   StackProps,
-  Text,
   useDisclosure,
-  useTheme,
   useToken,
   VStack,
 } from "@chakra-ui/react";
-import dynamic from "next/dynamic";
-import {
-  OutlinedPixelBox,
-  OutlinedPixelBoxProps,
-  ShadowedPixelBox,
-} from "./ShadowedPixelBox";
+import { ShadowedPixelBox } from "./ShadowedPixelBox";
 import { SmallArrowUp } from "./Icons";
 
 export type NutshellProps = {
   children: ReactNode;
   term: string;
+  isOpen?: boolean;
 } & StackProps;
 
-declare var twttr: { widgets: { load: () => void } };
-
-export const Nutshell: FC<NutshellProps> = ({ children, term, ...props }) => {
+export const Nutshell: FC<NutshellProps> = ({
+  children,
+  term,
+  isOpen: forceOpen,
+  ...props
+}) => {
   const { isOpen, onToggle } = useDisclosure();
   const nouns101Blue = useToken("colors", "nouns101.blue");
-
-  useEffect(() => {
-    if (!isOpen) return;
-    // @TODO remove when static tweet embedding is implemented (#28)
-    twttr.widgets.load();
-  }, [isOpen]);
+  const expanded = forceOpen ?? isOpen;
 
   return (
     <>
@@ -62,9 +44,9 @@ export const Nutshell: FC<NutshellProps> = ({ children, term, ...props }) => {
         >
           :{term}:
         </Link>
-        {isOpen && <SmallArrowUp viewBox={"0 0 27 15"} color={"#E9F0FF"} />}
+        {expanded && <SmallArrowUp viewBox={"0 0 27 15"} color={"#E9F0FF"} />}
       </VStack>
-      {isOpen && (
+      {expanded && (
         <>
           <Box>
             <ShadowedPixelBox bgColor={"#E9F0FF"} shadowColor={nouns101Blue}>

@@ -2,8 +2,6 @@ import { MDXRemoteSerializeResult } from "next-mdx-remote";
 import { NutshellDefinitions } from "../components/Nouns101MdxProvider";
 import { serialize } from "next-mdx-remote/serialize";
 import remarkGfm from "remark-gfm";
-import remarkEmbedder, { Transformer } from "@remark-embedder/core";
-import transformerOembed, { Config } from "@remark-embedder/transformer-oembed";
 // @ts-ignore
 import wikiLinkPlugin from "remark-wiki-link";
 import { basename } from "path";
@@ -21,27 +19,6 @@ export const serializeMdx = async (
           {
             wikiLinkClassName: "wikilink",
             hrefTemplate: (permalink: string) => normalizeName(permalink),
-          },
-        ],
-        [
-          remarkEmbedder,
-          {
-            transformers: [
-              [
-                transformerOembed,
-                {
-                  params: {
-                    omit_script: false,
-                    aspectRatio: "16 / 9",
-                    width: "100%",
-                    align: "center",
-                    maxwidth: 550,
-                    maxheight: 310,
-                    // maxheight: 600,
-                  },
-                } as Config,
-              ],
-            ],
           },
         ],
       ],

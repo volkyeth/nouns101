@@ -1,22 +1,13 @@
 import {
-  ComponentType,
   createContext,
   FC,
   PropsWithChildren,
   ReactNode,
   useContext,
 } from "react";
-import {
-  chakra,
-  forwardRef,
-  Image,
-  Text,
-  Tooltip,
-  TooltipProps,
-} from "@chakra-ui/react";
+import { chakra, Image, Text } from "@chakra-ui/react";
 import { Nutshell } from "./Nutshell";
 import { MDXProvider } from "@mdx-js/react";
-import dynamic from "next/dynamic";
 import Link from "next/link";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { PixelTooltip } from "./PixelTooltip";

@@ -17,6 +17,7 @@ import { MainLayout } from "../../components/MainLayout";
 import { ShadowedPixelBox } from "../../components/ShadowedPixelBox";
 import { CopyLinkButton } from "../../components/CopyLinkButton";
 import { join } from "lodash";
+import { DefinitionCard } from "../../components/DefinitionCard";
 
 export const getStaticProps: GetStaticProps<
   GlossaryEntryProps,
@@ -60,40 +61,12 @@ const GlossaryEntry: FC<GlossaryEntryProps> = ({
   terms,
   definitions,
 }) => {
+  const definition = definitions[permalink];
   return (
     <NutshellDefinitions.Provider value={definitions}>
       <MainLayout>
         <Center h={"full"}>
-          <ShadowedPixelBox
-            w={"2xl"}
-            p={10}
-            fontFamily={`"LoRes 12 OT",sans-serif`}
-          >
-            <VStack alignItems={"start"} spacing={6}>
-              <HStack justifyContent={"space-between"} w={"full"}>
-                <Heading color={"nouns101.blue"}>
-                  {definitions[permalink]!.frontmatter!.title}
-                </Heading>
-                <CopyLinkButton link={`/glossary/${permalink}`} />
-              </HStack>
-              <VStack w={"full"} spacing={0} alignItems={"start"}>
-                <Divider borderWidth={1} opacity={1} borderColor={"gray.700"} />
-                {(definitions[permalink]?.frontmatter?.aliases?.length ?? 0) >
-                  0 && (
-                  <Text
-                    fontWeight={"semibold"}
-                    color={"gray.700"}
-                  >{`AKA: ${join(
-                    definitions[permalink]!.frontmatter!.aliases,
-                    ", "
-                  )}`}</Text>
-                )}
-              </VStack>
-              <VStack alignItems={"start"} w={"full"}>
-                <MDXRemote {...definitions[permalink]} />
-              </VStack>
-            </VStack>
-          </ShadowedPixelBox>
+          <DefinitionCard definition={definition} permalink={permalink} />
         </Center>
       </MainLayout>
     </NutshellDefinitions.Provider>
