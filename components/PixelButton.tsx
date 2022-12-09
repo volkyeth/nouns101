@@ -44,7 +44,7 @@ export const PixelButton = forwardRef<PixelButtonProps, "button">(
         variant={"unstyled"}
         gridArea={"1/1/1/1"}
         ref={ref}
-        color={"#2245C5"}
+        color={"nouns101.blue"}
         fontFamily={`"Lores 12 OT", sans-serif;`}
         clipPath={pixelatedClipPath(pixelSize)}
         bgColor={"white"}
@@ -75,7 +75,7 @@ export const CtaButton: FC<CtaButtonProps> = ({
 }) => (
   <PixelButton
     color={colorScheme === "blue" ? "white" : undefined}
-    bgColor={colorScheme === "blue" ? "#254EFB" : undefined}
+    bgColor={colorScheme === "blue" ? "nouns101.blue" : undefined}
     {...props}
   />
 );
