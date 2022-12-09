@@ -1,9 +1,11 @@
-import { Divider, Heading, HStack, Text, VStack } from "@chakra-ui/react";
+import { Divider, Heading, HStack, Link, Text, VStack } from "@chakra-ui/react";
 import { CopyLinkButton } from "./CopyLinkButton";
 import { join } from "lodash";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { ShadowedPixelBox } from "./ShadowedPixelBox";
+import thinArrow from "../assets/thinArrowRight.svg";
 import { FC } from "react";
+import Image from "next/image";
 
 export type DefinitionCardProps = {
   definition: MDXRemoteSerializeResult;
@@ -35,6 +37,23 @@ export const DefinitionCard: FC<DefinitionCardProps> = ({
         <VStack alignItems={"start"} w={"full"}>
           <MDXRemote {...definition} />
         </VStack>
+        {(Object.keys(definition.frontmatter?.externalReferences ?? {})
+          .length ?? 0) > 0 && (
+          <VStack>
+            {Object.entries(
+              definition.frontmatter?.externalReferences ?? {}
+            ).map(([label, href]) => (
+              <Link isExternal key={label} href={href}>
+                <HStack>
+                  <Image src={thinArrow} alt={"arrow"} />
+                  <Text color={"nouns101.blue"} fontWeight={"bold"}>
+                    {label}
+                  </Text>
+                </HStack>
+              </Link>
+            ))}
+          </VStack>
+        )}
       </VStack>
     </ShadowedPixelBox>
   );
