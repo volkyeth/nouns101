@@ -2,19 +2,20 @@ import { Box, BoxProps, StackProps, VStack } from "@chakra-ui/react";
 import { FC } from "react";
 import Clippy from "../public/lil-clippy.svg";
 import Image from "next/image";
+import { Shadow } from "./Shadow";
 
 export type ClippySaysProps = {
   clippyScale: number;
 } & StackProps;
 
 export const ClippySays: FC<ClippySaysProps> = ({
-  clippyScale = 4,
+  clippyScale = 1,
   children,
   ...props
 }) => {
   return (
     <VStack width={"fit-content"} gap={2} alignItems={"end"} {...props}>
-      <Box clipPath={speechBubblePath} bgColor={"gray.300"} p="4px">
+      <Shadow size={4}>
         <Box
           clipPath={speechBubblePath}
           color={"black"}
@@ -23,8 +24,13 @@ export const ClippySays: FC<ClippySaysProps> = ({
         >
           {children}
         </Box>
-      </Box>
-      <Image alt={"Clippy"} src={Clippy} />
+      </Shadow>
+      <Image
+        alt={"Clippy"}
+        src={Clippy}
+        width={260 * clippyScale}
+        style={{ transform: "scaleX(-1)" }}
+      />
     </VStack>
   );
 };
