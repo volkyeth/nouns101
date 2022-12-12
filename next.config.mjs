@@ -19,5 +19,8 @@ export default {
     });
 
     return config;
+  },
+  images: {
+    domains: ["pbs.twimg.com"]
   }
 };

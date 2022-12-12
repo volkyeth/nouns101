@@ -6,6 +6,7 @@ import "@fontsource/londrina-solid";
 import { Fonts } from "../components/Fonts";
 import "@fontsource/nunito";
 import { Nouns101MdxProvider } from "../components/Nouns101MdxProvider";
+import "react-static-tweets/styles.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
