@@ -68,6 +68,28 @@ const Home: NextPage = () => {
           </VStack>
         </Center>
 
+        <VStack maxW={"2xl"} spacing={10}>
+          <Text>
+            Hi! <b>Welcome to Nouns101!</b> If you’re new to web3 and trying to
+            form an understanding and get more involved, you’re in the right
+            place!
+          </Text>
+          <Text>
+            Here you’ll find four chapters of content, leading you from web3
+            beginner to DAO contributor! Don’t know what a DAO is? Don’t worry —
+            We’ll get there! ⌐◨-◨
+          </Text>
+          <Text>
+            After completing each chapter, you’ll receive a reward in the form
+            of a POAP. This will not only be a free NFT, but can be used to
+            prove you’ve completed this course in the future. Think of these as
+            merit badges 🥇
+          </Text>
+          <Text>
+            <b>Ready to get started?…</b> Select a chapter to begin!
+          </Text>
+        </VStack>
+
         <SimpleGrid w={"full"} columns={[1, 2]} gridGap={4}>
           <ChapterCard
             chapterMetadata={chapter1Meta}
