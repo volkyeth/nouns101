@@ -3,12 +3,10 @@ import { chakra, Heading, HStack, VStack } from "@chakra-ui/react";
 import { GetStaticProps } from "next";
 import { readdirSync } from "fs";
 import { serializeNutshells, SerializeNutshellsResult } from "../utils/mdx";
-import { NutshellDefinitions } from "../components/Nouns101MdxProvider";
 import { MainLayout } from "../components/MainLayout";
 import Link from "next/link";
 import { ShadowedPixelBox } from "../components/ShadowedPixelBox";
-import { Nutshell } from "../components/Nutshell";
-import { MDXRemote } from "next-mdx-remote";
+import { Nutshell, NutshellDefinitions } from "../components/Nutshell";
 import openImg from "../assets/open.svg";
 import Image from "next/image";
 import { PixelTooltip } from "../components/PixelTooltip";
@@ -53,11 +51,7 @@ const Glossary: FC<SerializeNutshellsResult> = ({ terms, definitions }) => {
                   alignItems={"start"}
                   w={"full"}
                 >
-                  <Nutshell term={title}>
-                    <chakra.span>
-                      <MDXRemote {...definitions[permalink]} />
-                    </chakra.span>
-                  </Nutshell>
+                  <Nutshell term={title} />
                   <HStack position={"absolute"} right={0} pr={10}>
                     <PixelTooltip label={"Open definition page"}>
                       <Link key={permalink} href={`/glossary/${permalink}`}>

@@ -31,12 +31,6 @@ export const Nouns101MdxProvider: FC<PropsWithChildren<{}>> = ({
   return <MDXProvider components={components}>{children}</MDXProvider>;
 };
 
-export const NutshellDefinitions = createContext({});
-
-export type NutshellDefinitions = {
-  [permalink: string]: MDXRemoteSerializeResult;
-};
-
 type CustomLinkProps = {
   href?: string;
   children?: ReactNode;
@@ -48,23 +42,8 @@ const ResponsiveImage = (props: any) => (
 );
 
 const CustomLink: FC<CustomLinkProps> = ({ href, children, className }) => {
-  const nutshellDefinitions =
-    useContext<NutshellDefinitions>(NutshellDefinitions);
-
   if (className && className.includes("wikilink")) {
-    if (nutshellDefinitions && nutshellDefinitions[href!]) {
-      return (
-        <Nutshell term={children as string}>
-          <MDXRemote {...nutshellDefinitions[href!]} />
-        </Nutshell>
-      );
-    }
-
-    return (
-      <Text color={"red"} fontWeight={"extrabold"} display={"inline"}>
-        :{children}:
-      </Text>
-    );
+    return <Nutshell term={children as string} />;
   }
 
   return (
