@@ -1,11 +1,15 @@
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
-import { NutshellDefinitions } from "../components/Nouns101MdxProvider";
 import { serialize } from "next-mdx-remote/serialize";
 import remarkGfm from "remark-gfm";
 // @ts-ignore
 import wikiLinkPlugin from "remark-wiki-link";
 import { basename } from "path";
 import { readFileSync } from "fs";
+import {
+  depluralizeName,
+  normalizeName,
+  NutshellDefinitionsMap,
+} from "../components/Nutshell";
 
 export const serializeMdx = async (
   content: string
@@ -28,14 +32,14 @@ export const serializeMdx = async (
   });
 
 export type SerializeNutshellsResult = {
-  definitions: NutshellDefinitions;
+  definitions: NutshellDefinitionsMap;
   terms: { [permalink: string]: string };
 };
 
 export const serializeNutshells = async (
   nutshellFiles: string[]
 ): Promise<SerializeNutshellsResult> => {
-  const definitions = {} as NutshellDefinitions;
+  const definitions = {} as NutshellDefinitionsMap;
   const terms = {} as { [permalink: string]: string };
 
   for (const nutshellFile of nutshellFiles) {
@@ -57,8 +61,3 @@ export const serializeNutshells = async (
 
   return { definitions, terms };
 };
-
-export const normalizeName = (name: string) =>
-  name.replace(/[ -]/g, "_").toLowerCase();
-
-export const depluralizeName = (name: string) => name.replace(/[sS]$/g, "");

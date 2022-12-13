@@ -12,12 +12,15 @@ import { readdirSync } from "fs";
 import { MDXRemote } from "next-mdx-remote";
 import { basename } from "path";
 import { serializeNutshells, SerializeNutshellsResult } from "../../utils/mdx";
-import { NutshellDefinitions } from "../../components/Nouns101MdxProvider";
 import { MainLayout } from "../../components/MainLayout";
 import { ShadowedPixelBox } from "../../components/ShadowedPixelBox";
 import { CopyLinkButton } from "../../components/CopyLinkButton";
 import { join } from "lodash";
 import { DefinitionCard } from "../../components/DefinitionCard";
+import {
+  NutshellDefinitions,
+  NutshellDefinitionsMap,
+} from "../../components/Nutshell";
 
 export const getStaticProps: GetStaticProps<
   GlossaryEntryProps,

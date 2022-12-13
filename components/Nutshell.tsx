@@ -1,24 +1,24 @@
-import { FC, ReactNode } from "react";
+import { createContext, FC, ReactNode, useContext } from "react";
 import {
   Box,
   Link,
   Spacer,
   StackProps,
+  Text,
   useDisclosure,
   useToken,
   VStack,
 } from "@chakra-ui/react";
 import { ShadowedPixelBox } from "./ShadowedPixelBox";
 import { SmallArrowUp } from "./Icons";
+import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 
 export type NutshellProps = {
-  children: ReactNode;
   term: string;
   isOpen?: boolean;
 } & StackProps;
 
 export const Nutshell: FC<NutshellProps> = ({
-  children,
   term,
   isOpen: forceOpen,
   ...props
@@ -26,6 +26,19 @@ export const Nutshell: FC<NutshellProps> = ({
   const { isOpen, onToggle } = useDisclosure();
   const nouns101Blue = useToken("colors", "nouns101.blue");
   const expanded = forceOpen ?? isOpen;
+
+  const definitions = useContext(NutshellDefinitions);
+  const permalink = normalizeName(term);
+  const definition =
+    definitions[permalink] ?? definitions[depluralizeName(permalink)];
+
+  if (!definition) {
+    return (
+      <Text color={"red"} fontWeight={"extrabold"} display={"inline"}>
+        :{term}:
+      </Text>
+    );
+  }
 
   return (
     <>
@@ -50,7 +63,9 @@ export const Nutshell: FC<NutshellProps> = ({
         <>
           <Box>
             <ShadowedPixelBox bgColor={"#E9F0FF"} shadowColor={nouns101Blue}>
-              <VStack alignItems={"start"}>{children}</VStack>
+              <VStack alignItems={"start"}>
+                <MDXRemote {...definition} />
+              </VStack>
             </ShadowedPixelBox>
             <Spacer h={2} />
           </Box>
@@ -59,3 +74,14 @@ export const Nutshell: FC<NutshellProps> = ({
     </>
   );
 };
+
+export const NutshellDefinitions = createContext<NutshellDefinitionsMap>({});
+
+export type NutshellDefinitionsMap = {
+  [permalink: string]: MDXRemoteSerializeResult;
+};
+
+export const normalizeName = (name: string) =>
+  name.replace(/[ -]/g, "_").toLowerCase();
+
+export const depluralizeName = (name: string) => name.replace(/[sS]$/g, "");

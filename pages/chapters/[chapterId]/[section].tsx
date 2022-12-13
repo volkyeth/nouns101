@@ -18,7 +18,6 @@ import { ArrowUp } from "../../../components/Icons";
 import Link from "next/link";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { readdirSync, readFileSync } from "fs";
-import { NutshellDefinitions } from "../../../components/Nouns101MdxProvider";
 import { AnimatePresence, motion, MotionProps } from "framer-motion";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serializeMdx, serializeNutshells } from "../../../utils/mdx";
@@ -26,6 +25,10 @@ import { ChapterMetadata } from "../../../utils/metadata";
 import Image from "next/image";
 import { ProgressBar } from "../../../components/ProgressBar";
 import poap from "../../../assets/poap.svg";
+import {
+  NutshellDefinitions,
+  NutshellDefinitionsMap,
+} from "../../../components/Nutshell";
 
 export const getStaticProps: GetStaticProps<ChapterSectionProps> = async (
   context
@@ -103,7 +106,7 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
 
 type ChapterSectionProps = {
   serializedSection: MDXRemoteSerializeResult;
-  serializedNutshells: NutshellDefinitions;
+  serializedNutshells: NutshellDefinitionsMap;
   chapterId: string;
   sectionNumber: number;
   previousSection: string | null;

@@ -23,10 +23,11 @@ import { Shadow } from "./Shadow";
 import { CtaButton, PixelButton } from "./PixelButton";
 import Link from "next/link";
 import { ChapterMetadata } from "../utils/metadata";
+import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 
 export type ChapterCardProps = {
   chapterMetadata: ChapterMetadata;
-  chapterSummary: ReactNode;
+  chapterSummary: MDXRemoteSerializeResult;
 } & AccordionProps;
 
 export const ChapterCard: FC<ChapterCardProps> = ({
@@ -103,7 +104,7 @@ export const ChapterCard: FC<ChapterCardProps> = ({
             </AccordionButton>
             <AccordionPanel fontSize={"sm"} py={4} px={8}>
               <VStack h={"full"} w={"full"} alignItems={"start"}>
-                {chapterSummary}
+                <MDXRemote {...chapterSummary} />
                 <Link
                   href={`/chapters/${chapterMetadata.id}/1`}
                   style={{ alignSelf: "end" }}
