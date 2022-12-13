@@ -43,7 +43,12 @@ export const DefinitionCard: FC<DefinitionCardProps> = ({
             {Object.entries(
               definition.frontmatter?.externalReferences ?? {}
             ).map(([label, href]) => (
-              <Link isExternal key={label} href={href}>
+              <Link
+                isExternal
+                key={label}
+                href={href}
+                style={{ alignSelf: "start" }}
+              >
                 <HStack>
                   <Image src={thinArrow} alt={"arrow"} />
                   <Text color={"nouns101.blue"} fontWeight={"bold"}>
