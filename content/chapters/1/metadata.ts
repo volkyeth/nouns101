@@ -3,7 +3,7 @@ import bitNoggles from "./bitNoggles.svg";
 
 export default {
   id: "1",
-  title: "New to Web3",
+  title: "Welcome to Web3",
   color: "#FEE3F3",
   image: bitNoggles,
 } as ChapterMetadata;

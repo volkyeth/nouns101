@@ -1,22 +1,12 @@
 import type { NextPage } from "next";
-import Image from "next/image";
 import {
-  Box,
   Center,
   chakra,
-  Container,
-  ContainerProps,
   Heading,
-  HStack,
   SimpleGrid,
-  Spacer,
   Text,
   VStack,
 } from "@chakra-ui/react";
-import bitNoggles from "../content/chapters/1/bitNoggles.svg";
-import lilNoggles from "../content/chapters/2/lilNoggles.svg";
-import noggles from "../content/chapters/3/noggles.svg";
-import monoggle from "../content/chapters/4/monoggle.svg";
 
 import chapter1 from "../content/chapters/1/summary.mdx";
 import chapter1Meta from "../content/chapters/1/metadata";
@@ -26,20 +16,17 @@ import chapter3 from "../content/chapters/3/summary.mdx";
 import chapter3Meta from "../content/chapters/3/metadata";
 import chapter4 from "../content/chapters/4/summary.mdx";
 import chapter4Meta from "../content/chapters/4/metadata";
-import { FC } from "react";
-import { ShadowedPixelBox } from "../components/ShadowedPixelBox";
 import { ChapterCard } from "../components/ChapterCard";
-import { Navbar } from "../components/Navbar";
-import { Footer } from "../components/Footer";
 import { useIsMobile } from "../hooks/mobile";
 import { MainLayout } from "../components/MainLayout";
+import { ClippySays } from "../components/ClippySays";
 
 const Home: NextPage = () => {
   const isMobile = useIsMobile();
   return (
     <MainLayout>
-      <VStack w={"full"} spacing={20}>
-        <Center>
+      <VStack w={"full"} spacing={0}>
+        <Center pb={16}>
           <VStack w={"full"}>
             <Heading
               whiteSpace={"nowrap"}
@@ -67,6 +54,30 @@ const Home: NextPage = () => {
             </Text>
           </VStack>
         </Center>
+
+        <ClippySays clippyScale={0.5}>
+          <VStack maxW={"2xl"} spacing={4}>
+            <Text>
+              Hi! <b>Welcome to Nouns101!</b> If you’re new to web3 and trying
+              to form an understanding and get more involved, you’re in the
+              right place!
+            </Text>
+            <Text>
+              Here you’ll find four chapters of content, leading you from web3
+              beginner to DAO contributor! Don’t know what a DAO is? Don’t worry
+              — We’ll get there! ⌐◨-◨
+            </Text>
+            <Text>
+              After completing each chapter, you’ll receive a reward in the form
+              of a POAP. This will not only be a free NFT, but can be used to
+              prove you’ve completed this course in the future. Think of these
+              as merit badges 🥇
+            </Text>
+            <Text>
+              <b>Ready to get started?…</b> Select a chapter to begin!
+            </Text>
+          </VStack>
+        </ClippySays>
 
         <SimpleGrid w={"full"} columns={[1, 2]} gridGap={4}>
           <ChapterCard

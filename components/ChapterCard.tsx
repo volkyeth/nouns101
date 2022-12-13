@@ -104,12 +104,11 @@ export const ChapterCard: FC<ChapterCardProps> = ({
             <AccordionPanel fontSize={"sm"} py={4} px={8}>
               <VStack h={"full"} w={"full"} alignItems={"start"}>
                 {chapterSummary}
-                <Link href={`/chapters/${chapterMetadata.id}/1`}>
-                  <CtaButton
-                    shadowColor={"nouns101.blue"}
-                    alignSelf={"end"}
-                    colorScheme={"blue"}
-                  >
+                <Link
+                  href={`/chapters/${chapterMetadata.id}/1`}
+                  style={{ alignSelf: "end" }}
+                >
+                  <CtaButton shadowColor={"nouns101.blue"} colorScheme={"blue"}>
                     Read
                   </CtaButton>
                 </Link>
