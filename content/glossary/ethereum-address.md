@@ -1,3 +1,0 @@
-# Ethereum Address
-
-An Ethereum address is a unique identifier that is used to represent a specific Ethereum account on the Ethereum blockchain. An Ethereum account is a digital entity that holds and controls Ether (ETH) and other Ethereum-based assets, such as tokens and smart contracts. An Ethereum address is a long string of letters and numbers that is derived from the account's public key, and which is used to receive and send transactions on the Ethereum network. Ethereum addresses are similar to bank account numbers or email addresses, and are used by Ethereum users to identify and interact with each other on the network. Ethereum addresses typically start with the characters "0x" and are followed by 40 hexadecimal digits.

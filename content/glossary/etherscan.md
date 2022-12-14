@@ -1,5 +1,0 @@
-# Etherscan
-
-Etherscan is a popular blockchain explorer and analytics platform for the Ethereum blockchain. A blockchain explorer is a tool that allows users to search, view, and analyze the data and transactions on a blockchain. Etherscan provides a range of information and features for Ethereum users, including the ability to view and search the Ethereum blockchain, view individual transactions and addresses, and access detailed analytics and statistics about the Ethereum network. Etherscan is used by a wide range of Ethereum users, including individual investors, developers, and businesses, and is considered to be an important resource for anyone interested in the Ethereum blockchain. It is also home to a large and active community of Ethereum enthusiasts and users.
-
-\

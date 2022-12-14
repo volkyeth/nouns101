@@ -1,9 +1,0 @@
-# Gas
-
-In the context of Ethereum, "gas" refers to the unit of measurement for the amount of computational effort required to execute a transaction or smart contract on the Ethereum blockchain. Every operation on the Ethereum network, such as transferring tokens or interacting with a smart contract, requires a certain amount of gas to be performed. The more complex the operation, the more gas it will require.
-
-Gas is an important concept in Ethereum because it helps to prevent spam and malicious activity on the network by requiring users to pay for the computational resources needed to execute their transactions. This helps to ensure that the Ethereum network remains secure and efficient.
-
-In addition to its use as a measure of computational effort, gas is also used as a pricing mechanism in Ethereum. The cost of executing a transaction or smart contract on the Ethereum network is determined by the amount of gas it consumes, and users must pay for this gas using the network's native cryptocurrency, Ether (ETH). This means that users must have a sufficient amount of Ether in their accounts to pay for the gas needed to execute their transactions.
-
-\

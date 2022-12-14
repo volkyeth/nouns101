@@ -1,7 +1,0 @@
-# ETH
-
-ETH is the native cryptocurrency of the Ethereum blockchain. It is a digital asset that is used as a medium of exchange on the Ethereum network and is also used to pay transaction fees and to power decentralized applications that are built on the Ethereum platform. ETH is abbreviated from "Ethereum" and is sometimes referred to as "Ether" or "Ethereum tokens".&#x20;
-
-It is one of the largest and most widely used cryptocurrencies, with a market capitalization of over $100 billion as of December 2022. ETH can be bought, sold, or traded on cryptocurrency exchanges and can also be stored in a crypto wallet.
-
-\

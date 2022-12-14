@@ -5,10 +5,8 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 cd "$SCRIPT_DIR/../content"
 
 # remove readme files and summary
-rm **/README.md
-# @TODO replace after first cleanup:
-#rm **/gitbook-readme.md
-#rm gitbook-summary.md
+find . -name "gitbook-readme.md" -type f -delete
+rm gitbook-summary.md
 
 # move assets to the public folder
 mv $SCRIPT_DIR/../.gitbook/assets/* $SCRIPT_DIR/../public/assets/
