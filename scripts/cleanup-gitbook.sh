@@ -15,18 +15,17 @@ mv $SCRIPT_DIR/../.gitbook/assets/* $SCRIPT_DIR/../public/assets/
 
 # Process new files
 ADD_FRONTMATTER='s/# (.+)/---\ntitle: \1\naliases: []\nseeAlso: []\nexternalReferences: {}\n---/'
-REMOVE_HEADINGS='s/^# .+//g'
-find . -name "*.md" -exec sed -i '' -E "$ADD_FRONTMATTER;$REMOVE_HEADINGS" {} +
-# Remove duplicated line breaks
-find . -name "*.md" -exec sed -i '' '/^$/N;/^\n$/D' {} +
+find . -name "*.md" -exec sed -i '' -E "$ADD_FRONTMATTER" {} +
 
 # change md files to mdx
 find . -name "*.md" -exec rename 's/\.md$/.mdx/' '{}' +
-
 
 # Cleanup all files
 REMOVE_TRAILING_SLASH='s/\\$//'
 FIX_IMAGES='s/!\[]\(<.+\/.gitbook\/assets\/(.+)>\)/!\[](\/assets\/\1)/g'
 UNESCAPE_WIKILINKS='s/\\\[\\\[/[[/g'
+REMOVE_HEADINGS='s/^# .+//g'
 REMOVE_EMBEDS='s/\{% embed url="(.+)" %\}/\1/g'
-find . -name "*.mdx" -exec sed -i '' -E "$REMOVE_TRAILING_SLASH; $FIX_IMAGES;$UNESCAPE_WIKILINKS;$REMOVE_EMBEDS" {} +
+find . -name "*.mdx" -exec sed -i '' -E "$REMOVE_TRAILING_SLASH; $FIX_IMAGES;$UNESCAPE_WIKILINKS;$REMOVE_EMBEDS;$REMOVE_HEADINGS" {} +
+# Remove duplicated line breaks
+find . -name "*.mdx" -exec sed -i '' '/^$/N;/^\n$/D' {} +
