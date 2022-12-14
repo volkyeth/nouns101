@@ -15,8 +15,8 @@ mv $SCRIPT_DIR/../.gitbook/assets/* $SCRIPT_DIR/../public/assets/
 ADD_FRONTMATTER='s/# (.+)/---\ntitle: \1\naliases: []\nseeAlso: []\nexternalReferences: {}\n---/'
 find . -name "*.md" -exec sed -i '' -E "$ADD_FRONTMATTER" {} +
 
-# change md files to mdx
-find . -name "*.md" -exec rename 's/\.md$/.mdx/' '{}' +
+# change md files to mdx and replaces dashes for underscores
+find . -name "*.md" -exec rename 's/\.md$/.mdx/;s/-/_/' '{}' +
 
 # Cleanup all files
 REMOVE_TRAILING_SLASH='s/\\$//'
