@@ -1,0 +1,5 @@
+# Opensea
+
+OpenSea is an online marketplace for buying and selling non-fungible tokens (NFTs). NFTs are unique and indivisible digital assets that are used to represent items such as digital art, collectibles, in-game items, and other forms of digital ownership. OpenSea is built on the Ethereum blockchain, and allows users to browse and purchase a wide variety of NFTs from different creators and projects. It also offers tools and resources for creators to mint, manage, and promote their NFTs. OpenSea is considered to be one of the leading platforms for NFTs, and has a large and active community of users and creators.
+
+\

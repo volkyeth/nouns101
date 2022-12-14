@@ -1,0 +1,5 @@
+# Ethereum
+
+Ethereum is a decentralized, open-source blockchain platform that enables the creation and deployment of smart contracts and decentralized applications (DAPPs). It was created in 2015 by a team of developers, led by Vitalik Buterin, with the goal of providing a more versatile and scalable alternative to the Bitcoin blockchain.
+
+&#x20;Ethereum uses its own native cryptocurrency, ETH, to power transactions and to incentivize network participants who provide computing resources to the network. Ethereum has become one of the most widely used blockchain platforms, with a growing community of developers, users, and businesses building on the platform.

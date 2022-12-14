@@ -1,0 +1,7 @@
+# POAP
+
+POAP is an acronym that stands for "Proof of Attendance Protocol". POAP is a decentralized application (DAPP) built on the Ethereum blockchain that is used to create and distribute non-fungible tokens (NFTs) as proof of attendance for events and conferences. POAP allows event organizers to create unique NFTs for each attendee, which can be collected and verified using a blockchain-based smart contract.
+
+The NFTs can be customized with the event's branding and other details, and can be traded or used by attendees as a digital collectible or badge of attendance. POAP is used by a growing number of event organizers and attendees, and has become a popular way to create and distribute NFTs for attendance and engagement.
+
+\

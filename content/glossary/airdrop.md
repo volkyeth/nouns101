@@ -1,0 +1,3 @@
+# Airdrop
+
+An airdrop is a term used in the cryptocurrency world to describe the process of distributing tokens or other cryptocurrencies to a large number of users for free. Airdrops are often used by blockchain projects as a way to promote their project and increase awareness among potential users. They can also be used to distribute tokens to existing users as a reward for their support or participation in the project. Airdrops are typically distributed to users who hold a specific cryptocurrency, such as Bitcoin or Ethereum, or who have registered with the project in some way. Airdropped tokens are typically received by users in their cryptocurrency wallet, and can be traded or used on the project's platform.

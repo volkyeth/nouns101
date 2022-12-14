@@ -1,0 +1,5 @@
+# Coinbase
+
+Coinbase is a digital currency exchange and wallet platform that allows users to buy, sell, and store cryptocurrencies, such as Bitcoin and Ethereum. Coinbase was founded in 2012 and is headquartered in San Francisco, California. It is considered to be one of the most reputable and well-established cryptocurrency exchanges, and offers a range of services and features for individual and institutional investors. Coinbase offers a user-friendly platform that allows users to easily buy and sell cryptocurrencies using a variety of payment methods, such as bank transfers and credit cards. It also offers a range of secure wallet solutions for storing and managing cryptocurrencies. In addition to its core exchange and wallet services, Coinbase also offers a range of other products and services, such as staking and lending, and has acquired several other companies to expand its offering.
+
+\

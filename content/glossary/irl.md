@@ -1,0 +1,5 @@
+# IRL
+
+IRL is an abbreviation that stands for "in real life". It is commonly used online to contrast the virtual world of the internet with the physical world of everyday life. For example, someone might say that they are "IRL friends" with someone they have only met online, to indicate that their friendship exists in the real world and not just on the internet. The term IRL is often used to emphasize the contrast between online and offline experiences, and to remind people that there is a real person behind the screen, with real thoughts, feelings, and experiences.
+
+\

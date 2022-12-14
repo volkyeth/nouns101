@@ -1,0 +1,4 @@
+# Discord
+
+A Discord community is a group of people who are connected through the Discord communication platform. Discord is a popular platform that is designed for online gaming communities, but is also used by a wide range of other communities, such as artists, educators, and hobbyists. A Discord community is created by a Discord user who wants to connect with others who share their interests or goals. Communities can be private, meaning that only members can see and participate in the group, or public, meaning that anyone can see the group and its messages. Discord communities typically have a dedicated server, which is a virtual space where members can communicate and collaborate with each other using a variety of tools and features, such as voice and video calls, instant messaging, and screen sharing.
+

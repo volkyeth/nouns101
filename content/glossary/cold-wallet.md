@@ -1,0 +1,3 @@
+# Cold wallet
+
+A cold wallet is a type of cryptocurrency wallet that is not connected to the internet. Cold wallets are typically hardware wallets, which are physical devices, such as a USB drive or a specialized hardware device, that are used to store cryptocurrencies offline. Because cold wallets are not connected to the internet, they are considered to be more secure than hot wallets, which are connected to the internet and are therefore more vulnerable to hacking and other forms of cyberattack. Cold wallets are often used to store large amounts of cryptocurrencies, as they offer added security for the user's funds. They can also be used to securely store the user's private keys, which are essential for accessing and managing their cryptocurrencies.

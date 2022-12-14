@@ -1,0 +1,7 @@
+# Polygon
+
+Polygon (formerly known as Matic Network) is a decentralized platform that provides infrastructure for building and running decentralized applications (DAPPs) on the Ethereum blockchain. It is designed to make it easier for developers to create and deploy DAPPs on Ethereum, and to provide users with a more seamless and user-friendly experience when interacting with these DAPPs.&#x20;
+
+Polygon uses a combination of technologies, including layer 2 scaling solutions and proof-of-stake (PoS) consensus, to provide fast, low-cost, and secure transactions. It has its own native cryptocurrency, MATIC, which is used to power transactions on the platform and to incentivize network participants.
+
+\

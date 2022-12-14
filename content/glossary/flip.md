@@ -1,0 +1,7 @@
+# Flip
+
+To "flip" an NFT means to buy it and then sell it quickly, typically for a higher price than what was paid for it. Flipping is a common practice in the world of NFTs, where prices can fluctuate rapidly and where certain NFTs are highly sought after by collectors and investors.
+
+Flipping can be a way to make a quick profit on the NFT market, but it also carries some risk, as the value of an NFT can go down as well as up. As with any investment, it is important to do thorough research and carefully evaluate the potential risks and rewards before deciding to flip an NFT.
+
+\
