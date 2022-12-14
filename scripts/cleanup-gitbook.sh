@@ -27,5 +27,3 @@ UNESCAPE_WIKILINKS='s/\\\[\\\[/[[/g'
 REMOVE_HEADINGS='s/^# .+//g'
 REMOVE_EMBEDS='s/\{% embed url="(.+)" %\}/\1/g'
 find . -name "*.mdx" -exec sed -i '' -E "$REMOVE_TRAILING_SLASH; $FIX_IMAGES;$UNESCAPE_WIKILINKS;$REMOVE_EMBEDS;$REMOVE_HEADINGS" {} +
-# Remove leading, trailing and duplicated line breaks
-find . -name "*.mdx" -exec sed -i '' '/^$/N;/^\n$/D;s/^\n*//;s/\n*$//' {} +
