@@ -1,15 +1,14 @@
+import { FC, PropsWithChildren, ReactNode } from "react";
 import {
-  createContext,
-  FC,
-  PropsWithChildren,
-  ReactNode,
-  useContext,
-} from "react";
-import { chakra, HeadingProps, Image, Text } from "@chakra-ui/react";
+  chakra,
+  HeadingProps,
+  Image,
+  PropsOf,
+  UnorderedList,
+} from "@chakra-ui/react";
 import { Nutshell } from "./Nutshell";
 import { MDXProvider } from "@mdx-js/react";
 import Link from "next/link";
-import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { PixelTooltip } from "./PixelTooltip";
 
 export const Nouns101MdxProvider: FC<PropsWithChildren<{}>> = ({
@@ -23,6 +22,7 @@ export const Nouns101MdxProvider: FC<PropsWithChildren<{}>> = ({
     pre: chakra.pre,
     code: chakra.code,
     a: CustomLink,
+    ul: Ul,
     Nutshell,
     Tooltip: PixelTooltip,
     Link,
@@ -66,5 +66,13 @@ const H2: FC<HeadingProps> = ({ children, ...props }) => {
     <chakra.h2 fontSize={"lg"} fontWeight={"bold"} {...props}>
       {children}
     </chakra.h2>
+  );
+};
+
+const Ul: FC<PropsOf<"ul">> = ({ children }) => {
+  return (
+    <UnorderedList listStylePosition={"inside"} listStyleType={"square"}>
+      {children}
+    </UnorderedList>
   );
 };
