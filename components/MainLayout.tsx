@@ -21,7 +21,7 @@ export const MainLayout: FC<PropsWithChildren<MainLayoutProps>> = ({
         {children}
       </MainContainer>
     </Box>
-    <Footer py={2} />
+    <Footer py={2} zIndex={10} />
   </VStack>
 );
 
