@@ -279,9 +279,11 @@ const ChapterSection: FC<ChapterSectionProps> = ({
                   fontWeight={"bold"}
                   fontFamily={`"LoRes 12 OT",sans-serif`}
                 >
-                  <Text fontSize={["xl", "2xl"]} color={"#2245C5"}>
-                    Section {sectionNumber}
-                  </Text>
+                  {sectionNumber < amountSections && (
+                    <Text fontSize={["xl", "2xl"]} color={"#2245C5"}>
+                      Section {sectionNumber}
+                    </Text>
+                  )}
                   {serializedSection?.frontmatter?.title && (
                     <Heading fontSize={["lg", "2xl"]} as={"h2"}>
                       {serializedSection.frontmatter.title}
