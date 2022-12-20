@@ -62,7 +62,11 @@ export const Nutshell: FC<NutshellProps> = ({
       {expanded && (
         <>
           <Box>
-            <ShadowedPixelBox bgColor={"#E9F0FF"} shadowColor={nouns101Blue}>
+            <ShadowedPixelBox
+              bgColor={"#E9F0FF"}
+              shadowColor={nouns101Blue}
+              mx={2}
+            >
               <VStack alignItems={"start"}>
                 <MDXRemote {...definition} />
               </VStack>
