@@ -7,6 +7,7 @@ import {
 import { MainLayout } from "../../../components/MainLayout";
 import {
   Box,
+  chakra,
   Heading,
   HStack,
   Text,
@@ -18,7 +19,12 @@ import { ArrowUp } from "../../../components/Icons";
 import Link from "next/link";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { readdirSync, readFileSync } from "fs";
-import { AnimatePresence, motion, MotionProps } from "framer-motion";
+import {
+  AnimatePresence,
+  isValidMotionProp,
+  motion,
+  MotionProps,
+} from "framer-motion";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serializeMdx, serializeNutshells } from "../../../utils/mdx";
 import { ChapterMetadata } from "../../../utils/metadata";
@@ -130,12 +136,8 @@ const ChapterSection: FC<ChapterSectionProps> = ({
 
   const pixelBoxProps: Partial<ShadowedPixelBoxProps & MotionProps> = {
     as: motion.div,
-    // position: "absolute",
     h: "65vh",
     w: { base: "full", md: "xl" },
-    initial: { x: "-100vw" },
-    animate: { x: 0 },
-    exit: { x: "-100vw" },
   };
 
   const poapWidth = useBreakpointValue([32, 54]);
@@ -155,7 +157,6 @@ const ChapterSection: FC<ChapterSectionProps> = ({
   return (
     <MainLayout
       bgColor={chapterMeta.color}
-      overflow={"clip"}
       navbarExtraContent={
         <VStack
           w={"full"}
@@ -223,7 +224,7 @@ const ChapterSection: FC<ChapterSectionProps> = ({
         <Box display={"grid"}>
           <AnimatePresence initial={false}>
             {amountSections - sectionNumber > 0 &&
-              Array(amountSections - sectionNumber)
+              Array(Math.min(amountSections - sectionNumber, 8))
                 .fill(null)
                 .map((_, idx) => (
                   <ShadowedPixelBox
@@ -240,9 +241,12 @@ const ChapterSection: FC<ChapterSectionProps> = ({
               gridArea={"1/1/1/1"}
               key={`section-${sectionNumber}`}
               {...pixelBoxProps}
-              // @ts-ignore
+              initial={{ x: "-100vw" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100vw" }}
               onPanEnd={(event, info) => {
                 if (
+                  // @ts-ignore
                   event.pointerType !== "touch" ||
                   event.type === "pointercancel"
                 ) {

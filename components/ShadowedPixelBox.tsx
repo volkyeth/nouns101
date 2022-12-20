@@ -2,10 +2,12 @@ import { FC } from "react";
 import { Box, BoxProps, chakra, forwardRef } from "@chakra-ui/react";
 import { pixelatedClipPath } from "../utils/clipPaths";
 import { Shadow } from "./Shadow";
+import { motion, MotionAdvancedProps, MotionProps } from "framer-motion";
 
 export type ShadowedPixelBoxProps = {
   shadowColor?: string;
-} & PixelBoxProps;
+} & MotionProps &
+  PixelBoxProps;
 export const ShadowedPixelBox: FC<ShadowedPixelBoxProps> = forwardRef(
   (
     { pixelSize = 4, shadowColor = "black", w, gridArea, transform, ...props },
@@ -41,10 +43,12 @@ export const OutlinedPixelBox: FC<OutlinedPixelBoxProps> = forwardRef(
 
 export type PixelBoxProps = {
   pixelSize?: number;
-} & BoxProps;
+} & MotionProps &
+  BoxProps;
 
 export const PixelBox: FC<PixelBoxProps> = ({ pixelSize = 4, ...props }) => (
   <Box
+    as={motion.div}
     p={4}
     clipPath={pixelatedClipPath(pixelSize)}
     bgColor={"white"}
