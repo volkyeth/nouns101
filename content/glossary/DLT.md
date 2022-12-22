@@ -1,5 +1,0 @@
-# Distributed ledger technology (DLT)
-
-Distributed ledger technology (DLT) is a type of database that is distributed and decentralized, meaning it is stored on multiple computers or nodes in a network rather than being controlled by a single entity. DLT allows multiple parties to securely and transparently record transactions or other types of data without the need for intermediaries.
-
-One of the most well-known examples of DLT is the blockchain, which is a type of DLT that uses cryptographic techniques to ensure the integrity and security of the data it stores. Each block in a blockchain contains a list of transactions, and once a block is added to the chain, the data it contains cannot be altered or deleted. This makes blockchain-based DLT systems particularly suitable for recording financial transactions, as they provide a secure and transparent record of all activity.
