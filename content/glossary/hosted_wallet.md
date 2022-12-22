@@ -1,0 +1,5 @@
+# Hosted Wallet
+
+A hosted wallet is a type of digital wallet that is provided and managed by a third-party service provider. Hosted wallets allow users to store, manage, and transact with various types of digital assets, such as cryptocurrencies, tokens, and other digital assets.
+
+Unlike a software wallet, which is stored locally on a user's device and requires the user to manage their own security, a hosted wallet is accessed via the internet and is managed by the service provider. This means that the provider is responsible for securing the user's assets and for providing access to them.
