@@ -16,6 +16,7 @@
   * [DAO](glossary/dao.mdx)
   * [Dapp](glossary/dapp.mdx)
   * [Defi](glossary/defi.mdx)
+  * [Distributed ledger technology (DLT)](glossary/DLT.md)
   * [Discord](glossary/discord.mdx)
   * [Discord Moderator](glossary/discord\_moderator.mdx)
   * [DLT](glossary/dlt.mdx)
