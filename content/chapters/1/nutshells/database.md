@@ -1,0 +1,5 @@
+# database
+
+A database is a collection of data that is organized and stored in a specific way, allowing it to be accessed, modified, and analyzed efficiently.&#x20;
+
+Databases are used to store and manage large amounts of structured and unstructured data, such as customer information, financial records, and inventory data.

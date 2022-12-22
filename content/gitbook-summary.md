@@ -84,6 +84,8 @@
     * [summary](chapters/1/summary.mdx)
     * [nutshells](chapters/1/nutshells/README.md)
       * [decentralized\_database](chapters/1/nutshells/decentralized\_database.mdx)
+      * [Copy of decentralized\_database](chapters/1/nutshells/decentralized\_database-1.md)
+      * [database](chapters/1/nutshells/database.md)
       * [fully\_transparent](chapters/1/nutshells/fully\_transparent.mdx)
       * [intangible](chapters/1/nutshells/intangible.mdx)
       * [nodes](chapters/1/nutshells/nodes.mdx)
