@@ -1,6 +1,8 @@
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import remarkGfm from "remark-gfm";
+import remarkEmbedder from "@remark-embedder/core";
+import oembedTransformer from "@remark-embedder/transformer-oembed";
 // @ts-ignore
 import wikiLinkPlugin from "remark-wiki-link";
 import { basename } from "path";
@@ -23,6 +25,12 @@ export const serializeMdx = async (
           {
             wikiLinkClassName: "wikilink",
             hrefTemplate: (permalink: string) => normalizeName(permalink),
+          },
+        ],
+        [
+          remarkEmbedder,
+          {
+            transformers: [oembedTransformer],
           },
         ],
       ],
