@@ -97,7 +97,6 @@
       * [stored](chapters/1/nutshells/stored.mdx)
       * [Your First POAP](chapters/1/nutshells/your\_first\_poap.mdx)
     * [sections](chapters/1/sections/README.md)
-      * [An Intro To Web3](chapters/1/sections/1.mdx)
       * [Multiple Wallets & Safety](chapters/1/sections/10.mdx)
       * [Hardware Wallets](chapters/1/sections/11.mdx)
       * [Chapter 1 Complete! 🎉](chapters/1/sections/12.mdx)
