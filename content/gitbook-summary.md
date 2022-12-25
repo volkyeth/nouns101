@@ -50,6 +50,7 @@
   * [NFT Marketplace](glossary/nft\_marketplace.mdx)
   * [NFT Metadata](glossary/nft\_metadata.mdx)
   * [Noggles](glossary/noggles.mdx)
+  * [On-chain](glossary/on-chain.md)
   * [Off-chain](glossary/off\_chain.mdx)
   * [Opensea](glossary/opensea.mdx)
   * [peer-to-peer (P2P) system](glossary/peer\_to\_peer.mdx)
