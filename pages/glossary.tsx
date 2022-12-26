@@ -11,62 +11,75 @@ import openImg from "../assets/open.svg";
 import Image from "next/image";
 import { PixelTooltip } from "../components/PixelTooltip";
 import { CopyLinkButton } from "../components/CopyLinkButton";
+import client from "../.tina/__generated__/client";
+import {
+  Glossary,
+  GlossaryConnectionEdges,
+} from "../.tina/__generated__/types";
+import { basename } from "path";
 
-export const getStaticProps: GetStaticProps<
-  SerializeNutshellsResult
-> = async () => {
-  const glossaryNutshellFiles = readdirSync("content/glossary").map(
-    (filename) => `content/glossary/${filename}`
-  );
+export const getStaticProps: GetStaticProps<GlossaryProps> = async () => {
+  const glossaryEntries = await client.queries
+    .glossaryConnection()!
+    .then((res) =>
+      res!.data!.glossaryConnection!.edges!.map(
+        (edge) => edge!.node as Glossary
+      )
+    );
 
   return {
     props: {
-      ...(await serializeNutshells(glossaryNutshellFiles)),
+      glossaryEntries,
     },
   };
 };
 
-const Glossary: FC<SerializeNutshellsResult> = ({ terms, definitions }) => {
+type GlossaryProps = {
+  glossaryEntries: Glossary[];
+};
+
+const Glossary: FC<GlossaryProps> = ({ glossaryEntries }) => {
   return (
-    <NutshellDefinitions.Provider value={definitions}>
-      <MainLayout centerContent>
-        <VStack spacing={10} w={"full"}>
-          <Heading
+    <MainLayout centerContent>
+      <VStack spacing={10} w={"full"}>
+        <Heading
+          fontFamily={`"LoRes 12 OT",sans-serif`}
+          color={"nouns101.blue"}
+        >
+          Glossary
+        </Heading>
+        <ShadowedPixelBox w={["full", "2xl"]}>
+          <VStack
+            p={[4, 10]}
             fontFamily={`"LoRes 12 OT",sans-serif`}
-            color={"nouns101.blue"}
+            fontSize={["md", "lg"]}
+            spacing={2}
           >
-            Glossary
-          </Heading>
-          <ShadowedPixelBox w={["full", "2xl"]}>
-            <VStack
-              p={[4, 10]}
-              fontFamily={`"LoRes 12 OT",sans-serif`}
-              fontSize={["md", "lg"]}
-              spacing={2}
-            >
-              {Object.entries(terms).map(([permalink, title]) => (
+            {glossaryEntries.map(({ title, body, id }) => {
+              const permalink = basename(id, ".mdx");
+              return (
                 <VStack
-                  key={permalink}
+                  key={title}
                   spacing={-1}
                   alignItems={"start"}
                   w={"full"}
                 >
-                  <Nutshell term={title} />
+                  <Nutshell body={body}>{title}</Nutshell>
                   <HStack position={"absolute"} right={0} pr={10}>
                     <PixelTooltip label={"Open definition page"}>
-                      <Link key={permalink} href={`/glossary/${permalink}`}>
+                      <Link key={title} href={`/glossary/${permalink}`}>
                         <Image src={openImg} alt={"open definition"} />
                       </Link>
                     </PixelTooltip>
                     <CopyLinkButton link={`/glossary/${permalink}`} />
                   </HStack>
                 </VStack>
-              ))}
-            </VStack>
-          </ShadowedPixelBox>
-        </VStack>
-      </MainLayout>
-    </NutshellDefinitions.Provider>
+              );
+            })}
+          </VStack>
+        </ShadowedPixelBox>
+      </VStack>
+    </MainLayout>
   );
 };
 
