@@ -73,6 +73,8 @@ export const getStaticProps: GetStaticProps<ChapterSectionProps> = async (
 
   const content = await getQuery(chapterId, section);
 
+  console.log({ chapterId, section, content });
+
   const amountSections = readdirSync(
     `content/chapters/${chapterId}/sections`
   ).length;
@@ -121,12 +123,18 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
     })),
   ]).then((chapters) =>
     chapters.flatMap(({ chapterId, edges }) =>
-      edges.map((page) => ({
-        params: {
+      edges!.map((page) => {
+        console.log({
           chapterId,
           section: basename(page!.node!._sys.filename, "mdx"),
-        },
-      }))
+        });
+        return {
+          params: {
+            chapterId,
+            section: basename(page!.node!._sys.filename, "mdx"),
+          },
+        };
+      })
     )
   );
 
@@ -163,11 +171,12 @@ const ChapterSection: FC<ChapterSectionProps> = ({
 }) => {
   const showArrows = useBreakpointValue({ base: false, lg: true });
   const { push } = useRouter();
-  const {
-    data: { chapter1, chapter2, chapter3, chapter4 },
-  } = useTina(content);
+  // @ts-ignore
+  const { data } = useTina(content);
 
-  const section = chapter1 ?? chapter2 ?? chapter3 ?? chapter4;
+  const section =
+    // @ts-ignore
+    data?.chapter1 ?? data?.chapter2 ?? data?.chapter3 ?? data?.chapter4;
 
   const pixelBoxProps: Partial<ShadowedPixelBoxProps & MotionProps> = {
     as: motion.div,
@@ -319,11 +328,11 @@ const ChapterSection: FC<ChapterSectionProps> = ({
                       Section {sectionNumber}
                     </Text>
                   )}
-                  {/*{serializedSection?.frontmatter?.title && (*/}
-                  {/*  <Heading fontSize={["lg", "2xl"]} as={"h2"}>*/}
-                  {/*    {serializedSection.frontmatter.title}*/}
-                  {/*  </Heading>*/}
-                  {/*)}*/}
+                  {section?.title && (
+                    <Heading fontSize={["lg", "2xl"]} as={"h2"}>
+                      {section.title}
+                    </Heading>
+                  )}
                 </VStack>
                 <Markdown content={section.body} />
               </VStack>
