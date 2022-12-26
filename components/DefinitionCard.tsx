@@ -6,9 +6,12 @@ import { ShadowedPixelBox } from "./ShadowedPixelBox";
 import thinArrow from "../assets/thinArrowRight.svg";
 import { FC } from "react";
 import Image from "next/image";
+import { GlossaryQuery } from "../.tina/__generated__/types";
+import { TinaMarkdown } from "tinacms/dist/rich-text";
+import { Markdown } from "./Nouns101MdxProvider";
 
 export type DefinitionCardProps = {
-  definition: MDXRemoteSerializeResult;
+  definition: GlossaryQuery["glossary"];
   permalink: string;
 };
 
@@ -21,44 +24,44 @@ export const DefinitionCard: FC<DefinitionCardProps> = ({
       <VStack alignItems={"start"} spacing={6}>
         <HStack justifyContent={"space-between"} w={"full"}>
           <Heading color={"nouns101.blue"}>
-            {definition.frontmatter?.title ?? permalink}
+            {definition.title ?? permalink}
           </Heading>
           <CopyLinkButton link={`/glossary/${permalink}`} />
         </HStack>
         <VStack w={"full"} spacing={0} alignItems={"start"}>
           <Divider borderWidth={1} opacity={1} borderColor={"gray.700"} />
-          {(definition.frontmatter?.aliases?.length ?? 0) > 0 && (
+          {(definition.aliases?.length ?? 0) > 0 && (
             <Text fontWeight={"semibold"} color={"gray.700"}>{`AKA: ${join(
-              definition.frontmatter!.aliases,
+              definition.aliases,
               ", "
             )}`}</Text>
           )}
         </VStack>
         <VStack alignItems={"start"} w={"full"}>
-          <MDXRemote {...definition} />
+          <Markdown content={definition.body} />
         </VStack>
-        {(Object.keys(definition.frontmatter?.externalReferences ?? {})
-          .length ?? 0) > 0 && (
-          <VStack>
-            {Object.entries(
-              definition.frontmatter?.externalReferences ?? {}
-            ).map(([label, href]) => (
-              <Link
-                isExternal
-                key={label}
-                href={href}
-                style={{ alignSelf: "start" }}
-              >
-                <HStack>
-                  <Image src={thinArrow} alt={"arrow"} />
-                  <Text color={"nouns101.blue"} fontWeight={"bold"}>
-                    {label}
-                  </Text>
-                </HStack>
-              </Link>
-            ))}
-          </VStack>
-        )}
+        {/*{(Object.keys(definition.frontmatter?.externalReferences ?? {})*/}
+        {/*  .length ?? 0) > 0 && (*/}
+        {/*  <VStack>*/}
+        {/*    {Object.entries(*/}
+        {/*      definition.frontmatter?.externalReferences ?? {}*/}
+        {/*    ).map(([label, href]) => (*/}
+        {/*      <Link*/}
+        {/*        isExternal*/}
+        {/*        key={label}*/}
+        {/*        href={href}*/}
+        {/*        style={{ alignSelf: "start" }}*/}
+        {/*      >*/}
+        {/*        <HStack>*/}
+        {/*          <Image src={thinArrow} alt={"arrow"} />*/}
+        {/*          <Text color={"nouns101.blue"} fontWeight={"bold"}>*/}
+        {/*            {label}*/}
+        {/*          </Text>*/}
+        {/*        </HStack>*/}
+        {/*      </Link>*/}
+        {/*    ))}*/}
+        {/*  </VStack>*/}
+        {/*)}*/}
       </VStack>
     </ShadowedPixelBox>
   );

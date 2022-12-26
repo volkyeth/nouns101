@@ -35,6 +35,33 @@ import {
   NutshellDefinitions,
   NutshellDefinitionsMap,
 } from "../../../components/Nutshell";
+import client from "../../../.tina/__generated__/client";
+import { basename } from "path";
+import { useTina } from "tinacms/dist/react";
+import { Markdown } from "../../../components/Nouns101MdxProvider";
+
+const getQuery = (chapterId: string, section: string) => {
+  switch (chapterId) {
+    case "1":
+      return client.queries.chapter1({
+        relativePath: `${section}.mdx`,
+      });
+    case "2":
+      return client.queries.chapter2({
+        relativePath: `${section}.mdx`,
+      });
+    case "3":
+      return client.queries.chapter3({
+        relativePath: `${section}.mdx`,
+      });
+    case "4":
+      return client.queries.chapter4({
+        relativePath: `${section}.mdx`,
+      });
+    default:
+      throw new Error("Invalid chapter id");
+  }
+};
 
 export const getStaticProps: GetStaticProps<ChapterSectionProps> = async (
   context
@@ -43,25 +70,8 @@ export const getStaticProps: GetStaticProps<ChapterSectionProps> = async (
     chapterId: string;
     section: string;
   };
-  const glossaryNutshellFiles = readdirSync("content/glossary").map(
-    (filename) => `content/glossary/${filename}`
-  );
-  const chapterNutshellFiles = readdirSync(
-    `content/chapters/${chapterId}/nutshells`
-  ).map((filename) => `content/chapters/${chapterId}/nutshells/${filename}`);
-  const nutshellFiles = [
-    ...glossaryNutshellFiles,
-    ...chapterNutshellFiles,
-  ].filter((filename) => filename.split(".")[1] === "mdx");
 
-  const { definitions: nutshellDefinitions } = await serializeNutshells(
-    nutshellFiles
-  );
-
-  const sectionFile = `content/chapters/${chapterId}/sections/${section}.mdx`;
-  const serializedSection = await serializeMdx(
-    readFileSync(sectionFile).toString()
-  );
+  const content = await getQuery(chapterId, section);
 
   const amountSections = readdirSync(
     `content/chapters/${chapterId}/sections`
@@ -85,40 +95,61 @@ export const getStaticProps: GetStaticProps<ChapterSectionProps> = async (
       previousSection,
       nextSection,
       amountSections,
-      serializedSection,
-      serializedNutshells: nutshellDefinitions,
       chapterMeta,
+      content,
     },
   };
 };
 
 export const getStaticPaths: GetStaticPaths = async (context) => {
-  const paths = readdirSync("content/chapters").flatMap((chapterId) =>
-    readdirSync(`content/chapters/${chapterId}/sections`).map((sectionFile) => {
-      const section = sectionFile.split(".")[0];
-      return {
+  const paths = await Promise.all([
+    client.queries.chapter1Connection().then((chapter) => ({
+      chapterId: "1",
+      edges: chapter.data.chapter1Connection.edges,
+    })),
+    client.queries.chapter2Connection().then((chapter) => ({
+      chapterId: "2",
+      edges: chapter.data.chapter2Connection.edges,
+    })),
+    client.queries.chapter3Connection().then((chapter) => ({
+      chapterId: "3",
+      edges: chapter.data.chapter3Connection.edges,
+    })),
+    client.queries.chapter4Connection().then((chapter) => ({
+      chapterId: "4",
+      edges: chapter.data.chapter4Connection.edges,
+    })),
+  ]).then((chapters) =>
+    chapters.flatMap(({ chapterId, edges }) =>
+      edges.map((page) => ({
         params: {
           chapterId,
-          section,
+          section: basename(page!.node!._sys.filename, "mdx"),
         },
-      };
-    })
+      }))
+    )
   );
+
   return {
     paths,
     fallback: false,
   };
 };
 
+type ChapterQuery =
+  | typeof client.queries.chapter1
+  | typeof client.queries.chapter2
+  | typeof client.queries.chapter3
+  | typeof client.queries.chapter4;
+
 type ChapterSectionProps = {
-  serializedSection: MDXRemoteSerializeResult;
-  serializedNutshells: NutshellDefinitionsMap;
   chapterId: string;
   sectionNumber: number;
   previousSection: string | null;
   nextSection: string | null;
   amountSections: number;
   chapterMeta: ChapterMetadata;
+  content: Awaited<ReturnType<ChapterQuery>>;
 };
 
 const ChapterSection: FC<ChapterSectionProps> = ({
@@ -127,12 +158,16 @@ const ChapterSection: FC<ChapterSectionProps> = ({
   previousSection,
   nextSection,
   amountSections,
-  serializedSection,
-  serializedNutshells,
   chapterMeta,
+  content,
 }) => {
   const showArrows = useBreakpointValue({ base: false, lg: true });
   const { push } = useRouter();
+  const {
+    data: { chapter1, chapter2, chapter3, chapter4 },
+  } = useTina(content);
+
+  const section = chapter1 ?? chapter2 ?? chapter3 ?? chapter4;
 
   const pixelBoxProps: Partial<ShadowedPixelBoxProps & MotionProps> = {
     as: motion.div,
@@ -284,15 +319,13 @@ const ChapterSection: FC<ChapterSectionProps> = ({
                       Section {sectionNumber}
                     </Text>
                   )}
-                  {serializedSection?.frontmatter?.title && (
-                    <Heading fontSize={["lg", "2xl"]} as={"h2"}>
-                      {serializedSection.frontmatter.title}
-                    </Heading>
-                  )}
+                  {/*{serializedSection?.frontmatter?.title && (*/}
+                  {/*  <Heading fontSize={["lg", "2xl"]} as={"h2"}>*/}
+                  {/*    {serializedSection.frontmatter.title}*/}
+                  {/*  </Heading>*/}
+                  {/*)}*/}
                 </VStack>
-                <NutshellDefinitions.Provider value={serializedNutshells}>
-                  <MDXRemote {...serializedSection} />
-                </NutshellDefinitions.Provider>
+                <Markdown content={section.body} />
               </VStack>
             </ShadowedPixelBox>
           </AnimatePresence>

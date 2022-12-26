@@ -19,5 +19,8 @@ export default {
     });
 
     return config;
+  },
+  images: {
+    domains: ["assets.tina.io"]
   }
 };

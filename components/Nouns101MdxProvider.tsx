@@ -10,6 +10,7 @@ import { Nutshell } from "./Nutshell";
 import { MDXProvider } from "@mdx-js/react";
 import Link from "next/link";
 import { PixelTooltip } from "./PixelTooltip";
+import { TinaMarkdown } from "tinacms/dist/rich-text";
 
 export const Nouns101MdxProvider: FC<PropsWithChildren<{}>> = ({
   children,
@@ -43,7 +44,7 @@ const ResponsiveImage = (props: any) => (
 
 const CustomLink: FC<CustomLinkProps> = ({ href, children, className }) => {
   if (className && className.includes("wikilink")) {
-    return <Nutshell term={children as string} />;
+    return <Nutshell />;
   }
 
   return (
@@ -75,4 +76,11 @@ const Ul: FC<PropsOf<"ul">> = ({ children }) => {
       {children}
     </UnorderedList>
   );
+};
+
+export const Markdown: FC<Pick<PropsOf<typeof TinaMarkdown>, "content">> = ({
+  content,
+}) => {
+  const components = { Nutshell };
+  return <TinaMarkdown content={content} components={components} />;
 };

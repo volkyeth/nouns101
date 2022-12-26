@@ -21,58 +21,52 @@ import {
   NutshellDefinitions,
   NutshellDefinitionsMap,
 } from "../../components/Nutshell";
+import { useTina } from "tinacms/dist/react";
+import client from "../../.tina/__generated__/client";
 
 export const getStaticProps: GetStaticProps<
   GlossaryEntryProps,
   { permalink: string }
 > = async (context) => {
   const { permalink } = context.params!;
-  const glossaryNutshellFiles = readdirSync("content/glossary").map(
-    (filename) => `content/glossary/${filename}`
-  );
+  const content = await client.queries.glossary({
+    relativePath: `${permalink}.mdx`,
+  });
 
   return {
     props: {
-      ...(await serializeNutshells(glossaryNutshellFiles)),
       permalink,
+      content,
     },
   };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = readdirSync("content/glossary").map((entryFile) => {
-    const permalink = basename(entryFile, ".mdx");
-    return {
-      params: {
-        permalink,
-      },
-    };
-  });
-
+  const postListResponse = await client.queries.glossaryConnection();
   return {
-    paths,
-    fallback: false,
+    // @ts-ignore
+    paths: postListResponse.data.glossaryConnection.edges.map((page) => ({
+      params: { permalink: page!.node!._sys.filename },
+    })),
+    fallback: "blocking",
   };
 };
 
 type GlossaryEntryProps = {
   permalink: string;
-} & SerializeNutshellsResult;
+  content: Awaited<ReturnType<typeof client.queries.glossary>>;
+};
 
-const GlossaryEntry: FC<GlossaryEntryProps> = ({
-  permalink,
-  terms,
-  definitions,
-}) => {
-  const definition = definitions[permalink];
+const GlossaryEntry: FC<GlossaryEntryProps> = ({ permalink, content }) => {
+  const {
+    data: { glossary: definition },
+  } = useTina(content);
   return (
-    <NutshellDefinitions.Provider value={definitions}>
-      <MainLayout>
-        <Center h={"full"}>
-          <DefinitionCard definition={definition} permalink={permalink} />
-        </Center>
-      </MainLayout>
-    </NutshellDefinitions.Provider>
+    <MainLayout>
+      <Center h={"full"}>
+        <DefinitionCard definition={definition} permalink={permalink} />
+      </Center>
+    </MainLayout>
   );
 };
 

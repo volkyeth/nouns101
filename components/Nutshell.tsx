@@ -12,33 +12,51 @@ import {
 import { ShadowedPixelBox } from "./ShadowedPixelBox";
 import { SmallArrowUp } from "./Icons";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
+import { GlossaryQuery } from "../.tina/__generated__/types";
+import { TinaMarkdown, TinaMarkdownContent } from "tinacms/dist/rich-text";
+import client from "../.tina/__generated__/client";
+import { basename } from "path";
+import { useTina } from "tinacms/dist/react";
+import { useQuery } from "react-query";
 
 export type NutshellProps = {
-  term: string;
+  glossaryEntry?: string;
+  body?: TinaMarkdownContent;
   isOpen?: boolean;
+  children?: ReactNode;
 } & StackProps;
 
 export const Nutshell: FC<NutshellProps> = ({
-  term,
+  glossaryEntry,
+  body,
+  children,
   isOpen: forceOpen,
   ...props
 }) => {
   const { isOpen, onToggle } = useDisclosure();
   const nouns101Blue = useToken("colors", "nouns101.blue");
   const expanded = forceOpen ?? isOpen;
+  const { data } = useQuery(
+    glossaryEntry ?? "",
+    ({ queryKey }) => {
+      const relativePath = basename(queryKey[0]);
+      console.log(`fetching ${relativePath}`);
+      return client.queries.glossary({ relativePath }).then((r) => r.data);
+    },
+    {
+      enabled: !!glossaryEntry,
+    }
+  );
 
-  const definitions = useContext(NutshellDefinitions);
-  const permalink = normalizeName(term);
-  const definition =
-    definitions[permalink] ?? definitions[depluralizeName(permalink)];
-
-  if (!definition) {
+  if (!body && !glossaryEntry) {
     return (
       <Text color={"red"} fontWeight={"extrabold"} display={"inline"}>
-        :{term}:
+        :{children}:
       </Text>
     );
   }
+
+  const content = data?.glossary?.body ?? body;
 
   return (
     <>
@@ -55,7 +73,7 @@ export const Nutshell: FC<NutshellProps> = ({
           fontWeight={"extrabold"}
           onClick={onToggle}
         >
-          :{term}:
+          :{children}:
         </Link>
         {expanded && <SmallArrowUp viewBox={"0 0 27 15"} color={"#E9F0FF"} />}
       </VStack>
@@ -68,7 +86,7 @@ export const Nutshell: FC<NutshellProps> = ({
               mx={2}
             >
               <VStack alignItems={"start"}>
-                <MDXRemote {...definition} />
+                <TinaMarkdown content={content} />
               </VStack>
             </ShadowedPixelBox>
             <Spacer h={2} />
