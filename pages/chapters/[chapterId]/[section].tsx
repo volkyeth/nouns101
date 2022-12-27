@@ -259,7 +259,7 @@ const ChapterSection: FC<ChapterSectionProps> = ({
             )}
           </Box>
         )}
-        <Box display={"grid"}>
+        <Box display={"grid"} fontFamily={`"LoRes 12 OT",sans-serif`}>
           <AnimatePresence initial={false}>
             {amountSections - sectionNumber > 0 &&
               Array(Math.min(amountSections - sectionNumber, 8))
@@ -315,13 +315,17 @@ const ChapterSection: FC<ChapterSectionProps> = ({
                   p={0}
                   pb={[4, 8]}
                   fontWeight={"bold"}
-                  fontFamily={`"LoRes 12 OT",sans-serif`}
+                  w={"full"}
                 >
-                  {sectionNumber < amountSections && (
-                    <Text fontSize={["xl", "2xl"]} color={"#2245C5"}>
-                      Section {sectionNumber}
-                    </Text>
-                  )}
+                  <Text
+                    alignSelf={"end"}
+                    fontSize={"lg"}
+                    fontWeight={"bold"}
+                    color={"#2245C5"}
+                    pb={2}
+                  >
+                    {sectionNumber}/{amountSections}
+                  </Text>
                   {section?.title && (
                     <Heading fontSize={["lg", "2xl"]} as={"h2"}>
                       {section.title}
