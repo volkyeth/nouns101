@@ -1,10 +1,12 @@
 import { FC, PropsWithChildren, ReactNode } from "react";
 import {
+  Box,
   chakra,
   HeadingProps,
   Image,
   PropsOf,
   UnorderedList,
+  VStack,
 } from "@chakra-ui/react";
 import { Nutshell } from "./Nutshell";
 import { MDXProvider } from "@mdx-js/react";
@@ -87,5 +89,9 @@ export const Markdown: FC<Pick<PropsOf<typeof TinaMarkdown>, "content">> = ({
   content,
 }) => {
   const components = { Nutshell, Tweet, YouTube };
-  return <TinaMarkdown content={content} components={components} />;
+  return (
+    <VStack className={"markdown-content"} alignItems={"start"} spacing={6}>
+      <TinaMarkdown content={content} components={components} />
+    </VStack>
+  );
 };

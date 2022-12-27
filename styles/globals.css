@@ -26,3 +26,11 @@ blockquote.twitter-tweet {
     width: 100%;
     text-align: center;
 }
+
+.markdown-content li {
+    list-style-position: inside;
+}
+
+.markdown-content li div {
+    display: inline;
+}
