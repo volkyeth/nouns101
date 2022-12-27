@@ -34,3 +34,8 @@ blockquote.twitter-tweet {
 .markdown-content li div {
     display: inline;
 }
+
+.markdown-content a {
+    color: #2245C5;
+    text-decoration: underline;
+}
