@@ -55,6 +55,12 @@ const nutshell: Template = {
       description: "this is the collapsed nutshell text",
       required: true,
     },
+    {
+      type: "boolean",
+      name: "forceOpen",
+      label: "Force open",
+      description: "Enable to force the nutshell to be always open",
+    },
   ],
 };
 
