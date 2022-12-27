@@ -12,6 +12,11 @@ import Link from "next/link";
 import { PixelTooltip } from "./PixelTooltip";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 
+// @ts-ignore
+import { Tweet } from "mdx-embed/dist/components/twitter";
+// @ts-ignore
+import { YouTube } from "mdx-embed/dist/components/youtube";
+
 export const Nouns101MdxProvider: FC<PropsWithChildren<{}>> = ({
   children,
 }) => {
@@ -81,6 +86,6 @@ const Ul: FC<PropsOf<"ul">> = ({ children }) => {
 export const Markdown: FC<Pick<PropsOf<typeof TinaMarkdown>, "content">> = ({
   content,
 }) => {
-  const components = { Nutshell };
+  const components = { Nutshell, Tweet, YouTube };
   return <TinaMarkdown content={content} components={components} />;
 };

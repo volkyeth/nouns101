@@ -23,7 +23,7 @@ const chapterCollection = (number: number): Collection => ({
       type: "rich-text",
       required: true,
       isBody: true,
-      templates: [{ ...nutshell, inline: true }],
+      templates,
     },
   ],
 });
@@ -57,6 +57,67 @@ const nutshell: Template = {
     },
   ],
 };
+
+const Tweet: Template = {
+  name: "Tweet",
+  label: "Tweet",
+  fields: [
+    {
+      type: "string",
+      name: "tweetLink",
+      label: "Tweet Link",
+      description:
+        "Enter the link to the tweet. Example: If the full link is https://twitter.com/volkyeth/status/1605300170958282754?s=20&t=Sv3FCtHeVAOAO7Pcf6JH5g, use volkyeth/status/1605300170958282754 as the tweet link",
+      required: true,
+    },
+    {
+      type: "string",
+      name: "align",
+      label: "Align",
+      options: ["center", "left", "right"],
+    },
+    { name: "hideConversation", label: "Hide Conversation", type: "boolean" },
+  ],
+};
+
+const YouTube: Template = {
+  name: "YouTube",
+  label: "YouTube",
+  fields: [
+    {
+      name: "youTubeId",
+      label: "YouTube video ID",
+      type: "string",
+      required: true,
+      description:
+        "Enter the ID of the YouTube video. Example: If the full link is https://www.youtube.com/watch?v=Q8TXgCzxEnw, use Q8TXgCzxEnw as the ID",
+    },
+    {
+      name: "aspectRatio",
+      label: "Aspect Ratio",
+      type: "string",
+      options: ["16:9", "1:1", "4:3", "3:2", "8:5"],
+    },
+    {
+      name: "skipTo",
+      label: "Skip to",
+      type: "object",
+      fields: [
+        { type: "number", label: "Hours", name: "h" },
+        {
+          type: "number",
+          label: "Minutes",
+          name: "m",
+          required: true,
+        },
+        { type: "number", label: "Seconds", name: "s", required: true },
+      ],
+      description: "Start the video at specific time",
+    },
+  ],
+};
+
+const templates = [{ ...nutshell, inline: true }, Tweet, YouTube];
 
 export default defineConfig({
   branch,
@@ -96,7 +157,7 @@ export default defineConfig({
             name: "body",
             label: "Body",
             isBody: true,
-            templates: [{ ...nutshell, inline: true }],
+            templates,
           },
           {
             name: "aliases",

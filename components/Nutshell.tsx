@@ -40,7 +40,6 @@ export const Nutshell: FC<NutshellProps> = ({
     glossaryEntry ?? "",
     ({ queryKey }) => {
       const relativePath = basename(queryKey[0]);
-      console.log(`fetching ${relativePath}`);
       return client.queries.glossary({ relativePath }).then((r) => r.data);
     },
     {

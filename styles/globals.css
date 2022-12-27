@@ -21,3 +21,7 @@ blockquote.twitter-tweet {
     text-align: start;
     max-width: 548px;
 }
+
+.mdx-embed {
+    width: 100%;
+}

@@ -73,8 +73,6 @@ export const getStaticProps: GetStaticProps<ChapterSectionProps> = async (
 
   const content = await getQuery(chapterId, section);
 
-  console.log({ chapterId, section, content });
-
   const amountSections = readdirSync(
     `content/chapters/${chapterId}/sections`
   ).length;
@@ -124,10 +122,6 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
   ]).then((chapters) =>
     chapters.flatMap(({ chapterId, edges }) =>
       edges!.map((page) => {
-        console.log({
-          chapterId,
-          section: basename(page!.node!._sys.filename, "mdx"),
-        });
         return {
           params: {
             chapterId,
