@@ -80,12 +80,25 @@ export const getStaticProps: GetStaticProps<ChapterSectionProps> = async (
   const chapterMeta = (await import(`content/chapters/${chapterId}/metadata`))
     .default as ChapterMetadata;
 
+  const chapterNumber = parseInt(chapterId);
+  const previousChapter = chapterNumber > 1 ? chapterNumber - 1 : null;
+  const previousChapterLastSection = previousChapter
+    ? readdirSync(`content/chapters/${previousChapter}/sections`).length
+    : null;
+  const nextChapter = chapterNumber < 4 ? chapterNumber + 1 : null;
+
   const sectionNumber = parseInt(section);
   const previousSection =
-    sectionNumber > 1 ? `/chapters/${chapterId}/${sectionNumber - 1}` : null;
+    sectionNumber > 1
+      ? `/chapters/${chapterId}/${sectionNumber - 1}`
+      : previousChapter
+      ? `/chapters/${previousChapter}/${previousChapterLastSection}`
+      : null;
   const nextSection =
     sectionNumber + 1 <= amountSections
       ? `/chapters/${chapterId}/${sectionNumber + 1}`
+      : nextChapter
+      ? `/chapters/${nextChapter}/1`
       : null;
 
   return {
@@ -249,9 +262,16 @@ const ChapterSection: FC<ChapterSectionProps> = ({
                 <Link href={previousSection}>
                   <ArrowUp
                     cursor={"pointer"}
-                    _hover={{ color: "nouns101.lightBlue" }}
+                    _hover={{
+                      color:
+                        sectionNumber === 1
+                          ? "nouns101.lightRed"
+                          : "nouns101.lightBlue",
+                    }}
                     boxSize={20}
-                    color={"nouns101.blue"}
+                    color={
+                      sectionNumber === 1 ? "nouns101.red" : "nouns101.blue"
+                    }
                     transform={"rotate(-90deg)"}
                   />
                 </Link>
@@ -344,9 +364,18 @@ const ChapterSection: FC<ChapterSectionProps> = ({
                 <Link href={nextSection}>
                   <ArrowUp
                     cursor={"pointer"}
-                    _hover={{ color: "nouns101.lightBlue" }}
+                    _hover={{
+                      color:
+                        sectionNumber === amountSections
+                          ? "nouns101.lightRed"
+                          : "nouns101.lightBlue",
+                    }}
                     boxSize={20}
-                    color={"nouns101.blue"}
+                    color={
+                      sectionNumber === amountSections
+                        ? "nouns101.red"
+                        : "nouns101.blue"
+                    }
                     transform={"rotate(90deg)"}
                   />
                 </Link>

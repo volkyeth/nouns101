@@ -18,6 +18,8 @@ const theme = extendTheme({
     nouns101: {
       blue: "#2245C5",
       lightBlue: "#2E90FF",
+      red: "#DD473F",
+      lightRed: "#FF6B5C",
     },
   },
 });
