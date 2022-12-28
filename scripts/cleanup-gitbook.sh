@@ -12,7 +12,7 @@ rm ../SUMMARY.md
 mv $SCRIPT_DIR/../.gitbook/assets/* $SCRIPT_DIR/../public/assets/
 
 # Process new files
-ADD_FRONTMATTER='s/# (.+)/---\ntitle: \1\naliases: []\nseeAlso: []\nexternalReferences: {}\n---/'
+ADD_FRONTMATTER='s/# (.+)/---\ntitle: \1\naliases: []\nseeAlso: []\nhide: false\n---/'
 find . -name "*.md" -exec sed -i '' -E "$ADD_FRONTMATTER" {} +
 
 # change md files to mdx and replaces dashes for underscores

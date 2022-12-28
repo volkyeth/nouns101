@@ -41,14 +41,6 @@ const nutshell: Template = {
       required: false,
     },
     {
-      type: "rich-text",
-      name: "body",
-      label: "Content",
-      description:
-        "If you want to add a custom nutshell, enter it's content here and leave the Glossary entry field empty.",
-      required: false,
-    },
-    {
       type: "string",
       name: "children",
       label: "Text",
@@ -169,14 +161,17 @@ export default defineConfig({
             templates,
           },
           {
-            name: "aliases",
-            label: "Aliases",
-            type: "string",
-            list: true,
+            type: "boolean",
+            name: "hide",
+            label: "Hide from Glossary",
+            description:
+              "Enable to hide this entry from the glossary (E.g. for use in chapter-specific Nutshells)",
+            required: true,
+            ui: { defaultValue: false },
           },
           {
-            name: "seeAlso",
-            label: "Related",
+            name: "aliases",
+            label: "Aliases",
             type: "string",
             list: true,
           },

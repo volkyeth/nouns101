@@ -44,6 +44,7 @@ export const getStaticProps: GetStaticProps<
 export const getStaticPaths: GetStaticPaths = async () => {
   const postListResponse = await client.queries.glossaryConnection({
     first: 100000,
+    filter: { hide: { eq: false } },
   });
   return {
     // @ts-ignore
