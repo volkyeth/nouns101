@@ -42,7 +42,9 @@ export const getStaticProps: GetStaticProps<
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const postListResponse = await client.queries.glossaryConnection();
+  const postListResponse = await client.queries.glossaryConnection({
+    first: 100000,
+  });
   return {
     // @ts-ignore
     paths: postListResponse.data.glossaryConnection.edges.map((page) => ({
