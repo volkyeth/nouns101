@@ -187,7 +187,7 @@ const ChapterSection: FC<ChapterSectionProps> = ({
 
   const pixelBoxProps: Partial<ShadowedPixelBoxProps & MotionProps> = {
     as: motion.div,
-    h: "65vh",
+    h: "full",
     w: { base: "full", md: "xl" },
   };
 
@@ -319,14 +319,15 @@ const ChapterSection: FC<ChapterSectionProps> = ({
                   push(previousSection);
                 }
               }}
-              py={8}
+              py={4}
               px={[2, 8]}
             >
               <VStack
                 h="full"
                 px={[6, 0]}
                 alignItems={"start"}
-                overflowY={"scroll"}
+                pb={4}
+                // overflowY={"scroll"}
                 style={{ touchAction: "pan-y" }}
               >
                 <VStack
