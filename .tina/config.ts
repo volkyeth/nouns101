@@ -76,6 +76,7 @@ const Tweet: Template = {
       description:
         "Enter the link to the tweet. Example: If the full link is https://twitter.com/volkyeth/status/1605300170958282754?s=20&t=Sv3FCtHeVAOAO7Pcf6JH5g, use volkyeth/status/1605300170958282754 as the tweet link",
       required: true,
+      isTitle: true,
     },
     {
       type: "string",
@@ -96,6 +97,7 @@ const YouTube: Template = {
       label: "YouTube video ID",
       type: "string",
       required: true,
+      isTitle: true,
       description:
         "Enter the ID of the YouTube video. Example: If the full link is https://www.youtube.com/watch?v=Q8TXgCzxEnw, use Q8TXgCzxEnw as the ID",
     },
