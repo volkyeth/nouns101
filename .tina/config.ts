@@ -54,6 +54,7 @@ const nutshell: Template = {
       label: "Text",
       description: "this is the collapsed nutshell text",
       required: true,
+      isTitle: true,
     },
     {
       type: "boolean",
