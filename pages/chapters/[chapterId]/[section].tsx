@@ -188,6 +188,7 @@ const ChapterSection: FC<ChapterSectionProps> = ({
   const pixelBoxProps: Partial<ShadowedPixelBoxProps & MotionProps> = {
     as: motion.div,
     h: "full",
+    minH: "65vh",
     w: { base: "full", md: "xl" },
   };
 
@@ -249,12 +250,7 @@ const ChapterSection: FC<ChapterSectionProps> = ({
         </VStack>
       }
     >
-      <HStack
-        h={"full"}
-        w={"full"}
-        alignItems={"center"}
-        justifyContent={"space-evenly"}
-      >
+      <HStack w={"full"} alignItems={"center"} justifyContent={"space-evenly"}>
         {showArrows && (
           <Box w={"80px"}>
             {previousSection && (
@@ -280,7 +276,7 @@ const ChapterSection: FC<ChapterSectionProps> = ({
           </Box>
         )}
         <Box display={"grid"} fontFamily={`"LoRes 12 OT",sans-serif`}>
-          <AnimatePresence initial={false}>
+          <AnimatePresence initial={false} mode={"popLayout"}>
             {amountSections - sectionNumber > 0 &&
               Array(Math.min(amountSections - sectionNumber, 8))
                 .fill(null)
@@ -296,6 +292,7 @@ const ChapterSection: FC<ChapterSectionProps> = ({
                 ))
                 .reverse()}
             <ShadowedPixelBox
+              minH={"full"}
               gridArea={"1/1/1/1"}
               key={`section-${sectionNumber}`}
               {...pixelBoxProps}
