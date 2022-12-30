@@ -176,6 +176,25 @@ export default defineConfig({
             list: true,
           },
         ],
+        defaultItem: () => ({
+          title: "New Glossary Entry",
+          body: {
+            type: "root",
+            children: [
+              {
+                type: "p",
+                children: [
+                  {
+                    type: "text",
+                    text: "Default Text",
+                  },
+                ],
+              },
+            ],
+          },
+          hide: false,
+          aliases: [],
+        }),
         ui: {
           router: ({ document }) => `/glossary/${document._sys.filename}`,
         },
