@@ -4,6 +4,8 @@
 
 A Nounish Web3 onboarding experience for everyone.
 
+Funded by [Lil Nouns](https://lilnouns.wtf) on [prop 57](https://lilnouns.wtf/vote/57)
+
 [![Powered by Vercel](docs/img/powered-by-vercel.svg)](https://vercel.com/?utm_source=Nouns101&utm_campaign=oss)
 
 ## Getting Started

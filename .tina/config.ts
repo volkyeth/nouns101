@@ -122,7 +122,7 @@ const templates = [{ ...nutshell, inline: true }, Tweet, YouTube];
 
 export default defineConfig({
   branch,
-  clientId: "27afce68-cf9b-4f9f-a296-8bc2e283a74e", // Get this from tina.io
+  clientId: process.env.TINA_CLIENT_ID!, // Get this from tina.io
   token: "12aa17c49b4a2b2d9193919826ac366fd926477d", // Get this from tina.io
   build: {
     outputFolder: "admin",
