@@ -19,6 +19,7 @@ import {
   VStack,
   Text,
   StackProps,
+  Link as ChakraLink,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import logo from "../assets/noggle101.svg";
@@ -26,6 +27,7 @@ import { PixelButton, PixelButtonProps } from "./PixelButton";
 import twitter from "../assets/twitter.svg";
 import figma from "../assets/figma.svg";
 import discord from "../assets/discord.svg";
+import github from "../assets/github.svg";
 import thinArrow from "../assets/thinArrowRight.svg";
 import { useIsMobile } from "../hooks/mobile";
 import { FC, ReactNode, useRef } from "react";
@@ -154,13 +156,29 @@ export const Navbar: FC<NavbarProps> = ({ extraContent, ...props }) => {
 const Socials: FC<StackProps> = (props) => (
   <HStack spacing={2} {...props}>
     <PixelButton bgColor={"#1D9BF0"} {...socialsButtonProps}>
-      <Image alt={"twitter"} src={twitter} />
+      <ChakraLink href={"https://twitter.com/Nouns101"} isExternal>
+        <Image alt={"twitter"} src={twitter} />
+      </ChakraLink>
     </PixelButton>
     <PixelButton bgColor={"black"} {...socialsButtonProps}>
-      <Image alt={"figma"} src={figma} />
+      <ChakraLink
+        href={
+          "https://www.figma.com/file/zogY9rdp6EgwzkKaIeZAhI/Nouns101?node-id=945%3A7018&t=UB3vJuZG8X1JZlBF-1"
+        }
+        isExternal
+      >
+        <Image alt={"figma"} src={figma} />
+      </ChakraLink>
     </PixelButton>
     <PixelButton bgColor={"#5865F2"} {...socialsButtonProps}>
-      <Image alt={"discord"} src={discord} />
+      <ChakraLink href={"https://discord.gg/PHZfnQjPZm"} isExternal>
+        <Image alt={"discord"} src={discord} />
+      </ChakraLink>
+    </PixelButton>
+    <PixelButton bgColor={"#000"} {...socialsButtonProps}>
+      <ChakraLink href={"https://github.com/volkyeth/nouns101"} isExternal>
+        <Image alt={"github"} src={github} />
+      </ChakraLink>
     </PixelButton>
   </HStack>
 );
