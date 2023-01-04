@@ -20,7 +20,11 @@ import { basename } from "path";
 
 export const getStaticProps: GetStaticProps<GlossaryProps> = async () => {
   const glossaryEntries = await client.queries
-    .glossaryConnection({ first: 100000, filter: { hide: { eq: false } } })!
+    .glossaryConnection({
+      first: 100000,
+      filter: { hide: { eq: false } },
+      sort: "title",
+    })!
     .then((res) =>
       res!.data!.glossaryConnection!.edges!.map(
         (edge) => edge!.node as Glossary
