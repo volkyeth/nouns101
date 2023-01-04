@@ -7,7 +7,6 @@ import {
 import { MainLayout } from "../../../components/MainLayout";
 import {
   Box,
-  chakra,
   Heading,
   HStack,
   Text,
@@ -18,23 +17,11 @@ import { Shadow } from "../../../components/Shadow";
 import { ArrowUp } from "../../../components/Icons";
 import Link from "next/link";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { readdirSync, readFileSync } from "fs";
-import {
-  AnimatePresence,
-  isValidMotionProp,
-  motion,
-  MotionProps,
-} from "framer-motion";
-import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
-import { serializeMdx, serializeNutshells } from "../../../utils/mdx";
+import { readdirSync } from "fs";
+import { AnimatePresence, motion, MotionProps } from "framer-motion";
 import { ChapterMetadata } from "../../../utils/metadata";
 import Image from "next/image";
 import { ProgressBar } from "../../../components/ProgressBar";
-import poap from "../../../assets/poap.svg";
-import {
-  NutshellDefinitions,
-  NutshellDefinitionsMap,
-} from "../../../components/Nutshell";
 import client from "../../../.tina/__generated__/client";
 import { basename } from "path";
 import { useTina } from "tinacms/dist/react";
@@ -192,19 +179,6 @@ const ChapterSection: FC<ChapterSectionProps> = ({
     w: { base: "full", md: "xl" },
   };
 
-  const poapWidth = useBreakpointValue([32, 54]);
-  const poapStyle = useBreakpointValue([
-    {
-      marginLeft: "-14px",
-      marginBottom: "-6px",
-    },
-    {
-      marginTop: "-16px",
-      marginLeft: "-30px",
-      marginBottom: "-30px",
-    },
-  ]);
-
   // @ts-ignore
   return (
     <MainLayout
@@ -231,7 +205,7 @@ const ChapterSection: FC<ChapterSectionProps> = ({
             </VStack>
             <Image alt={"noggles"} src={chapterMeta.image} width={60} />
           </HStack>
-          <HStack w={"full"} pb={[1, 6]}>
+          <HStack w={"full"}>
             <Text>
               {sectionNumber}/{amountSections}
             </Text>
@@ -239,12 +213,6 @@ const ChapterSection: FC<ChapterSectionProps> = ({
               flexGrow={1}
               amountSegments={amountSections}
               currentSegment={sectionNumber}
-            />
-            <Image
-              alt={"poap"}
-              src={poap}
-              width={poapWidth}
-              style={poapStyle}
             />
           </HStack>
         </VStack>
