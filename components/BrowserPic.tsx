@@ -13,21 +13,10 @@ export const BrowserPic: FC<BrowserPicProps> = ({
   description,
 }) => (
   <VStack>
-    <VStack
-      borderWidth={2}
-      borderColor={"gray.200"}
-      borderRadius={4}
-      spacing={0}
-    >
+    <VStack borderWidth={2} borderColor={"gray.200"} spacing={0}>
       <HStack p={2} alignItems={"start"} w={"full"} bgColor={"gray.200"}>
         {["#FF605C", "#FFBD44", "#00CA4E"].map((color, idx) => (
-          <Box
-            key={`dot-${idx}`}
-            bgColor={color}
-            borderRadius={"full"}
-            w={2}
-            h={2}
-          />
+          <Box key={`button-${idx}`} bgColor={color} w={2} h={2} />
         ))}
       </HStack>
       <Image overflow={"hidden"} pt={-4} src={image} alt={alt} w={"full"} />
