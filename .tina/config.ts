@@ -50,9 +50,9 @@ const nutshell: Template = {
     },
     {
       type: "boolean",
-      name: "forceOpen",
-      label: "Force open",
-      description: "Enable to force the nutshell to be always open",
+      name: "startOpen",
+      label: "Start open",
+      description: "Makes the nutshell start expanded",
     },
   ],
 };

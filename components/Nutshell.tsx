@@ -22,7 +22,7 @@ import { useQuery } from "react-query";
 export type NutshellProps = {
   glossaryEntry?: string;
   body?: TinaMarkdownContent;
-  forceOpen?: boolean;
+  startOpen?: boolean;
   children?: ReactNode;
 } & StackProps;
 
@@ -30,12 +30,11 @@ export const Nutshell: FC<NutshellProps> = ({
   glossaryEntry,
   body,
   children,
-  forceOpen = false,
+  startOpen = false,
   ...props
 }) => {
-  const { isOpen, onToggle } = useDisclosure();
+  const { isOpen, onToggle } = useDisclosure({ defaultIsOpen: startOpen });
   const nouns101Blue = useToken("colors", "nouns101.blue");
-  const expanded = forceOpen || isOpen;
   const { data } = useQuery(
     glossaryEntry ?? "",
     ({ queryKey }) => {
@@ -74,9 +73,9 @@ export const Nutshell: FC<NutshellProps> = ({
         >
           :{children}:
         </Link>
-        {expanded && <SmallArrowUp viewBox={"0 0 27 15"} color={"#E9F0FF"} />}
+        {isOpen && <SmallArrowUp viewBox={"0 0 27 15"} color={"#E9F0FF"} />}
       </VStack>
-      {expanded && (
+      {isOpen && (
         <>
           <Box>
             <ShadowedPixelBox
