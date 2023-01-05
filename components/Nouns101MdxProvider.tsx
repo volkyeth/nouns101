@@ -18,6 +18,7 @@ import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { Tweet } from "mdx-embed/dist/components/twitter";
 // @ts-ignore
 import { YouTube } from "mdx-embed/dist/components/youtube";
+import { BrowserPic } from "./BrowserPic";
 
 export const Nouns101MdxProvider: FC<PropsWithChildren<{}>> = ({
   children,
@@ -88,7 +89,7 @@ const Ul: FC<PropsOf<"ul">> = ({ children }) => {
 export const Markdown: FC<Pick<PropsOf<typeof TinaMarkdown>, "content">> = ({
   content,
 }) => {
-  const components = { Nutshell, Tweet, YouTube };
+  const components = { Nutshell, Tweet, YouTube, BrowserPic };
   return (
     <VStack className={"markdown-content"} alignItems={"start"} spacing={6}>
       <TinaMarkdown content={content} components={components} />

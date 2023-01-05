@@ -118,7 +118,30 @@ const YouTube: Template = {
   ],
 };
 
-const templates = [{ ...nutshell, inline: true }, Tweet, YouTube];
+const BrowserPic: Template = {
+  name: "BrowserPic",
+  label: "BrowserPic",
+  fields: [
+    {
+      name: "image",
+      label: "Image",
+      type: "image",
+      required: true,
+    },
+    {
+      name: "alt",
+      label: "Alternative text",
+      type: "string",
+    },
+    {
+      name: "description",
+      label: "Description",
+      type: "string",
+    },
+  ],
+};
+
+const templates = [{ ...nutshell, inline: true }, Tweet, YouTube, BrowserPic];
 
 export default defineConfig({
   branch,
