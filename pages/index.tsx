@@ -96,12 +96,6 @@ const Home: NextPage<HomeProps> = ({ terms, definitions, summaries }) => {
                 worry — We’ll get there! ⌐◨-◨
               </Text>
               <Text>
-                After completing each chapter, you’ll receive a reward in the
-                form of a POAP. This will not only be a free NFT, but can be
-                used to prove you’ve completed this course in the future. Think
-                of these as merit badges 🥇
-              </Text>
-              <Text>
                 <b>Ready to get started?…</b> Select a chapter to begin!
               </Text>
             </VStack>
