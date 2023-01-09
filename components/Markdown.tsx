@@ -28,6 +28,9 @@ export const Markdown: FC<Pick<PropsOf<typeof TinaMarkdown>, "content">> = ({
     Html: ({ html }: { html: string }) => (
       <chakra.div w={"full"} dangerouslySetInnerHTML={{ __html: html }} />
     ),
+    a: (props: any) => (
+      <chakra.a target={"_blank"} {...props} href={props.url} />
+    ),
   };
   useEffect(() => {
     // @ts-ignore
