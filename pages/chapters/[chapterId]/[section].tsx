@@ -218,9 +218,9 @@ const ChapterSection: FC<ChapterSectionProps> = ({
         </VStack>
       }
     >
-      <HStack w={"full"} alignItems={"center"} justifyContent={"space-evenly"}>
+      <HStack w={"full"} alignItems={"start"} justifyContent={"space-evenly"}>
         {showArrows && (
-          <Box w={"80px"}>
+          <Box w={"80px"} pt={96}>
             {previousSection && (
               <Shadow>
                 <Link href={previousSection}>
@@ -324,7 +324,7 @@ const ChapterSection: FC<ChapterSectionProps> = ({
           </AnimatePresence>
         </Box>
         {showArrows && (
-          <Box w={"80px"}>
+          <Box w={"80px"} pt={96}>
             {nextSection && (
               <Shadow>
                 <Link href={nextSection}>
