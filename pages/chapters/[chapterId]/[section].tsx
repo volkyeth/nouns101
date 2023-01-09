@@ -25,7 +25,7 @@ import { ProgressBar } from "../../../components/ProgressBar";
 import client from "../../../.tina/__generated__/client";
 import { basename } from "path";
 import { useTina } from "tinacms/dist/react";
-import { Markdown } from "../../../components/Nouns101MdxProvider";
+import { Markdown } from "../../../components/Markdown";
 
 const getQuery = (chapterId: string, section: string) => {
   switch (chapterId) {

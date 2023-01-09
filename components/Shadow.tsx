@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren } from "react";
-import { chakra, PropsOf } from "@chakra-ui/react";
+import { chakra, PropsOf, useToken } from "@chakra-ui/react";
 
 export type ShadowProps = {
   size?: number;
@@ -11,8 +11,14 @@ export const Shadow: FC<ShadowProps> = ({
   size = 3,
   color = "black",
   ...props
-}) => (
-  <chakra.span filter={`drop-shadow(${size}px ${size}px ${color})`} {...props}>
-    {children}
-  </chakra.span>
-);
+}) => {
+  const shadowColor = useToken("colors", color, color);
+  return (
+    <chakra.span
+      filter={`drop-shadow(${size}px ${size}px ${shadowColor})`}
+      {...props}
+    >
+      {children}
+    </chakra.span>
+  );
+};

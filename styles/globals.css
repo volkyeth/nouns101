@@ -19,7 +19,7 @@ blockquote.twitter-tweet {
     margin: 10px 5px;
     padding: 16px;
     text-align: start;
-    max-width: 548px;
+    width: 100%;
 }
 
 .mdx-embed {

@@ -7,14 +7,9 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-
-import chapter1 from "../content/chapters/1/summary.mdx";
 import chapter1Meta from "../content/chapters/1/metadata";
-import chapter2 from "../content/chapters/2/summary.mdx";
 import chapter2Meta from "../content/chapters/2/metadata";
-import chapter3 from "../content/chapters/3/summary.mdx";
 import chapter3Meta from "../content/chapters/3/metadata";
-import chapter4 from "../content/chapters/4/summary.mdx";
 import chapter4Meta from "../content/chapters/4/metadata";
 import { ChapterCard } from "../components/ChapterCard";
 import { useIsMobile } from "../hooks/mobile";

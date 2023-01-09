@@ -57,29 +57,6 @@ const nutshell: Template = {
   ],
 };
 
-const Tweet: Template = {
-  name: "Tweet",
-  label: "Tweet",
-  fields: [
-    {
-      type: "string",
-      name: "tweetLink",
-      label: "Tweet Link",
-      description:
-        "Enter the link to the tweet. Example: If the full link is https://twitter.com/volkyeth/status/1605300170958282754?s=20&t=Sv3FCtHeVAOAO7Pcf6JH5g, use volkyeth/status/1605300170958282754 as the tweet link",
-      required: true,
-      isTitle: true,
-    },
-    {
-      type: "string",
-      name: "align",
-      label: "Align",
-      options: ["center", "left", "right"],
-    },
-    { name: "hideConversation", label: "Hide Conversation", type: "boolean" },
-  ],
-};
-
 const YouTube: Template = {
   name: "YouTube",
   label: "YouTube",
@@ -141,7 +118,23 @@ const BrowserPic: Template = {
   ],
 };
 
-const templates = [{ ...nutshell, inline: true }, Tweet, YouTube, BrowserPic];
+const Html: Template = {
+  name: "Html",
+  label: "HTML",
+  fields: [
+    {
+      name: "html",
+      label: "html",
+      type: "string",
+      required: true,
+      ui: {
+        component: "textarea",
+      },
+    },
+  ],
+};
+
+const templates = [{ ...nutshell, inline: true }, YouTube, BrowserPic, Html];
 
 export default defineConfig({
   branch,

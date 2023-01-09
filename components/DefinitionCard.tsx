@@ -8,7 +8,7 @@ import { FC } from "react";
 import Image from "next/image";
 import { GlossaryQuery } from "../.tina/__generated__/types";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
-import { Markdown } from "./Nouns101MdxProvider";
+import { Markdown } from "./Markdown";
 
 export type DefinitionCardProps = {
   definition: GlossaryQuery["glossary"];
