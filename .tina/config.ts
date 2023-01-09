@@ -134,7 +134,26 @@ const Html: Template = {
   ],
 };
 
-const templates = [{ ...nutshell, inline: true }, YouTube, BrowserPic, Html];
+const Team: Template = {
+  name: "Team",
+  label: "Team",
+  fields: [
+    {
+      name: "foo",
+      label: "bar",
+      type: "string",
+      description: "Ignore this. It's just a workaround for a bug in TinaCMS",
+    },
+  ],
+};
+
+const templates = [
+  { ...nutshell, inline: true },
+  YouTube,
+  BrowserPic,
+  Html,
+  Team,
+];
 
 export default defineConfig({
   branch,

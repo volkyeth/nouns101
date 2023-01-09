@@ -16,6 +16,7 @@ import { TinaMarkdown } from "tinacms/dist/rich-text";
 // @ts-ignore
 import { YouTube } from "mdx-embed/dist/components/youtube";
 import { BrowserPic } from "./BrowserPic";
+import { Team } from "./Team";
 
 export const Markdown: FC<Pick<PropsOf<typeof TinaMarkdown>, "content">> = ({
   content,
@@ -31,6 +32,7 @@ export const Markdown: FC<Pick<PropsOf<typeof TinaMarkdown>, "content">> = ({
     a: (props: any) => (
       <chakra.a target={"_blank"} {...props} href={props.url} />
     ),
+    Team,
   };
   useEffect(() => {
     // @ts-ignore
@@ -38,7 +40,12 @@ export const Markdown: FC<Pick<PropsOf<typeof TinaMarkdown>, "content">> = ({
   }, [content]);
 
   return (
-    <VStack className={"markdown-content"} alignItems={"start"} spacing={6}>
+    <VStack
+      className={"markdown-content"}
+      alignItems={"start"}
+      spacing={6}
+      w={"full"}
+    >
       <TinaMarkdown
         content={content}
         // @ts-ignore
