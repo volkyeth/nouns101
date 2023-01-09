@@ -8,20 +8,29 @@ import {
   Image as ChakraImage,
   Text,
   VStack,
+  Tooltip,
 } from "@chakra-ui/react";
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import { PixelBox, ShadowedPixelBox } from "./ShadowedPixelBox";
 import volky from "../assets/team/volky.png";
 import mikegood from "../assets/team/mikegood.png";
 import zylag from "../assets/team/zylag.png";
 import blowned from "../assets/team/blowned.svg";
+import pepeEvil from "../assets/team/pepeEvil.webp";
 import { Link as ChakraLink } from "@chakra-ui/layout";
 import twitterLogo from "../assets/twitter.svg";
 import { PixelButton } from "./PixelButton";
 import Image, { StaticImageData } from "next/image";
+import { PixelTooltip } from "./PixelTooltip";
 
 export const Team = () => (
-  <HStack w={"full"} justifyContent={"space-around"} flexWrap={"wrap"}>
+  <HStack
+    w={"full"}
+    justifyContent={"space-around"}
+    flexWrap={"wrap"}
+    rowGap={4}
+    spacing={0}
+  >
     <Member
       color={"#FF638D"}
       name={"Volky"}
@@ -34,22 +43,27 @@ export const Team = () => (
       color={"#EC5B43"}
       name={"MikeGood"}
       role={"Mastermind"}
+      tooltip={
+        <VStack p={0}>
+          <Image src={pepeEvil} alt={""} width={128} style={{ padding: 0 }} />
+        </VStack>
+      }
       image={mikegood}
-      twitter={"volkyeth"}
+      twitter={"GoodBeats"}
     />
     <Member
       color={"#254EFB"}
       name={"Blowned"}
       role={"Writer"}
       image={blowned}
-      twitter={"volkyeth"}
+      twitter={"BlownedEth"}
     />
     <Member
       color={"#4420C1"}
       name={"Zylag"}
       role={"Designer"}
       image={zylag}
-      twitter={"volkyeth"}
+      twitter={"zylageth"}
     />
   </HStack>
 );
@@ -59,9 +73,17 @@ type MemberProps = {
   role: string;
   image: StaticImageData;
   twitter: string;
+  tooltip?: ReactNode;
 };
 
-const Member: FC<MemberProps> = ({ name, color, image, twitter, role }) => {
+const Member: FC<MemberProps> = ({
+  name,
+  color,
+  image,
+  twitter,
+  role,
+  tooltip,
+}) => {
   return (
     <Box boxShadow={"4px 4px black"} borderWidth={2} borderColor={"black"}>
       <VStack spacing={0}>
@@ -84,7 +106,9 @@ const Member: FC<MemberProps> = ({ name, color, image, twitter, role }) => {
           >
             {name}
           </Text>
-          <Text>{role}</Text>
+          <PixelTooltip label={tooltip} bgColor={"white"}>
+            <Text>{role}</Text>
+          </PixelTooltip>
           <PixelButton bgColor={"#1D9BF0"} minW={7}>
             <Link href={`https://twitter.com/${twitter}`} isExternal>
               <Image src={twitterLogo} alt={"twitter"} />

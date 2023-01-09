@@ -39,3 +39,8 @@ blockquote.twitter-tweet {
     color: #2245C5;
     text-decoration: underline;
 }
+
+.pixel-tooltip .chakra-tooltip__arrow {
+    border-color: black;
+    border-width: 1px 0 0 1px;
+}
