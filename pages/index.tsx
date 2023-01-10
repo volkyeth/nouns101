@@ -1,4 +1,4 @@
-import type { GetStaticProps, NextPage } from "next";
+import type { NextPage } from "next";
 import {
   Center,
   chakra,
@@ -12,14 +12,10 @@ import chapter2Meta from "../content/chapters/2/metadata";
 import chapter3Meta from "../content/chapters/3/metadata";
 import chapter4Meta from "../content/chapters/4/metadata";
 import { ChapterCard } from "../components/ChapterCard";
-import { useIsMobile } from "../hooks/mobile";
 import { MainLayout } from "../components/MainLayout";
 import { ClippySays } from "../components/ClippySays";
-import client from "../.tina/__generated__/client";
-import { DefinitionCard } from "../components/DefinitionCard";
-import { useTina } from "tinacms/dist/react";
 
-const Home: NextPage<> = () => {
+const Home: NextPage = () => {
   return (
     <MainLayout
       contentWrapperProps={{
