@@ -82,7 +82,7 @@ const Glossary: FC<GlossaryProps> = ({ glossaryEntries }) => {
           Glossary
         </Heading>
 
-        <ShadowedPixelBox w={"xl"} py={1} px={2}>
+        <ShadowedPixelBox w={["full", "xl"]} py={1} px={2}>
           <InputGroup>
             <Input
               placeholder="search..."
