@@ -48,6 +48,7 @@ export const Navbar: FC<NavbarProps> = ({ extraContent, ...props }) => {
   const nav = [
     { href: "/", label: "Chapters" },
     { href: "/glossary", label: "Glossary" },
+    { href: "/about", label: "About" },
   ];
 
   return (

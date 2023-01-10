@@ -19,29 +19,7 @@ import client from "../.tina/__generated__/client";
 import { DefinitionCard } from "../components/DefinitionCard";
 import { useTina } from "tinacms/dist/react";
 
-type HomeProps = {
-  aboutNouns101: Awaited<ReturnType<typeof client.queries.glossary>>;
-};
-
-export const getStaticProps: GetStaticProps<HomeProps> = async () => {
-  const aboutNouns101 = await client.queries.glossary({
-    relativePath: "Nouns101.mdx",
-  });
-
-  aboutNouns101.data.glossary.title = "About Nouns 101";
-
-  return {
-    props: {
-      aboutNouns101,
-    },
-  };
-};
-
-const Home: NextPage<HomeProps> = ({ aboutNouns101 }) => {
-  const isMobile = useIsMobile();
-  const {
-    data: { glossary: aboutProject },
-  } = useTina(aboutNouns101);
+const Home: NextPage<> = () => {
   return (
     <MainLayout
       contentWrapperProps={{
@@ -172,12 +150,6 @@ const Home: NextPage<HomeProps> = ({ aboutNouns101 }) => {
             </Text>
           </ChapterCard>
         </SimpleGrid>
-        <DefinitionCard
-          mt={64}
-          definition={aboutProject}
-          permalink={""}
-          hasLink={false}
-        />
       </VStack>
     </MainLayout>
   );

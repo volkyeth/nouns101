@@ -24,7 +24,15 @@ export const MainLayout: FC<PropsWithChildren<MainLayoutProps>> = ({
 }) => (
   <VStack spacing={0} w={"full"} h={["full", "100vh"]} overflowX={"clip"}>
     <Navbar py={2} extraContent={navbarExtraContent} />
-    <Box bgColor={bgColor} w={"full"} flexGrow={1} {...contentWrapperProps}>
+    <Box
+      bgColor={bgColor}
+      w={"full"}
+      flexGrow={1}
+      bgGradient={
+        "linear(to-b, #FFE7BF00 0%, 92.5%, #FFE7BF40 92.5%, #FFE7BF40 95%, #FFE7BF80 95%, #FFE7BF80 97.5%, #FFE7BFC0 97.5%,#FFE7BFC0 )"
+      }
+      {...contentWrapperProps}
+    >
       <MainContainer py={10} px={6} h={"full"} {...containerProps}>
         {children}
       </MainContainer>
