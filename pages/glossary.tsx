@@ -1,21 +1,16 @@
 import { FC } from "react";
-import { chakra, Heading, HStack, VStack } from "@chakra-ui/react";
+import { Heading, HStack, VStack } from "@chakra-ui/react";
 import { GetStaticProps } from "next";
-import { readdirSync } from "fs";
-import { serializeNutshells, SerializeNutshellsResult } from "../utils/mdx";
 import { MainLayout } from "../components/MainLayout";
 import Link from "next/link";
 import { ShadowedPixelBox } from "../components/ShadowedPixelBox";
-import { Nutshell, NutshellDefinitions } from "../components/Nutshell";
+import { Nutshell } from "../components/Nutshell";
 import openImg from "../assets/open.svg";
 import Image from "next/image";
 import { PixelTooltip } from "../components/PixelTooltip";
 import { CopyLinkButton } from "../components/CopyLinkButton";
 import client from "../.tina/__generated__/client";
-import {
-  Glossary,
-  GlossaryConnectionEdges,
-} from "../.tina/__generated__/types";
+import { Glossary } from "../.tina/__generated__/types";
 import { basename } from "path";
 
 export const getStaticProps: GetStaticProps<GlossaryProps> = async () => {

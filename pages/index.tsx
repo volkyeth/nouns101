@@ -46,7 +46,7 @@ const Home: NextPage<HomeProps> = ({ aboutNouns101 }) => {
     <MainLayout
       contentWrapperProps={{
         bgGradient:
-          "linear(to-b, #FFE7BF00 0%, #FFE7BF00 80%, #FFE7BF40 80%, #FFE7BF40 85%, #FFE7BF80 85%, #FFE7BF80 90%, #FFE7BFC0 90%,#FFE7BFC0 95%,#FFE7BFFF 95%,#FFE7BFFF )",
+          "linear(to-b, #FFE7BF00 0%, 92.5%, #FFE7BF40 92.5%, #FFE7BF40 95%, #FFE7BF80 95%, #FFE7BF80 97.5%, #FFE7BFC0 97.5%,#FFE7BFC0 )",
       }}
     >
       <VStack w={"full"} spacing={0}>

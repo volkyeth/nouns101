@@ -6,7 +6,6 @@ import {
   BoxProps,
   Container,
   ContainerProps,
-  StackProps,
   VStack,
 } from "@chakra-ui/react";
 
