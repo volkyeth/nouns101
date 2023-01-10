@@ -15,6 +15,7 @@ import { TinaMarkdown, TinaMarkdownContent } from "tinacms/dist/rich-text";
 import client from "../.tina/__generated__/client";
 import { basename } from "path";
 import { useQuery } from "react-query";
+import { Markdown } from "./Markdown";
 
 export type NutshellProps = {
   glossaryEntry?: string;
@@ -81,7 +82,7 @@ export const Nutshell: FC<NutshellProps> = ({
               mr={2}
             >
               <VStack alignItems={"start"}>
-                <TinaMarkdown content={content} />
+                <Markdown content={content} />
               </VStack>
             </ShadowedPixelBox>
             <Spacer h={2} />
