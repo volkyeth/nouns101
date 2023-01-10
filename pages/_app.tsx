@@ -7,17 +7,21 @@ import { Fonts } from "../components/Fonts";
 import "@fontsource/nunito";
 import "../styles/globals.css";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { Analytics } from "@vercel/analytics/react";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient();
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ChakraProvider theme={theme}>
-        <Fonts />
-        <Component {...pageProps} />
-      </ChakraProvider>
-    </QueryClientProvider>
+    <>
+      <QueryClientProvider client={queryClient}>
+        <ChakraProvider theme={theme}>
+          <Fonts />
+          <Component {...pageProps} />
+        </ChakraProvider>
+      </QueryClientProvider>
+      <Analytics />
+    </>
   );
 }
 
