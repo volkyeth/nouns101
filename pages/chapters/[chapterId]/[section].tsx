@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useRouter } from "next/router";
 import {
   ShadowedPixelBox,
@@ -12,6 +12,7 @@ import {
   Text,
   useBreakpointValue,
   VStack,
+  chakra,
 } from "@chakra-ui/react";
 import { Shadow } from "../../../components/Shadow";
 import { ArrowUp } from "../../../components/Icons";
@@ -26,6 +27,7 @@ import client from "../../../.tina/__generated__/client";
 import { basename } from "path";
 import { useTina } from "tinacms/dist/react";
 import { Markdown } from "../../../components/Markdown";
+import { useReward } from "react-rewards";
 
 const getQuery = (chapterId: string, section: string) => {
   switch (chapterId) {
@@ -164,6 +166,18 @@ const ChapterSection: FC<ChapterSectionProps> = ({
   content,
 }) => {
   const showArrows = useBreakpointValue({ base: false, lg: true });
+  const isLastPage = sectionNumber === amountSections;
+  const { reward, isAnimating } = useReward("confetti-gun", "confetti", {
+    lifetime: 500,
+    spread: 100,
+    zIndex: 1000,
+  });
+  useEffect(() => {
+    if (isLastPage && !isAnimating) {
+      setTimeout(() => reward(), 1000);
+    }
+  }, [isLastPage]);
+
   const { push } = useRouter();
   // @ts-ignore
   const { data } = useTina(content);
@@ -243,86 +257,93 @@ const ChapterSection: FC<ChapterSectionProps> = ({
             )}
           </Box>
         )}
-        <Box display={"grid"} fontFamily={`"LoRes 12 OT",sans-serif`}>
-          <AnimatePresence initial={false} mode={"popLayout"}>
-            {amountSections - sectionNumber > 0 &&
-              Array(Math.min(amountSections - sectionNumber, 8))
-                .fill(null)
-                .map((_, idx) => (
-                  <ShadowedPixelBox
-                    gridArea={"1/1/1/1"}
-                    transform={`translateX(${8 * (idx + 1)}px) translateY(${
-                      8 * (idx + 1)
-                    }px)`}
-                    key={`section-${sectionNumber + idx + 1}`}
-                    {...pixelBoxProps}
-                  />
-                ))
-                .reverse()}
-            <ShadowedPixelBox
-              minH={"full"}
-              gridArea={"1/1/1/1"}
-              key={`section-${sectionNumber}`}
-              {...pixelBoxProps}
-              initial={{ x: "-100vw" }}
-              animate={{ x: 0 }}
-              exit={{ x: "-100vw" }}
-              onPanEnd={(event, info) => {
-                if (
-                  // @ts-ignore
-                  event.pointerType !== "touch" ||
-                  event.type === "pointercancel"
-                ) {
-                  return;
-                }
-                const { offset } = info;
-                if (offset.x < -40 && nextSection) {
-                  push(nextSection);
-                }
+        <VStack alignItems={"center"}>
+          <chakra.span id={"confetti-gun"} />
+          <Box
+            display={"grid"}
+            id={"page-content"}
+            fontFamily={`"LoRes 12 OT",sans-serif`}
+          >
+            <AnimatePresence initial={false} mode={"popLayout"}>
+              {amountSections - sectionNumber > 0 &&
+                Array(Math.min(amountSections - sectionNumber, 8))
+                  .fill(null)
+                  .map((_, idx) => (
+                    <ShadowedPixelBox
+                      gridArea={"1/1/1/1"}
+                      transform={`translateX(${8 * (idx + 1)}px) translateY(${
+                        8 * (idx + 1)
+                      }px)`}
+                      key={`section-${sectionNumber + idx + 1}`}
+                      {...pixelBoxProps}
+                    />
+                  ))
+                  .reverse()}
+              <ShadowedPixelBox
+                minH={"full"}
+                gridArea={"1/1/1/1"}
+                key={`section-${sectionNumber}`}
+                {...pixelBoxProps}
+                initial={{ x: "-100vw" }}
+                animate={{ x: 0 }}
+                exit={{ x: "-100vw" }}
+                onPanEnd={(event, info) => {
+                  if (
+                    // @ts-ignore
+                    event.pointerType !== "touch" ||
+                    event.type === "pointercancel"
+                  ) {
+                    return;
+                  }
+                  const { offset } = info;
+                  if (offset.x < -40 && nextSection) {
+                    push(nextSection);
+                  }
 
-                if (offset.x > 40 && previousSection) {
-                  push(previousSection);
-                }
-              }}
-              py={4}
-              px={[2, 8]}
-            >
-              <VStack
-                h="full"
-                px={[6, 0]}
-                alignItems={"start"}
-                pb={4}
-                // overflowY={"scroll"}
-                style={{ touchAction: "pan-y" }}
+                  if (offset.x > 40 && previousSection) {
+                    push(previousSection);
+                  }
+                }}
+                py={4}
+                px={[2, 8]}
               >
                 <VStack
-                  spacing={0}
+                  h="full"
+                  px={[6, 0]}
                   alignItems={"start"}
-                  p={0}
-                  pb={[4, 8]}
-                  fontWeight={"bold"}
-                  w={"full"}
+                  pb={4}
+                  // overflowY={"scroll"}
+                  style={{ touchAction: "pan-y" }}
                 >
-                  <Text
-                    alignSelf={"end"}
-                    fontSize={"lg"}
+                  <VStack
+                    spacing={0}
+                    alignItems={"start"}
+                    p={0}
+                    pb={[4, 8]}
                     fontWeight={"bold"}
-                    color={"#2245C5"}
-                    pb={2}
+                    w={"full"}
                   >
-                    {sectionNumber}/{amountSections}
-                  </Text>
-                  {section?.title && (
-                    <Heading fontSize={["lg", "2xl"]} as={"h2"}>
-                      {section.title}
-                    </Heading>
-                  )}
+                    <Text
+                      alignSelf={"end"}
+                      fontSize={"lg"}
+                      fontWeight={"bold"}
+                      color={"#2245C5"}
+                      pb={2}
+                    >
+                      {sectionNumber}/{amountSections}
+                    </Text>
+                    {section?.title && (
+                      <Heading fontSize={["lg", "2xl"]} as={"h2"}>
+                        {section.title}
+                      </Heading>
+                    )}
+                  </VStack>
+                  <Markdown content={section.body} />
                 </VStack>
-                <Markdown content={section.body} />
-              </VStack>
-            </ShadowedPixelBox>
-          </AnimatePresence>
-        </Box>
+              </ShadowedPixelBox>
+            </AnimatePresence>
+          </Box>
+        </VStack>
         {showArrows && (
           <Box w={"80px"} pt={96}>
             {nextSection && (
