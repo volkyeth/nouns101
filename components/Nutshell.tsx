@@ -1,4 +1,4 @@
-import { createContext, FC, ReactNode, useContext } from "react";
+import { FC, ReactNode } from "react";
 import {
   Box,
   Link,
@@ -11,12 +11,9 @@ import {
 } from "@chakra-ui/react";
 import { ShadowedPixelBox } from "./ShadowedPixelBox";
 import { SmallArrowUp } from "./Icons";
-import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
-import { GlossaryQuery } from "../.tina/__generated__/types";
 import { TinaMarkdown, TinaMarkdownContent } from "tinacms/dist/rich-text";
 import client from "../.tina/__generated__/client";
 import { basename } from "path";
-import { useTina } from "tinacms/dist/react";
 import { useQuery } from "react-query";
 
 export type NutshellProps = {
@@ -94,14 +91,3 @@ export const Nutshell: FC<NutshellProps> = ({
     </>
   );
 };
-
-export const NutshellDefinitions = createContext<NutshellDefinitionsMap>({});
-
-export type NutshellDefinitionsMap = {
-  [permalink: string]: MDXRemoteSerializeResult;
-};
-
-export const normalizeName = (name: string) =>
-  name.replace(/[ -]/g, "_").toLowerCase();
-
-export const depluralizeName = (name: string) => name.replace(/[sS]$/g, "");

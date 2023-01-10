@@ -1,4 +1,4 @@
-import { Box, BoxProps, StackProps, VStack } from "@chakra-ui/react";
+import { Box, StackProps, VStack } from "@chakra-ui/react";
 import { FC } from "react";
 import Clippy from "../public/lil-clippy.svg";
 import Image from "next/image";

@@ -1,6 +1,4 @@
 import {
-  Button,
-  ButtonProps,
   Center,
   CenterProps,
   Drawer,
@@ -11,15 +9,11 @@ import {
   DrawerHeader,
   DrawerOverlay,
   HStack,
-  Icon,
-  Input,
-  Image as ChakraImage,
-  useBreakpointValue,
+  Link as ChakraLink,
+  StackProps,
+  Text,
   useDisclosure,
   VStack,
-  Text,
-  StackProps,
-  Link as ChakraLink,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import logo from "../assets/noggle101.svg";

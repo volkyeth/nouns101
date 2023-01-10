@@ -1,8 +1,8 @@
-import { Global } from '@emotion/react'
+import { Global } from "@emotion/react";
 
 export const Fonts = () => (
-    <Global
-        styles={`
+  <Global
+    styles={`
       @font-face {
         font-family: 'LoRes 12 OT';
         font-style: normal;
@@ -51,5 +51,5 @@ export const Fonts = () => (
         src: url('/fonts/LoRes9OTWide-Bold.ttf') format("truetype");
       }
       `}
-    />
-)
+  />
+);

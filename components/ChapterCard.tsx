@@ -1,4 +1,3 @@
-import { ReactNode } from "@mdx-js/react/lib";
 import {
   Accordion,
   AccordionButton,
@@ -8,31 +7,26 @@ import {
   chakra,
   Heading,
   HStack,
-  Spacer,
   Text,
-  useBreakpointValue,
   VStack,
 } from "@chakra-ui/react";
 import { FC } from "react";
 import Image from "next/image";
-import arrow from "../assets/arrowDown.svg";
 import { AutoExpander } from "./AutoExpander";
 import { useIsMobile } from "../hooks/mobile";
 import { SmallArrowUp } from "./Icons";
 import { Shadow } from "./Shadow";
-import { CtaButton, PixelButton } from "./PixelButton";
+import { CtaButton } from "./PixelButton";
 import Link from "next/link";
 import { ChapterMetadata } from "../utils/metadata";
-import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 
 export type ChapterCardProps = {
   chapterMetadata: ChapterMetadata;
-  chapterSummary: MDXRemoteSerializeResult;
 } & AccordionProps;
 
 export const ChapterCard: FC<ChapterCardProps> = ({
   chapterMetadata,
-  chapterSummary,
+  children,
   ...props
 }) => {
   const isMobile = useIsMobile();
@@ -104,7 +98,7 @@ export const ChapterCard: FC<ChapterCardProps> = ({
             </AccordionButton>
             <AccordionPanel fontSize={"sm"} py={4} px={8}>
               <VStack h={"full"} w={"full"} alignItems={"start"}>
-                <MDXRemote {...chapterSummary} />
+                {children}
                 <Link
                   href={`/chapters/${chapterMetadata.id}/1`}
                   style={{ alignSelf: "end" }}

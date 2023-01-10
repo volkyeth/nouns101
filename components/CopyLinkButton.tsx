@@ -1,5 +1,5 @@
 import { FC, useEffect } from "react";
-import { IconButton, Link, useBoolean, useClipboard } from "@chakra-ui/react";
+import { Link, useBoolean, useClipboard } from "@chakra-ui/react";
 import { PixelTooltip } from "./PixelTooltip";
 import Image from "next/image";
 import linkImg from "../assets/link.svg";

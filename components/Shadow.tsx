@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren } from "react";
+import { FC } from "react";
 import { chakra, PropsOf, useToken } from "@chakra-ui/react";
 
 export type ShadowProps = {

@@ -1,8 +1,8 @@
 import { FC } from "react";
-import { Box, BoxProps, chakra, forwardRef } from "@chakra-ui/react";
+import { Box, BoxProps, forwardRef } from "@chakra-ui/react";
 import { pixelatedClipPath } from "../utils/clipPaths";
 import { Shadow } from "./Shadow";
-import { motion, MotionAdvancedProps, MotionProps } from "framer-motion";
+import { motion, MotionProps } from "framer-motion";
 
 export type ShadowedPixelBoxProps = {
   shadowColor?: string;

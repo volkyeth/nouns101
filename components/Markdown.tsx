@@ -1,17 +1,6 @@
-import { FC, PropsWithChildren, ReactNode, useEffect } from "react";
-import {
-  Box,
-  chakra,
-  HeadingProps,
-  Image,
-  PropsOf,
-  UnorderedList,
-  VStack,
-} from "@chakra-ui/react";
+import { FC, useEffect } from "react";
+import { chakra, PropsOf, VStack } from "@chakra-ui/react";
 import { Nutshell } from "./Nutshell";
-import { MDXProvider } from "@mdx-js/react";
-import Link from "next/link";
-import { PixelTooltip } from "./PixelTooltip";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 // @ts-ignore
 import { YouTube } from "mdx-embed/dist/components/youtube";

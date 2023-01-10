@@ -1,26 +1,8 @@
 import { FC } from "react";
-import {
-  Center,
-  Divider,
-  Heading,
-  HStack,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { Center } from "@chakra-ui/react";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { readdirSync } from "fs";
-import { MDXRemote } from "next-mdx-remote";
-import { basename } from "path";
-import { serializeNutshells, SerializeNutshellsResult } from "../../utils/mdx";
 import { MainLayout } from "../../components/MainLayout";
-import { ShadowedPixelBox } from "../../components/ShadowedPixelBox";
-import { CopyLinkButton } from "../../components/CopyLinkButton";
-import { join } from "lodash";
 import { DefinitionCard } from "../../components/DefinitionCard";
-import {
-  NutshellDefinitions,
-  NutshellDefinitionsMap,
-} from "../../components/Nutshell";
 import { useTina } from "tinacms/dist/react";
 import client from "../../.tina/__generated__/client";
 

@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { forwardRef, Icon, IconProps } from "@chakra-ui/react";
 
 export const SmallArrowUp = forwardRef<IconProps, "svg">((props, ref) => (

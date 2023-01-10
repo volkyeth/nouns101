@@ -1,23 +1,10 @@
-import {
-  Box,
-  Center,
-  Divider,
-  HStack,
-  Link,
-  SimpleGrid,
-  Image as ChakraImage,
-  Text,
-  VStack,
-  Tooltip,
-} from "@chakra-ui/react";
+import { Box, Center, HStack, Link, Text, VStack } from "@chakra-ui/react";
 import { FC, ReactNode } from "react";
-import { PixelBox, ShadowedPixelBox } from "./ShadowedPixelBox";
 import volky from "../assets/team/volky.png";
 import mikegood from "../assets/team/mikegood.png";
 import zylag from "../assets/team/zylag.png";
 import blowned from "../assets/team/blowned.svg";
 import pepeEvil from "../assets/team/pepeEvil.webp";
-import { Link as ChakraLink } from "@chakra-ui/layout";
 import twitterLogo from "../assets/twitter.svg";
 import { PixelButton } from "./PixelButton";
 import Image, { StaticImageData } from "next/image";
