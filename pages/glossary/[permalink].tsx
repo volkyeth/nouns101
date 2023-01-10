@@ -48,7 +48,7 @@ const GlossaryEntry: FC<GlossaryEntryProps> = ({ permalink, content }) => {
   } = useTina(content);
   return (
     <MainLayout>
-      <Center h={"full"}>
+      <Center>
         <DefinitionCard definition={definition} permalink={permalink} />
       </Center>
     </MainLayout>

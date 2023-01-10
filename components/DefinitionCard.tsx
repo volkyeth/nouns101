@@ -21,6 +21,7 @@ export const DefinitionCard: FC<DefinitionCardProps> = ({
   return (
     <ShadowedPixelBox
       w={"2xl"}
+      maxW={"2xl"}
       p={10}
       fontFamily={`"LoRes 12 OT",sans-serif`}
       {...props}

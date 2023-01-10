@@ -3,6 +3,7 @@ import { MainLayout } from "../components/MainLayout";
 import client from "../.tina/__generated__/client";
 import { DefinitionCard } from "../components/DefinitionCard";
 import { useTina } from "tinacms/dist/react";
+import { Center } from "@chakra-ui/react";
 
 type AboutProps = {
   aboutNouns101: Awaited<ReturnType<typeof client.queries.glossary>>;
@@ -28,11 +29,13 @@ const About: NextPage<AboutProps> = ({ aboutNouns101 }) => {
   } = useTina(aboutNouns101);
   return (
     <MainLayout>
-      <DefinitionCard
-        definition={aboutProject}
-        permalink={""}
-        hasLink={false}
-      />
+      <Center>
+        <DefinitionCard
+          definition={aboutProject}
+          permalink={""}
+          hasLink={false}
+        />
+      </Center>
     </MainLayout>
   );
 };
