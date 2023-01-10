@@ -21,6 +21,23 @@ export const Markdown: FC<Pick<PropsOf<typeof TinaMarkdown>, "content">> = ({
     a: (props: any) => (
       <chakra.a target={"_blank"} {...props} href={props.url} />
     ),
+    h1: (props: any) => (
+      <chakra.h1
+        fontSize={32}
+        fontWeight={"bold"}
+        fontFamily={`"LoRes 9 OT", sans-serif`}
+        {...props}
+      />
+    ),
+    h2: (props: any) => (
+      <chakra.h2
+        fontSize={28}
+        fontWeight={"bold"}
+        fontFamily={`"LoRes 12 OT", sans-serif`}
+        color={"nouns101.blue"}
+        {...props}
+      />
+    ),
     Team,
   };
   useEffect(() => {
