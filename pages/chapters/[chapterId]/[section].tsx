@@ -197,6 +197,7 @@ const ChapterSection: FC<ChapterSectionProps> = ({
   return (
     <MainLayout
       bgColor={chapterMeta.color}
+      contentWrapperProps={{ bgGradient: undefined }}
       navbarExtraContent={
         <VStack
           w={"full"}

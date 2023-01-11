@@ -33,7 +33,7 @@ export const MainLayout: FC<PropsWithChildren<MainLayoutProps>> = ({
       }
       {...contentWrapperProps}
     >
-      <MainContainer py={10} px={6} h={"full"} {...containerProps}>
+      <MainContainer py={10} px={6} mb={16} h={"full"} {...containerProps}>
         {children}
       </MainContainer>
     </Box>
