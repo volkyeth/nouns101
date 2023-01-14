@@ -1,4 +1,5 @@
 import { useBreakpointValue } from "@chakra-ui/react";
 
 export const useIsMobile = () =>
-  useBreakpointValue([true, false]);
+  // @ts-expect-error
+  useBreakpointValue([true, false], { fallback: false });

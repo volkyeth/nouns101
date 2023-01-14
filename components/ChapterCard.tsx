@@ -103,7 +103,10 @@ export const ChapterCard: FC<ChapterCardProps> = ({
               h={"full"}
               py={4}
               px={8}
-              motionProps={{ endingHeight: "100%", startingHeight: "0" }}
+              motionProps={{
+                endingHeight: "100%",
+                startingHeight: isMobile ? "0" : "100%",
+              }}
             >
               <VStack h={"full"} w={"full"} alignItems={"start"}>
                 {children}
