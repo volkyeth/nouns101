@@ -104,7 +104,7 @@ const Home: NextPage = () => {
             </Text>
 
             <Text>
-              But you still can’t wrap your head around **NFTs**. Why would
+              But you still can’t wrap your head around <b>NFTs</b>. Why would
               anyone (in the right mind) pay a million dollars for a JPEG? _Am I
               really seeing the bigger (digital) picture?_
             </Text>
