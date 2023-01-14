@@ -4,9 +4,11 @@ import {
   AccordionItem,
   AccordionPanel,
   AccordionProps,
+  Box,
   chakra,
   Heading,
   HStack,
+  Spacer,
   Text,
   VStack,
 } from "@chakra-ui/react";
@@ -41,7 +43,7 @@ export const ChapterCard: FC<ChapterCardProps> = ({
     >
       <AccordionItem isDisabled={!isMobile} h={"full"} bg={"#FFE7BF"}>
         {({ isExpanded }) => (
-          <>
+          <VStack h={"full"} id="test">
             <AutoExpander expand={!isMobile} />
             <AccordionButton
               bg={chapterMetadata.color}
@@ -75,7 +77,7 @@ export const ChapterCard: FC<ChapterCardProps> = ({
                     Chapter {chapterMetadata.id}
                   </Text>
                   <Heading
-                    fontSize={["lg", "2xl"]}
+                    fontSize={["lg", "xl"]}
                     as={"h2"}
                     textAlign={"start"}
                   >
@@ -96,9 +98,16 @@ export const ChapterCard: FC<ChapterCardProps> = ({
                 )}
               </HStack>
             </AccordionButton>
-            <AccordionPanel fontSize={"sm"} py={4} px={8}>
+            <AccordionPanel
+              fontSize={"sm"}
+              h={"full"}
+              py={4}
+              px={8}
+              motionProps={{ endingHeight: "100%", startingHeight: "0" }}
+            >
               <VStack h={"full"} w={"full"} alignItems={"start"}>
                 {children}
+                <Spacer />
                 <Link
                   href={`/chapters/${chapterMetadata.id}/1`}
                   style={{ alignSelf: "end" }}
@@ -109,7 +118,7 @@ export const ChapterCard: FC<ChapterCardProps> = ({
                 </Link>
               </VStack>
             </AccordionPanel>
-          </>
+          </VStack>
         )}
       </AccordionItem>
     </Accordion>
