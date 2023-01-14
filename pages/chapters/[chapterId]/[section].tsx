@@ -182,6 +182,22 @@ const ChapterSection: FC<ChapterSectionProps> = ({
   // @ts-ignore
   const { data } = useTina(content);
 
+  useEffect(() => {
+    const navigateWithKeyboard = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight" && nextSection) {
+        push(nextSection);
+      }
+      if (e.key === "ArrowLeft" && previousSection) {
+        push(previousSection);
+      }
+    };
+
+    document.addEventListener("keydown", navigateWithKeyboard);
+    return () => {
+      document.removeEventListener("keydown", navigateWithKeyboard);
+    };
+  }, [nextSection, previousSection]);
+
   const section =
     // @ts-ignore
     data?.chapter1 ?? data?.chapter2 ?? data?.chapter3 ?? data?.chapter4;
