@@ -158,7 +158,7 @@ const templates = [
 export default defineConfig({
   branch,
   clientId: process.env.TINA_CLIENT_ID!, // Get this from tina.io
-  token: "12aa17c49b4a2b2d9193919826ac366fd926477d", // Get this from tina.io
+  token: process.env.TINA_CLIENT_TOKEN || "12aa17c49b4a2b2d9193919826ac366fd926477d", // Get this from tina.io
   build: {
     outputFolder: "admin",
     publicFolder: "public",
