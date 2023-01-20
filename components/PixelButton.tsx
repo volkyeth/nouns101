@@ -30,8 +30,6 @@ export const PixelButton = forwardRef<PixelButtonProps, "button">(
     <SimpleGrid alignSelf={alignSelf}>
       {hasShadow && (
         <PixelBox
-          w={"full"}
-          h={"full"}
           p={0}
           gridArea={"1/1/1/1"}
           bgColor={"black"}
