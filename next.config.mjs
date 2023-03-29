@@ -22,5 +22,30 @@ export default {
   },
   images: {
     domains: ["assets.tina.io"]
-  }
+  },
+  redirects: async () => {
+    return [
+    {
+      source: '/',
+      has: [
+        {
+          type: 'host',
+          value: 'bitnouns.wtf',
+        },
+      ],
+      permanent: false,
+      destination: 'https://www.nouns101.wtf/glossary/bitNouns',
+    },
+      {
+        source: '/',
+        has: [
+          {
+            type: 'host',
+            value: 'www.bitnouns.wtf',
+          },
+        ],
+        permanent: false,
+        destination: 'https://www.nouns101.wtf/glossary/bitNouns',
+      },
+  ]}
 };
